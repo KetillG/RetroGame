@@ -6,12 +6,11 @@
 
 function Board(descr) {
 
-  tileBoard = descr.board;
-  // Inits walls on top and bot border of game board
-  topBotBorder = Array(tileBoard.length[0]).fill(new Brick(1));
+  var tileBoard = descr.board;
+
 
   for(var i = 0; i < tileBoard.length; i++) {
-    for(var j = 0; j < tileBoard.length[0]; j++) {
+    for(var j = 0; j < tileBoard[i].length; j++) {
       // Changes numbers to tiles
       tileBoard[i][j] = new Brick(tileBoard[i][j]);
     }
@@ -19,10 +18,11 @@ function Board(descr) {
     tileBoard[i].unshift(new Brick(1));
     tileBoard[i].push(new Brick(1));
   }
+  // Inits walls on top and bot border of game board
+  var topBotBorder = Array(tileBoard[0].length).fill(new Brick(1));
   // Adds top/bot border
-  tileBoard[i].unshift(topBotBorder);
-  tileBoard[i].push();
-
+  tileBoard.unshift(topBotBorder);
+  tileBoard.push(topBotBorder);
   // Common inherited setup logic from Entity
   this.setup(descr);
 

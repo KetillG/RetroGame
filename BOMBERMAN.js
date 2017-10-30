@@ -41,7 +41,7 @@ function requestPreloads() {
 
     var requiredImages = {
     };
-
+    console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 

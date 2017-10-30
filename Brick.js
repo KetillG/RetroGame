@@ -3,11 +3,11 @@
 function Brick(descr) {
 
   // Gets brick properties
-  brick = this.getBricktype(descr)
+  var brick = this.getBricktype(descr)
 
   // Adds the properties to the brick
   for (var property in brick) {
-      this[property] = descr[property];
+      this[property] = brick[property];
   }
 
 }
@@ -20,11 +20,11 @@ Brick.prototype.render = function (ctx) {
 
 }
 
-Brick.prototype.isWalkable() {
+Brick.prototype.isWalkable = function () {
   return this.solid;
 }
 
-Brick.prototype.getBricktype(number) {
+Brick.prototype.getBricktype =  function (number) {
   switch (number) {
     case 0:
       return {
@@ -39,6 +39,6 @@ Brick.prototype.getBricktype(number) {
       }
       break;
     default:
-
+      console.log('hmhmhm');
   }
 }

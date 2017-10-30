@@ -36,8 +36,8 @@ deferredSetup : function () {
 },
 
 _createBoard(board) {
-  _board = new Board({board});
-}
+  this._board = new Board({board});
+},
 
 init: function() {
   this._createBoard(board);
