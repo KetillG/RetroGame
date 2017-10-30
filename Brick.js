@@ -11,13 +11,15 @@ function Brick(descr) {
   }
 
 }
+Brick.prototype.w = 10;
+Brick.prototype.h = 10;
 
 Brick.prototype.update = function (du) {
 
 }
 
 Brick.prototype.render = function (ctx) {
-
+  util.fillBox(ctx,this.x,this.y,this.w,this.h,this.color)
 }
 
 Brick.prototype.isWalkable = function () {
@@ -30,12 +32,14 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         solid: false,
         sprite: '..path',
+        color: 'red',
       }
       break;
     case 1:
       return {
         solid: true,
         sprite: '..path',
+        color: 'blue',
       }
       break;
     default:

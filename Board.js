@@ -7,12 +7,19 @@
 function Board(descr) {
 
   var tileBoard = descr.board;
+  var boardSize = 10;
 
+  const xStep = consts.LOGICAL_WIDTH / boardSize;
+  const yStep = consts.LOGICAL_HEIGHT / boardSize;
 
   for(var i = 0; i < tileBoard.length; i++) {
     for(var j = 0; j < tileBoard[i].length; j++) {
       // Changes numbers to tiles
-      tileBoard[i][j] = new Brick(tileBoard[i][j]);
+      // tileBoard[i][j] = new Brick(tileBoard[i][j]);
+      tileBoard[i][j] = new Brick({
+        cx: i * xStep,
+        cy: j * yStep,
+      })
     }
     // Adds left/right border
     tileBoard[i].unshift(new Brick(1));
