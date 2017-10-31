@@ -23,11 +23,13 @@ function Board(descr) {
         id: tileBoard[i][j],
         x: (j + 1) * yStep,
         y: (i + 1) * xStep,
+        width: xStep,
+        height: yStep,
       })
     }
     // Adds left/right border
-    tileBoard[i].unshift(new Brick({id:1,x:0,y:(i + 1) * xStep}));
-    tileBoard[i].push(new Brick({id:1,x:(tileBoard.length + 1) * yStep,y:(i + 1) * yStep}));
+    tileBoard[i].unshift(new Brick({id:1,x:0,y:(i + 1) * xStep,width: xStep,height: yStep}));
+    tileBoard[i].push(new Brick({id:1,x:(tileBoard.length + 1) * yStep,y:(i + 1) * yStep,width: xStep,height: yStep}));
   }
 
   // Top/bot border
@@ -39,11 +41,15 @@ function Board(descr) {
       id: 1,
       x: i * xStep,
       y: 0,
+      width: xStep,
+      height: yStep,
     }));
     bottomBorder.push(new Brick({
       id: 1,
       x: i * xStep,
       y: (tileBoard.length + 1) * yStep,
+      width: xStep,
+      height: yStep,
     }));
   }
   // Adds top/bot border

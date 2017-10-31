@@ -14,8 +14,8 @@ function Brick(descr) {
   }
 
 }
-Brick.prototype.width = consts.LOGICAL_WIDTH / 7;
-Brick.prototype.height = consts.LOGICAL_HEIGHT / 7;
+//Brick.prototype.width = consts.LOGICAL_WIDTH / 7;
+//Brick.prototype.height = consts.LOGICAL_HEIGHT / 7;
 
 Brick.prototype.update = function (du) {
 
