@@ -62,6 +62,17 @@ function Board(descr) {
   }
 }
 
+/**
+  * @param {double} x old x position
+  * @param {double} y old y position
+  * @param {double} newX updated x position
+  * @param {double} newY updated y position
+  * @return An array with the updated positions for the character
+ */
+Board.prototype.moveOnBoard = function(x, y, newX, newY){
+  return [newX, newY];
+}
+
 Board.prototype.getBrickAt = function (x, y) {
   const i = Math.floor(y / ( this.yStep * consts.RENDER_SCALE_WIDTH));
   const j = Math.floor(x / ( this.xStep * consts.RENDER_SCALE_HEIGHT));

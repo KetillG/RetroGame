@@ -36,6 +36,8 @@ var entityManager = {
 
 _board: null,
 
+_players : [],
+
 deferredSetup : function () {
     this._categories = [];
 },
@@ -46,6 +48,24 @@ _createBoard(board) {
 
 init: function() {
   this._createBoard(board);
+  this._addPlayers();
+},
+
+_addPlayers : function () {
+  console.log('create player');
+  var player = new Character({
+    cx: 70,
+    cy: 70,
+    velX: 4,
+    velY: 4,
+    keyUp: 'W'.charCodeAt(0),
+    keyDown: 'S'.charCodeAt(0),
+    keyLeft: 'A'.charCodeAt(0),
+    keyRight: 'D'.charCodeAt(0)
+  });
+
+  this._players.push(player);
+  this._categories.push(this._players);
 },
 
 update: function(du) {
