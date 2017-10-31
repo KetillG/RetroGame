@@ -32,12 +32,26 @@ Brick.prototype.isWalkable = function () {
 Brick.prototype.makeWalkable = function () {
   this.solid = false;
 }
+
+Brick.prototype.isBreakable = function () {
+  return this.breakable;
+}
+
+Brick.prototype.break = function () {
+  var brick = this.getBricktype(0)
+
+  for (var property in brick) {
+      this[property] = brick[property];
+  }
+}
+
 // Maps number to a brick type
 Brick.prototype.getBricktype =  function (number) {
   switch (number) {
     case 0:
       return {
         solid: false,
+        breakable: false,
         sprite: '..path',
         color: 'green',
       }
@@ -45,8 +59,17 @@ Brick.prototype.getBricktype =  function (number) {
     case 1:
       return {
         solid: true,
+        breakable: false,
         sprite: '..path',
         color: 'gray',
+      }
+      break;
+    case 2:
+      return {
+        solid: true,
+        breakable: true,
+        sprite: '..path',
+        color: 'navy',
       }
       break;
     default:
