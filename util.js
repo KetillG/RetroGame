@@ -33,7 +33,16 @@ var util = {
   fillBox: function (ctx, x, y, w, h, style) {
       var oldStyle = ctx.fillStyle;
       ctx.fillStyle = style;
-      ctx.fillRect(x, y, w, h);
+    //   ctx.fillRect(x, y, w, h);
+        ctx.fillRect(
+            x * consts.RENDER_SCALE_WIDTH,
+            y * consts.RENDER_SCALE_HEIGHT,
+            w * consts.RENDER_SCALE_WIDTH,
+            h * consts.RENDER_SCALE_HEIGHT
+        );
       ctx.fillStyle = oldStyle;
-  }
+  },
+
+
+
 };

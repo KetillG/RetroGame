@@ -7,7 +7,7 @@
 function Board(descr) {
 
   var tileBoard = descr.board;
-  var boardSize = 10;
+  var boardSize = 7;
 
   const xStep = consts.LOGICAL_WIDTH / boardSize;
   const yStep = consts.LOGICAL_HEIGHT / boardSize;
