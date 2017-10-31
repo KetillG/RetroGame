@@ -29,6 +29,10 @@ Brick.prototype.isWalkable = function () {
   return this.solid;
 }
 
+Brick.prototype.makeWalkable = function () {
+  this.solid = false;
+}
+
 Brick.prototype.getBricktype =  function (number) {
   switch (number) {
     case 0:

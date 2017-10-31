@@ -38,7 +38,7 @@ function Board(descr) {
 
 Board.prototype = new Entity();
 
-Board.prototype.getBrickAt(x, y) {
+Board.prototype.getBrickAt = function (x, y) {
   //temp brick
   return new Brick({id:1,x:i * xStep,y:0});
 }
