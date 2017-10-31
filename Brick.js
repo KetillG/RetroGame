@@ -30,7 +30,7 @@ Brick.prototype.isWalkable = function () {
 }
 
 Brick.prototype.makeWalkable = function () {
-  this.solid = false;
+  this.walkable = true;
 }
 
 Brick.prototype.isBreakable = function () {
