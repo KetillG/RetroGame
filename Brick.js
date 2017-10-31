@@ -14,15 +14,15 @@ function Brick(descr) {
   }
 
 }
-Brick.prototype.w = 100;
-Brick.prototype.h = 100;
+Brick.prototype.w = consts.LOGICAL_WIDTH / 7;
+Brick.prototype.h = consts.LOGICAL_HEIGHT / 7;
 
 Brick.prototype.update = function (du) {
 
 }
 
 Brick.prototype.render = function (ctx) {
-  util.fillBox(ctx,this.x + this.w/2,this.y + this.h/2,this.w,this.h,this.color)
+  util.fillBox(ctx,this.x,this.y,this.w,this.h,this.color)
 }
 
 Brick.prototype.isWalkable = function () {
@@ -32,7 +32,7 @@ Brick.prototype.isWalkable = function () {
 Brick.prototype.makeWalkable = function () {
   this.solid = false;
 }
-
+// Maps number to a brick type
 Brick.prototype.getBricktype =  function (number) {
   switch (number) {
     case 0:
