@@ -21,12 +21,16 @@ Brick.prototype.update = function (du) {
 
 }
 
-Brick.prototype.render = function (ctx,cx,cy) {
-  util.fillBox(ctx,cx,cy,this.w,this.h,this.color)
+Brick.prototype.render = function (ctx) {
+  util.fillBox(ctx,this.x + this.w/2,this.y + this.h/2,this.w,this.h,this.color)
 }
 
 Brick.prototype.isWalkable = function () {
   return this.solid;
+}
+
+Brick.prototype.makeWalkable = function () {
+  this.solid = false;
 }
 
 Brick.prototype.getBricktype =  function (number) {
