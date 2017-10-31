@@ -15,6 +15,8 @@ function Character(descr){
   }
 }
 
+Character.prototype.board = new Board();
+
 this.prototype.moveDirection = function(){
   var right = g_keys[this.keyRight];
   var left = g_keys[this.keyLeft];
@@ -42,7 +44,15 @@ this.prototype.update(du){
   if(directionObject){
     var vel = directionObject.vel;
     var dir = directionObject.direction;
-    var center = directionObject.center;
-    this[center] = dir*this[vel]*du;
+    if(vel === "velY"){
+      var newY = this.cy + dir*this.velY*du;
+      var
+    }
+
   }
+}
+
+this.prototype.setPos = function(x, y){
+  this.cx = x;
+  this.cy = y;
 }
