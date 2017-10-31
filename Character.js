@@ -66,6 +66,7 @@ Character.prototype.render = function(ctx){
     this.sprite.drawAt(ctx, this.cx, this.cy);
   }
   else{
+
     ctx.beginPath();
     ctx.arc(this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT, 50 * consts.RENDER_SCALE_WIDTH, 2 * Math.PI, false);
     ctx.fill();
