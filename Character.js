@@ -12,6 +12,8 @@
 function Character(descr){
 
   this.setup(descr);
+  this.oldPosX = this.cx;
+  this.oldPosY = this.cy;
 }
 
 Character.prototype = new Entity();
@@ -41,18 +43,17 @@ Character.prototype.moveDirection = function(){
 
 Character.prototype.update = function(du){
   var directionObject = this.moveDirection();
+  var newX = this.cx;
+  var newY = this.cy;
   if(directionObject){
     var vel = directionObject.vel;
     var dir = directionObject.direction;
-    var newX = this.cx;
-    var newY = this.cy;
     if(vel === "velY"){
       newY = this.cy + dir*this.velY*du;
     }
     else{
       newX = this.cx + dir*this.velX*du;
     }
-
     this.oldPosX = this.cx;
     this.oldPosY = this.cy;
     this.cx = newX;

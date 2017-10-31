@@ -52,7 +52,6 @@ init: function() {
 },
 
 _addPlayers : function () {
-  console.log('create player');
   var player = new Character({
     cx: 70,
     cy: 70,
@@ -76,9 +75,7 @@ update: function(du) {
         var i = 0;
 
         while (i < aCategory.length) {
-            console.log(aCategory[i]);
             var status = aCategory[i].update(du);
-            console.log(aCategory[i]);
 
             spatialManager.findPositionOnBoard(this._board, aCategory[i]);
 

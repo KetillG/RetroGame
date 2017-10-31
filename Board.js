@@ -71,7 +71,6 @@ function Board(descr) {
  */
 
 Board.prototype.getBrickAt = function (x, y) {
-  console.log(x, y);
   const i = Math.floor(y / ( this.yStep * consts.RENDER_SCALE_WIDTH));
   const j = Math.floor(x / ( this.xStep * consts.RENDER_SCALE_HEIGHT));
   try {
