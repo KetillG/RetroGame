@@ -18,16 +18,16 @@ Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
 Character.prototype.moveDirection = function(){
-  var right = g_keys[this.keyRight];
-  var left = g_keys[this.keyLeft];
-  var up = g_keys[this.keyUp];
-  var down = g_keys[this.keyDown];
+  var right = keys[this.keyRight];
+  var left = keys[this.keyLeft];
+  var up = keys[this.keyUp];
+  var down = keys[this.keyDown];
   var y = up ^ down;
   var x = left ^ right;
   if(x && !y){
     var dir = right ? 1 : -1;
     var obj = {vel : "velX", direction : dir, center : "cx"};
-    return dir;
+    return obj;
   }
   else if(y && !x){
     var dir = down ? 1 : -1;
@@ -65,8 +65,10 @@ Character.prototype.render = function(ctx){
     this.sprite.drawAt(ctx, this.cx, this.cy);
   }
   else{
+    ctx.beginPath();
     ctx.arc(this.cx, this.cy, 50, 2 * Math.PI, false);
     ctx.fill();
+    ctx.closePath();
   }
 }
 
