@@ -50,7 +50,7 @@ Brick.prototype.getBricktype =  function (number) {
   switch (number) {
     case 0:
       return {
-        walkable: false,
+        walkable: true,
         breakable: false,
         sprite: '..path',
         color: 'green',
@@ -58,7 +58,7 @@ Brick.prototype.getBricktype =  function (number) {
       break;
     case 1:
       return {
-        walkable: true,
+        walkable: false,
         breakable: false,
         sprite: '..path',
         color: 'gray',
@@ -66,7 +66,7 @@ Brick.prototype.getBricktype =  function (number) {
       break;
     case 2:
       return {
-        walkable: true,
+        walkable: false,
         breakable: true,
         sprite: '..path',
         color: 'navy',
