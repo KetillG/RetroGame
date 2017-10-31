@@ -36,14 +36,14 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         solid: false,
         sprite: '..path',
-        color: 'red',
+        color: 'green',
       }
       break;
     case 1:
       return {
         solid: true,
         sprite: '..path',
-        color: 'blue',
+        color: 'gray',
       }
       break;
     default:
