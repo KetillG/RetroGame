@@ -23,6 +23,8 @@ function handleMouse(evt) {
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
     console.log('nice click');
+    console.log(entityManager.getBrick(g_mouseX, g_mouseY));
+
 }
 
 // Handle "down" and "move" events the same way.

@@ -21,11 +21,16 @@ with suitable 'data' and 'methods'.
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
-var board = [[0,0,0,0,0],
-            [0,1,0,1,0],
-            [0,0,0,0,0],
-            [0,1,0,1,0],
-            [0,0,0,0,0]]
+var board = [[0,0,0,0,0,0,0,0,0,0],
+             [0,1,0,1,0,0,1,0,1,0],
+             [0,0,0,0,0,0,0,0,0,0],
+             [0,1,0,1,0,0,1,0,1,0],
+             [0,0,0,0,0,0,0,0,0,0],
+             [0,0,0,0,0,0,0,0,0,0],
+             [0,1,0,1,0,0,1,0,1,0],
+             [0,0,0,0,0,0,0,0,0,0],
+             [0,1,0,1,0,0,1,0,1,0],
+             [0,0,0,0,0,0,0,0,0,0]]
 
 var entityManager = {
 
@@ -58,6 +63,10 @@ update: function(du) {
         }
     }
 
+},
+
+getBrick: function(x,y) {
+  return this._board.getBrickAt(x,y);
 },
 
 render: function(ctx) {
