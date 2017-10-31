@@ -18,7 +18,6 @@ function gatherInputs() {
 
 function updateSimulation(du) {
 
-
     entityManager.update(du);
 
 }

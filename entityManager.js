@@ -62,6 +62,8 @@ update: function(du) {
 
 render: function(ctx) {
 
+    this._board.render(ctx);
+
     var debugX = 10, debugY = 100;
 
     for (var c = 0; c < this._categories.length; ++c) {
