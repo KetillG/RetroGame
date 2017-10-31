@@ -26,7 +26,7 @@ Brick.prototype.render = function (ctx) {
 }
 
 Brick.prototype.isWalkable = function () {
-  return this.solid;
+  return this.walkable;
 }
 
 Brick.prototype.makeWalkable = function () {
