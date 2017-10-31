@@ -49,8 +49,8 @@ init: function() {
 _addPlayers : function () {
   console.log('create player');
   var player = new Character({
-    cx: 65,
-    cy: 65,
+    cx: 70,
+    cy: 70,
     velX: 4,
     velY: 4,
     keyUp: 'W'.charCodeAt(0),
