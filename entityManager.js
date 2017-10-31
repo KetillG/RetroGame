@@ -76,9 +76,10 @@ update: function(du) {
         var i = 0;
 
         while (i < aCategory.length) {
-
+            console.log(aCategory[i]);
             var status = aCategory[i].update(du);
-            
+            console.log(aCategory[i]);
+
             spatialManager.findPositionOnBoard(this._board, aCategory[i]);
 
             i++;

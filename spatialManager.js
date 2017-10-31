@@ -54,7 +54,6 @@ unregister: function(entity) {
 findPositionOnBoard: function(board, entity) {
   console.log(entity);
   var isValid = board.validPosition(entity.cx, entity.cy);
-  console.log(isValid);
   if(!isValid){
     entity.setPos(this.oldPosX, this.oldPosY);
   }
