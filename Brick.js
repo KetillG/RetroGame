@@ -22,7 +22,7 @@ Brick.prototype.update = function (du) {
 }
 
 Brick.prototype.render = function (ctx) {
-  util.fillBox(ctx,this.x,this.y,this.w,this.h,this.color)
+  util.fillBox(ctx, this.x, this.y, this.w * 0.99,this.h * 0.99, this.color)
 }
 
 Brick.prototype.isWalkable = function () {
