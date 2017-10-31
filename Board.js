@@ -46,11 +46,11 @@ function Board(descr) {
   tileBoard.unshift(topBorder);
   tileBoard.push(bottomBorder);
 
-  // Common inherited setup logic from Entity
-  this.setup(descr);
+  // Setup logic
+  for (var property in descr) {
+      this[property] = descr[property];
+  }
 }
-// Adds entity to this
-Board.prototype = new Entity();
 
 Board.prototype.getBrickAt = function (x, y) {
   //temp brick
