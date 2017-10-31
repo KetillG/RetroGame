@@ -65,7 +65,8 @@ Character.prototype.render = function(ctx){
     this.sprite.drawAt(ctx, this.cx, this.cy);
   }
   else{
-    ctx.fillCircle(this.cx, this.cy, 7);
+    ctx.arc(this.cx, this.cy, 50, 2 * Math.PI, false);
+    ctx.fill();
   }
 }
 
