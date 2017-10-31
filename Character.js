@@ -17,7 +17,7 @@ function Character(descr){
 
 Character.prototype.board = new Board();
 
-this.prototype.moveDirection = function(){
+Character.prototype.moveDirection = function(){
   var right = g_keys[this.keyRight];
   var left = g_keys[this.keyLeft];
   var up = g_keys[this.keyUp];
@@ -26,12 +26,12 @@ this.prototype.moveDirection = function(){
   var x = left ^ right;
   if(x && !y){
     var dir = right ? 1 : -1;
-    var obj = {vel : "velX", : direction : dir, center : "cx"};
+    var obj = {vel : "velX", direction : dir, center : "cx"};
     return dir;
   }
   else if(y && !x){
     var dir = down ? 1 : -1;
-    var obj = {vel : "velY", : direction : dir, center : "cy"}
+    var obj = {vel : "velY", direction : dir, center : "cy"}
     return obj;
   }
   else{
@@ -39,20 +39,34 @@ this.prototype.moveDirection = function(){
   }
 }
 
-this.prototype.update(du){
+Character.prototype.update = function(du){
   var directionObject = this.moveDirection();
   if(directionObject){
     var vel = directionObject.vel;
     var dir = directionObject.direction;
+    var newX = this.cx;
+    var newY = this.cy;
     if(vel === "velY"){
-      var newY = this.cy + dir*this.velY*du;
-      var
+      newY = this.cy + dir*this.velY*du;
     }
-
+    else{
+      newX = this.cx + dir*this.velX*du;
+    }
+    var centers = this.board.moveOnBoard(this.cx, this.cy, newX, newY);
+    this.setPos(centers[0], centers[1]);
   }
 }
 
-this.prototype.setPos = function(x, y){
+Character.prototype.render = function(ctx){
+  if(this.sprite){
+    this.sprite.drawAt(ctx, this.cx, this.cy);
+  }
+  else{
+    ctx.fillCircle(this.cx, this.cy, 7);
+  }
+}
+
+Character.prototype.setPos = function(x, y){
   this.cx = x;
   this.cy = y;
 }
