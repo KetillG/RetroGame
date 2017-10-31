@@ -11,7 +11,7 @@ function Board(descr) {
   const boardSize = tileBoard.length + 2;
   const xStep = consts.LOGICAL_WIDTH / boardSize;
   const yStep = consts.LOGICAL_HEIGHT / boardSize;
-  console.log(boardSize);
+
   // Adds step to the object
   this['xStep'] = xStep;
   this['yStep'] = yStep;
@@ -55,7 +55,7 @@ function Board(descr) {
   // Adds top/bot border
   tileBoard.unshift(topBorder);
   tileBoard.push(bottomBorder);
-  console.log(tileBoard);
+
   // Setup logic
   for (var property in descr) {
       this[property] = descr[property];
@@ -65,7 +65,15 @@ function Board(descr) {
 Board.prototype.getBrickAt = function (x, y) {
   const i = Math.floor(y / ( this.yStep * consts.RENDER_SCALE_WIDTH));
   const j = Math.floor(x / ( this.xStep * consts.RENDER_SCALE_HEIGHT));
-  return this.board[i][j];
+  try {
+    return this.board[i][j];
+  } catch (e) {
+    return null;
+  }
+}
+
+Board.prototype.validPosition = function (x, y) {
+  return this.getBrickAt(x,y).isWalkable();
 }
 
 Board.prototype.update = function (du) {
