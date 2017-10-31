@@ -15,8 +15,6 @@ function Character(descr){
   }
 }
 
-Character.prototype.board = new Board();
-
 Character.prototype.moveDirection = function(){
   var right = g_keys[this.keyRight];
   var left = g_keys[this.keyLeft];
@@ -52,8 +50,11 @@ Character.prototype.update = function(du){
     else{
       newX = this.cx + dir*this.velX*du;
     }
-    var centers = this.board.moveOnBoard(this.cx, this.cy, newX, newY);
-    this.setPos(centers[0], centers[1]);
+
+    this.oldPosX = this.cx;
+    this.oldPosY = this.cy;
+    this.cx = newX;
+    this.cy = newY;
   }
 }
 
