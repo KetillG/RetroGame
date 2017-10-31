@@ -22,7 +22,6 @@ Brick.prototype.update = function (du) {
 }
 
 Brick.prototype.render = function (ctx,cx,cy) {
-  console.log(this);
   util.fillBox(ctx,cx,cy,this.w,this.h,this.color)
 }
 
