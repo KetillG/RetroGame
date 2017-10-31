@@ -51,6 +51,7 @@ function Board(descr) {
       this[property] = descr[property];
   }
 }
+
 /**
   * @param {double} x old x position
   * @param {double} y old y position
