@@ -10,12 +10,12 @@
 // keyLeft : Which key corresponds to left
 // keyRight : Which key corresponds to right
 function Character(descr){
-  for (var property in descr) {
-      this[property] = descr[property];
-  }
+
+  this.setup(descr);
 }
 
-Character.prototype.board = new Board();
+Character.prototype = new Entity();
+// Character.prototype.board = new Board();
 
 Character.prototype.moveDirection = function(){
   var right = g_keys[this.keyRight];

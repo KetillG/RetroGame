@@ -51,7 +51,7 @@ function Board(descr) {
       this[property] = descr[property];
   }
 }
-<<<<<<< HEAD
+
 /**
   * @param {double} x old x position
   * @param {double} y old y position
@@ -61,7 +61,7 @@ function Board(descr) {
  */
 Board.prototype.moveOnBoard = function(x, y, newX, newY){
   return [newX, newY];
-=======
+}
 
 Board.prototype.getBrickAt = function (x, y) {
   //temp brick
@@ -78,5 +78,4 @@ Board.prototype.render = function (ctx) {
       this.board[i][j].render(ctx);
     }
   }
->>>>>>> master
 }
