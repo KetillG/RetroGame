@@ -14,15 +14,15 @@ function Brick(descr) {
   }
 
 }
-Brick.prototype.w = consts.LOGICAL_WIDTH / 7;
-Brick.prototype.h = consts.LOGICAL_HEIGHT / 7;
+Brick.prototype.width = consts.LOGICAL_WIDTH / 7;
+Brick.prototype.height = consts.LOGICAL_HEIGHT / 7;
 
 Brick.prototype.update = function (du) {
 
 }
 
 Brick.prototype.render = function (ctx) {
-  util.fillBox(ctx, this.x, this.y, this.w * 0.99,this.h * 0.99, this.color)
+  util.fillBox(ctx,this.x,this.y,this.width*0.99,this.height*0.99,this.color)
 }
 
 Brick.prototype.isWalkable = function () {
