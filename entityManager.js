@@ -17,19 +17,30 @@ with suitable 'data' and 'methods'.
 
 
 // Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops 
+// my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
-
+var board = [[0,0,0,0,0],
+            [0,1,0,1,0],
+            [0,0,0,0,0],
+            [0,1,0,1,0],
+            [0,0,0,0,0]]
 
 var entityManager = {
+
+_board: null,
 
 deferredSetup : function () {
     this._categories = [];
 },
 
+_createBoard(board) {
+  this._board = new Board({board});
+},
+
 init: function() {
+  this._createBoard(board);
 },
 
 update: function(du) {
@@ -51,6 +62,8 @@ update: function(du) {
 
 render: function(ctx) {
 
+    this._board.render(ctx);
+
     var debugX = 10, debugY = 100;
 
     for (var c = 0; c < this._categories.length; ++c) {
@@ -71,4 +84,3 @@ render: function(ctx) {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
-
