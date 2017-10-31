@@ -66,14 +66,8 @@ Character.prototype.render = function(ctx){
     this.sprite.drawAt(ctx, this.cx, this.cy);
   }
   else{
-<<<<<<< HEAD
-    ctx.beginPath();
-    ctx.arc(this.cx, this.cy, 50, 2 * Math.PI, false);
-=======
-
     ctx.beginPath();
     ctx.arc(this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT, 50 * consts.RENDER_SCALE_WIDTH, 2 * Math.PI, false);
->>>>>>> cf8ed94b74f00d2fae6c25e0aff96f3ff0475059
     ctx.fill();
     ctx.closePath();
   }
