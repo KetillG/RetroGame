@@ -17,6 +17,8 @@ function Character(descr){
 Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
+Character.prototype.ammo = 1;
+
 Character.prototype.moveDirection = function(){
   var right = keys[this.keyRight];
   var left = keys[this.keyLeft];
@@ -53,6 +55,9 @@ Character.prototype.update = function(du){
       newX = this.cx + dir*this.velX*du;
     }
 
+    // Handle firing
+    this.maybeDropBomb();
+
     this.oldPosX = this.cx;
     this.oldPosY = this.cy;
     this.cx = newX;
@@ -67,10 +72,14 @@ Character.prototype.render = function(ctx){
   }
   else{
 
-    ctx.beginPath();
-    ctx.arc(this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT, 50 * consts.RENDER_SCALE_WIDTH, 2 * Math.PI, false);
-    ctx.fill();
-    ctx.closePath();
+    //ctx.beginPath();
+    //ctx.arc(this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT, 50 * consts.RENDER_SCALE_WIDTH, 2 * Math.PI, false);
+    //ctx.fill();
+    //ctx.closePath();
+    util.fillCircle(ctx, 
+      this.cx * consts.RENDER_SCALE_WIDTH, 
+      this.cy * consts.RENDER_SCALE_HEIGHT, 
+      30 * consts.RENDER_SCALE_WIDTH);
   }
 }
 
@@ -78,3 +87,12 @@ Character.prototype.setPos = function(x, y){
   this.cx = x;
   this.cy = y;
 }
+
+Character.prototype.maybeDropBomb = function () {
+    if (keys[this.keyFire] && this.ammo > 0) {
+        this.ammo--;
+        entityManager.spawnBomb({cx:this.cx,
+                                cy:this.cy,
+                                ammo:this.ammo});
+    }
+};

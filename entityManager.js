@@ -35,20 +35,12 @@ var board = [[0,0,0,0,0,0,0,0,0,0],
 var entityManager = {
 
 _board: null,
-
 _players : [],
-
-deferredSetup : function () {
-    this._categories = [];
-},
+_powerups : [],
+_bombs : [],
 
 _createBoard(board) {
   this._board = new Board({board});
-},
-
-init: function() {
-  this._createBoard(board);
-  this._addPlayers();
 },
 
 _addPlayers : function () {
@@ -61,28 +53,60 @@ _addPlayers : function () {
     keyUp: 'W'.charCodeAt(0),
     keyDown: 'S'.charCodeAt(0),
     keyLeft: 'A'.charCodeAt(0),
-    keyRight: 'D'.charCodeAt(0)
+    keyRight: 'D'.charCodeAt(0),
+    keyFire: ' '.charCodeAt(0),
   });
 
   this._players.push(player);
-  this._categories.push(this._players);
+  //this._categories.push(this._players);
+},
+
+// PUBLIC METHODS
+
+// A special return value, used by other objects,
+// to request the blessed release of death!
+//
+
+KILL_ME_NOW : -1,
+
+deferredSetup : function () {
+    this._categories = [this._powerups, this._bombs, this._players];
+},
+
+init: function() {
+    this._createBoard(board);
+    this._addPlayers();
+},
+
+spawnPowerup(descr) {
+    this._powerups.push(new Powerup(descr));
+},
+
+spawnBomb(descr) {
+    this._bombs.push(new Bomb(descr));
+    console.log(this._bombs[0])
 },
 
 update: function(du) {
 
     for (var c = 0; c < this._categories.length; ++c) {
-
-        var aCategory = this._categories[c];
-        var i = 0;
-
-        while (i < aCategory.length) {
-
-            var status = aCategory[i].update(du);
-
-            i++;
-        }
-    }
-
+        
+                var aCategory = this._categories[c];
+                var i = 0;
+        
+                while (i < aCategory.length) {
+        
+                    var status = aCategory[i].update(du);
+                    if (status === this.KILL_ME_NOW) {
+                        // remove the dead guy, and shuffle the others down to
+                        // prevent a confusing gap from appearing in the array
+                        aCategory.splice(i,1);
+                    }
+                    else {
+                        ++i;
+                    }
+                }
+            }
 },
 
 getBrick: function(x,y) {
@@ -102,7 +126,6 @@ render: function(ctx) {
         for (var i = 0; i < aCategory.length; ++i) {
 
             aCategory[i].render(ctx);
-            //debug.text(".", debugX + i * 10, debugY);
 
         }
         debugY += 10;

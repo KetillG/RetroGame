@@ -62,8 +62,3 @@ Entity.prototype.getRadius = function () {
 Entity.prototype.kill = function () {
     this._isDeadNow = true;
 };
-
-Entity.prototype.wrapPosition = function () {
-    this.cx = util.wrapRange(this.cx, 0, g_canvas.width);
-    this.cy = util.wrapRange(this.cy, 0, g_canvas.height);
-};
