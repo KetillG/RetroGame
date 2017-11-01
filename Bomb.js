@@ -21,9 +21,7 @@ Bomb.prototype.update = function (du) {
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
-        console.log(this.ammo);
-        this.ammo.ammo++;
-        console.log('dead')
+        this.owner.ammo++;
         this.dropPowerup();
         return entityManager.KILL_ME_NOW;
     }

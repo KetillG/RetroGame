@@ -64,7 +64,6 @@ Character.prototype.update = function(du){
     // Hit detection
     var hitEntity = this.findHitEntity();
     if(hitEntity) {
-      console.log(hitEntity);
       this.cx = this.oldPosX;
       this.cy = this.oldPosY;
       return;
@@ -113,6 +112,6 @@ Character.prototype.maybeDropBomb = function () {
         this.ammo--;
         entityManager.spawnBomb({cx:this.cx,
                                 cy:this.cy,
-                                ammo:this});
+                                owner:this});
     }
 };
