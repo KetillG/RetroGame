@@ -17,7 +17,9 @@ function Powerup(descr) {
         this[property] = powerup[property];
     }
 
+    this['constructorType'] = 'Powerup'
 };
+
 
 Powerup.prototype = new Entity();
 
@@ -47,6 +49,24 @@ Powerup.prototype.render = function (ctx) {
     ctx.fillStyle = oldStyle;
 };
 
+Powerup.prototype.addFire =  function (player) {
+  console.log(player);
+}
+
+Powerup.prototype.addSpeed =  function (player) {
+  player.velX += 4;
+  player.velY += 4;
+  console.log(player);
+}
+
+Powerup.prototype.addAmmo =  function (player) {
+  player.ammo++;
+  console.log(player);
+}
+
+Powerup.prototype.addKick =  function (player) {
+  console.log(player);
+}
 // Maps number to a brick type
 Powerup.prototype.getBricktype =  function (number) {
     switch (number) {
@@ -55,6 +75,7 @@ Powerup.prototype.getBricktype =  function (number) {
           sprite: '..path',
           color: 'green',
           description: 'Bigger fire',
+          effect: this.addFire,
         }
         break;
       case 1:
@@ -62,6 +83,7 @@ Powerup.prototype.getBricktype =  function (number) {
           sprite: '..path',
           color: 'gray',
           description: 'Faster character',
+          effect: this.addSpeed,
         }
         break;
       case 2:
@@ -69,6 +91,7 @@ Powerup.prototype.getBricktype =  function (number) {
           sprite: '..path',
           color: 'navy',
           description: 'More bombs',
+          effect: this.addAmmo,
         }
         break;
       case 3:
@@ -76,6 +99,7 @@ Powerup.prototype.getBricktype =  function (number) {
           sprite: '..path',
           color: 'cyan',
           description: 'Player can kick bomb',
+          effect: this.addKick,
         }
         break;
       default:

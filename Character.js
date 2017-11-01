@@ -64,6 +64,14 @@ Character.prototype.update = function(du){
     // Hit detection
     var hitEntity = this.findHitEntity();
     if(hitEntity) {
+
+      console.log(hitEntity.constructorType);
+      if (hitEntity.constructorType === 'Powerup') {
+        console.log(hitEntity);
+        hitEntity.effect(this);
+        hitEntity.kill();
+      }
+
       this.cx = this.oldPosX;
       this.cy = this.oldPosY;
       return;
