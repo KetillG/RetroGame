@@ -26,11 +26,11 @@ Brick.prototype.render = function (ctx) {
 }
 
 Brick.prototype.isWalkable = function () {
-  return this.solid;
+  return this.walkable;
 }
 
 Brick.prototype.makeWalkable = function () {
-  this.solid = false;
+  this.walkable = true;
 }
 
 Brick.prototype.isBreakable = function () {
@@ -50,29 +50,41 @@ Brick.prototype.getBricktype =  function (number) {
   switch (number) {
     case 0:
       return {
-        solid: false,
+        walkable: true,
         breakable: false,
         sprite: '..path',
         color: 'green',
+        description: 'Walkable base block',
       }
       break;
     case 1:
       return {
-        solid: true,
+        walkable: false,
         breakable: false,
         sprite: '..path',
         color: 'gray',
+        description: 'Solid block that is not breakable',
       }
       break;
     case 2:
       return {
-        solid: true,
+        walkable: false,
         breakable: true,
         sprite: '..path',
         color: 'navy',
+        description: 'Solid block that is breakable',
+      }
+      break;
+    case 3:
+      return {
+        walkable: false,
+        breakable: false,
+        sprite: '..path',
+        color: 'cyan',
+        description: 'Endgame block, indicates tile is dead',
       }
       break;
     default:
-      console.log('hmhmhm');
+      console.log('No block found');
   }
 }
