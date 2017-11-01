@@ -21,13 +21,19 @@ function Powerup(descr) {
 
 Powerup.prototype = new Entity();
 
+Powerup.prototype.positionOccupied = function (x, y) {
+  const xHit = this.cx - 10 < x && this.cx + 10 > x
+  const yHit = this.cy - 10 < y && this.cy + 10 > y
+  return xHit && yHit;
+}
+
 Powerup.prototype.update = function (du) {
 
-    //spatialManager.unregister(this);
-    //if (this._isDeadNow) return entityManager.KILL_ME_NOW;
+    spatialManager.unregister(this);
+    if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
 
-    //spatialManager.register(this);
+    spatialManager.register(this);
 };
 
 Powerup.prototype.render = function (ctx) {
@@ -36,7 +42,7 @@ Powerup.prototype.render = function (ctx) {
     ctx.fillStyle = "pink";
     util.fillCircle(ctx,
                     this.cx * consts.RENDER_SCALE_WIDTH,
-                    this.cy * consts.RENDER_SCALE_HEIGHT, 
+                    this.cy * consts.RENDER_SCALE_HEIGHT,
                     30 * consts.RENDER_SCALE_WIDTH);
     ctx.fillStyle = oldStyle;
 };
