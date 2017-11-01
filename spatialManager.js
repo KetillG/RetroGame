@@ -52,7 +52,11 @@ unregister: function(entity) {
 },
 
 findPositionOnBoard: function(board, entity) {
-  board.moveOnBoard(entity.oldPosX, entity.oldPosY, entity.cx, entity.cy);
+  var isValid = board.validPosition(entity.cx, entity.cy);
+  console.log(isValid);
+  if(isValid){
+    entity.setPos(entity.oldPosX, entity.oldPosY);
+  }
 }
 
 }
