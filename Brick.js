@@ -54,6 +54,7 @@ Brick.prototype.getBricktype =  function (number) {
         breakable: false,
         sprite: '..path',
         color: 'green',
+        description: 'Walkable base block',
       }
       break;
     case 1:
@@ -62,6 +63,7 @@ Brick.prototype.getBricktype =  function (number) {
         breakable: false,
         sprite: '..path',
         color: 'gray',
+        description: 'Solid block that is not breakable',
       }
       break;
     case 2:
@@ -70,9 +72,19 @@ Brick.prototype.getBricktype =  function (number) {
         breakable: true,
         sprite: '..path',
         color: 'navy',
+        description: 'Solid block that is breakable',
+      }
+      break;
+    case 3:
+      return {
+        walkable: false,
+        breakable: false,
+        sprite: '..path',
+        color: 'cyan',
+        description: 'Endgame block, indicates tile is dead',
       }
       break;
     default:
-      console.log('hmhmhm');
+      console.log('No block found');
   }
 }
