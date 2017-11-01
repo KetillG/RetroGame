@@ -7,7 +7,7 @@
 
 // A generic contructor which accepts an arbitrary descriptor object
 function Powerup(descr) {
-    
+
     // Common inherited setup logic from Entity
     this.setup(descr);
     // Adds custom powerup properties
@@ -22,7 +22,7 @@ function Powerup(descr) {
 Powerup.prototype = new Entity();
 
 Powerup.prototype.update = function (du) {
-    
+
     //spatialManager.unregister(this);
     //if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
@@ -34,9 +34,9 @@ Powerup.prototype.render = function (ctx) {
     // Draw circle shit
     const oldStyle = ctx.fillStyle;
     ctx.fillStyle = "pink";
-    util.fillCircle(ctx, 
-                    this.cx, 
-                    this.cy, 
+    util.fillCircle(ctx,
+                    this.cx * consts.RENDER_SCALE_WIDTH,
+                    this.cy * consts.RENDER_SCALE_HEIGHT, 
                     30 * consts.RENDER_SCALE_WIDTH);
     ctx.fillStyle = oldStyle;
 };

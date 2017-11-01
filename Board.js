@@ -83,8 +83,18 @@ Board.prototype.getBrickAt = function (x, y) {
   }
 }
 
+Board.prototype.getBrickAtWithoutScaling = function (x, y) {
+  const i = Math.floor(y / ( this.yStep));
+  const j = Math.floor(x / ( this.xStep));
+  try {
+    return this.board[i][j];
+  } catch (e) {
+    return null;
+  }
+}
+
 Board.prototype.positionOccupied = function (x, y) {
-  return !this.getBrickAt(x,y).isWalkable();
+  return !this.getBrickAtWithoutScaling(x,y).isWalkable();
 }
 
 Board.prototype.update = function (du) {

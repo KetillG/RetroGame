@@ -45,8 +45,8 @@ _createBoard(board) {
 
 _addPlayers : function () {
   var player = new Character({
-    cx: 70,
-    cy: 70,
+    cx: 100,
+    cy: 100,
     velX: 4,
     velY: 4,
     keyUp: 'W'.charCodeAt(0),
@@ -68,16 +68,6 @@ _addPlayers : function () {
 
 KILL_ME_NOW : -1,
 
-
-        while (i < aCategory.length) {
-            var status = aCategory[i].update(du);
-
-            spatialManager.findPositionOnBoard(this._board, aCategory[i]);
-
-            i++;
-        }
-    }
-
 deferredSetup : function () {
     this._categories = [this._powerups, this._bombs, this._players];
 },
@@ -98,24 +88,24 @@ spawnBomb(descr) {
 
 update: function(du) {
 
-    for (var c = 0; c < this._categories.length; ++c) {
-        
-                var aCategory = this._categories[c];
-                var i = 0;
-        
-                while (i < aCategory.length) {
-        
-                    var status = aCategory[i].update(du);
-                    if (status === this.KILL_ME_NOW) {
-                        // remove the dead guy, and shuffle the others down to
-                        // prevent a confusing gap from appearing in the array
-                        aCategory.splice(i,1);
-                    }
-                    else {
-                        ++i;
-                    }
-                }
-            }
+  for (var c = 0; c < this._categories.length; ++c) {
+
+    var aCategory = this._categories[c];
+    var i = 0;
+
+    while (i < aCategory.length) {
+
+      var status = aCategory[i].update(du);
+      if (status === this.KILL_ME_NOW) {
+          // remove the dead guy, and shuffle the others down to
+          // prevent a confusing gap from appearing in the array
+          aCategory.splice(i,1);
+      }
+      else {
+          ++i;
+      }
+    }
+  }
 },
 
 getBrick: function(x,y) {

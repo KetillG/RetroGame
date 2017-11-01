@@ -62,3 +62,10 @@ Entity.prototype.getRadius = function () {
 Entity.prototype.kill = function () {
     this._isDeadNow = true;
 };
+
+Entity.prototype.findHitEntity = function () {
+    var pos = this.getPos();
+    return spatialManager.findEntityInRange(
+        pos.posX, pos.posY, this.getRadius()
+    );
+};

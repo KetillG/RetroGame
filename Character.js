@@ -44,10 +44,15 @@ Character.prototype.moveDirection = function(){
 }
 
 Character.prototype.update = function(du){
+
+  spatialManager.unregister(this);
+
   var directionObject = this.moveDirection();
   var newX = this.cx;
   var newY = this.cy;
-  if(directionObject){
+
+  if(directionObject) {
+    // Directions
     var vel = directionObject.vel;
     var dir = directionObject.direction;
     if(vel === "velY"){
@@ -56,15 +61,25 @@ Character.prototype.update = function(du){
     else{
       newX = this.cx + dir*this.velX*du;
     }
+    // Hit detection
+    var hitEntity = this.findHitEntity();
+    if(hitEntity) {
+      console.log(hitEntity);
+      this.cx = this.oldPosX;
+      this.cy = this.oldPosY;
+      return;
+    }
 
-
-    // Handle firing
-    this.maybeDropBomb();
     this.oldPosX = this.cx;
     this.oldPosY = this.cy;
     this.cx = newX;
     this.cy = newY;
   }
+
+  // Handle firing
+  this.maybeDropBomb();
+
+  spatialManager.register(this);
 }
 
 Character.prototype.render = function(ctx){
@@ -78,9 +93,9 @@ Character.prototype.render = function(ctx){
     //ctx.arc(this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT, 50 * consts.RENDER_SCALE_WIDTH, 2 * Math.PI, false);
     //ctx.fill();
     //ctx.closePath();
-    util.fillCircle(ctx, 
-      this.cx * consts.RENDER_SCALE_WIDTH, 
-      this.cy * consts.RENDER_SCALE_HEIGHT, 
+    util.fillCircle(ctx,
+      this.cx * consts.RENDER_SCALE_WIDTH,
+      this.cy * consts.RENDER_SCALE_HEIGHT,
       30 * consts.RENDER_SCALE_WIDTH);
   }
 }
@@ -91,10 +106,13 @@ Character.prototype.setPos = function(x, y){
 }
 
 Character.prototype.maybeDropBomb = function () {
+    if(keys[this.keyFire]) {
+      console.log(this.ammo);
+    }
     if (keys[this.keyFire] && this.ammo > 0) {
         this.ammo--;
         entityManager.spawnBomb({cx:this.cx,
                                 cy:this.cy,
-                                ammo:this.ammo});
+                                ammo:this});
     }
 };
