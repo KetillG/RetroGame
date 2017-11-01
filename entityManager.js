@@ -44,7 +44,6 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
-  console.log('create player');
   var player = new Character({
     cx: 70,
     cy: 70,
@@ -68,6 +67,16 @@ _addPlayers : function () {
 //
 
 KILL_ME_NOW : -1,
+
+
+        while (i < aCategory.length) {
+            var status = aCategory[i].update(du);
+
+            spatialManager.findPositionOnBoard(this._board, aCategory[i]);
+
+            i++;
+        }
+    }
 
 deferredSetup : function () {
     this._categories = [this._powerups, this._bombs, this._players];
