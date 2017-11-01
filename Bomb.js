@@ -45,7 +45,7 @@ Bomb.prototype.render = function (ctx) {
 };
 
 Bomb.prototype.dropPowerup = function () {
-    const powerupType = 2//Math.floor(Math.random() * 2);
+    const powerupType = Math.floor(Math.random() * 2) + 1;
     entityManager.spawnPowerup({cx:this.cx,
                                 cy:this.cy,
                                 id:powerupType});

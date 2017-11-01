@@ -65,9 +65,7 @@ Character.prototype.update = function(du){
     var hitEntity = this.findHitEntity();
     if(hitEntity) {
 
-      console.log(hitEntity.constructorType);
       if (hitEntity.constructorType === 'Powerup') {
-        console.log(hitEntity);
         hitEntity.effect(this);
         hitEntity.kill();
       }
