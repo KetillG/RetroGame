@@ -32,27 +32,26 @@ _entities : [],
 // PUBLIC METHODS
 
 getNewSpatialID : function() {
-
-    // TODO: YOUR STUFF HERE!
-    var nextSpatialID = this._nextSpatialID;
-    ++this._nextSpatialID;
-    return nextSpatialID;
+    return this._nextSpatialID++;
 },
 
 register: function(entity) {
-    var pos = entity.getPos();
-    var spatialID = entity.getSpatialID();
+    this._entities.push(entity);
 },
 
 unregister: function(entity) {
-    var spatialID = entity.getSpatialID();
-
-    // TODO: YOUR STUFF HERE!
-    delete this._entities[spatialID];
+    var index = this._entities.indexOf(entity);
+    if(index === -1) return;
+    this._entities.splice(index, 1);
 },
 
-findPositionOnBoard: function(board, entity) {
-  board.moveOnBoard(entity.oldPosX, entity.oldPosY, entity.cx, entity.cy);
-}
+findEntityInRange: function(posX, posY, radius) {
+    for(var i = 0; i < this._entities.length; i++) {
+      if(this._entities[i].positionOccupied(posX,posY) {
+        return this._entities[i];
+      }
+    }
+    return false;
+},
 
 }

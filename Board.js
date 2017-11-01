@@ -6,6 +6,9 @@
 
 function Board(descr) {
 
+  this._spatialID = spatialManager.getNewSpatialID();
+  spatialManager.register(this);
+
   // vars used to determine scaling
   const tileBoard = descr.board;
   const boardSize = tileBoard.length + 2;
@@ -83,8 +86,8 @@ Board.prototype.getBrickAt = function (x, y) {
   }
 }
 
-Board.prototype.validPosition = function (x, y) {
-  return this.getBrickAt(x,y).isWalkable();
+Board.prototype.positionOccupied = function (x, y) {
+  return !this.getBrickAt(x,y).isWalkable();
 }
 
 Board.prototype.update = function (du) {
