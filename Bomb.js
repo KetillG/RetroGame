@@ -27,21 +27,21 @@ Bomb.prototype.kick = function() {
     console.log('kicking bomb');
 }
 
+Bomb.prototype.explode = function () {
+    entityManager.bombExplode(this.cx, this.cy, this.power);
+}
+
 Bomb.prototype.update = function (du) {
 
     spatialManager.unregister(this);
-    //if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
         this.owner.ammo++;
+        this.explode();
         this.dropPowerup();
         return entityManager.KILL_ME_NOW;
     }
-
-    // Handle firing
-
-
 
     spatialManager.register(this);
 };

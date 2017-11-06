@@ -131,9 +131,12 @@ Character.prototype.maybeDropBomb = function () {
         // Gets correct position from board
         const pos = spatialManager.getValidBombCenter(this.cx,this.cy);
         // Tries to spawn a bomb
-        const maybeBomb = entityManager.trySpawnBomb({cx:pos.cx,
-                                                   cy:pos.cy,
-                                                   owner:this});
+        const maybeBomb = entityManager.trySpawnBomb({
+          cx:pos.cx,
+          cy:pos.cy,
+          power:this.power,
+          owner:this
+        });
         // If bomb was spawned
         
         if(maybeBomb) {

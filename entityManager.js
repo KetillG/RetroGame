@@ -81,6 +81,10 @@ spawnPowerup(descr) {
     this._powerups.push(new Powerup(descr));
 },
 
+bombExplode(x, y, power) {
+
+},
+
 trySpawnBomb(descr) {
     // Check if bomb already in place at location
     for(var i = 0; i < this._bombs.length; i++) {
