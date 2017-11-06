@@ -55,8 +55,8 @@ Powerup.prototype.addFire =  function (player) {
 }
 
 Powerup.prototype.addSpeed =  function (player) {
-  player.velX += 4;
-  player.velY += 4;
+  player.velX += 1;
+  player.velY += 1;
 }
 
 Powerup.prototype.addAmmo =  function (player) {

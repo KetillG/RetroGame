@@ -128,10 +128,17 @@ Character.prototype.maybeDropBomb = function () {
     if(keys[this.keyFire]) {
     }
     if (keys[this.keyFire] && this.ammo > 0) {
-        this.ammo--;
-        var pos = spatialManager.getValidBombCenter(this.cx,this.cy);
-        this.freshBomb = entityManager.spawnBomb({cx:pos.cx,
+        // Gets correct position from board
+        const pos = spatialManager.getValidBombCenter(this.cx,this.cy);
+        // Tries to spawn a bomb
+        const maybeBomb = entityManager.trySpawnBomb({cx:pos.cx,
                                                    cy:pos.cy,
                                                    owner:this});
+        // If bomb was spawned
+        
+        if(maybeBomb) {
+          this.freshBomb = maybeBomb;
+          this.ammo--;
+        }
     }
 };

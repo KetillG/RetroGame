@@ -81,7 +81,17 @@ spawnPowerup(descr) {
     this._powerups.push(new Powerup(descr));
 },
 
-spawnBomb(descr) {
+trySpawnBomb(descr) {
+    // Check if bomb already in place at location
+    for(var i = 0; i < this._bombs.length; i++) {
+        var temp = this._bombs[i];
+        console.log(temp)
+        console.log(descr)
+        if(temp.cx === descr.cx && temp.cy === descr.cy) {
+            console.log('bomb here already');
+            return null;
+        }
+    }
     const bomb = new Bomb(descr);
     this._bombs.push(bomb);
     return bomb;
