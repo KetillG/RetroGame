@@ -125,8 +125,6 @@ Character.prototype.setPos = function(x, y){
 }
 
 Character.prototype.maybeDropBomb = function () {
-    if(keys[this.keyFire]) {
-    }
     if (keys[this.keyFire] && this.ammo > 0) {
         // Gets correct position from board
         const pos = spatialManager.getValidBombCenter(this.cx,this.cy);
@@ -137,8 +135,8 @@ Character.prototype.maybeDropBomb = function () {
           power:this.power,
           owner:this
         });
+
         // If bomb was spawned
-        
         if(maybeBomb) {
           this.freshBomb = maybeBomb;
           this.ammo--;

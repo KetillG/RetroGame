@@ -28,7 +28,7 @@ Bomb.prototype.kick = function() {
 }
 
 Bomb.prototype.explode = function () {
-    entityManager.bombExplode(this.cx, this.cy, this.power);
+    entityManager.bombExplode(this);
 }
 
 Bomb.prototype.update = function (du) {
@@ -40,7 +40,8 @@ Bomb.prototype.update = function (du) {
         this.owner.ammo++;
         this.explode();
         this.dropPowerup();
-        return entityManager.KILL_ME_NOW;
+        return;
+        //return entityManager.KILL_ME_NOW;
     }
 
     spatialManager.register(this);
