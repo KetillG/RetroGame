@@ -8,15 +8,28 @@
 function Bomb(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
+
+    this['constructorType'] = 'Bomb'
 };
 
 Bomb.prototype = new Entity();
 
 Bomb.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
+Bomb.prototype.radius = 30;
+
+Bomb.prototype.positionOccupied = function (x, y) {
+  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
+  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
+  return xHit && yHit;
+}
+
+Bomb.prototype.kick = function() {
+    console.log('kicking bomb');
+}
 
 Bomb.prototype.update = function (du) {
 
-    //spatialManager.unregister(this);
+    spatialManager.unregister(this);
     //if (this._isDeadNow) return entityManager.KILL_ME_NOW;
 
     this.lifeSpan -= du;
@@ -30,7 +43,7 @@ Bomb.prototype.update = function (du) {
 
 
 
-    //spatialManager.register(this);
+    spatialManager.register(this);
 };
 
 Bomb.prototype.render = function (ctx) {
@@ -38,9 +51,9 @@ Bomb.prototype.render = function (ctx) {
     const oldStyle = ctx.fillStyle;
     ctx.fillStyle = "orange";
     util.fillCircle(ctx,
-                    this.cx * consts.RENDER_SCALE_WIDTH,
-                    this.cy * consts.RENDER_SCALE_HEIGHT,
-                    30 * consts.RENDER_SCALE_WIDTH);
+                    this.cx,
+                    this.cy,
+                    30);
     ctx.fillStyle = oldStyle;
 };
 

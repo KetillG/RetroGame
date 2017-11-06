@@ -22,10 +22,11 @@ function Powerup(descr) {
 
 
 Powerup.prototype = new Entity();
+Powerup.prototype.radius = 30;
 
 Powerup.prototype.positionOccupied = function (x, y) {
-  const xHit = this.cx - 10 < x && this.cx + 10 > x
-  const yHit = this.cy - 10 < y && this.cy + 10 > y
+  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
+  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
   return xHit && yHit;
 }
 
@@ -43,29 +44,27 @@ Powerup.prototype.render = function (ctx) {
     const oldStyle = ctx.fillStyle;
     ctx.fillStyle = "pink";
     util.fillCircle(ctx,
-                    this.cx * consts.RENDER_SCALE_WIDTH,
-                    this.cy * consts.RENDER_SCALE_HEIGHT,
-                    30 * consts.RENDER_SCALE_WIDTH);
+                    this.cx,
+                    this.cy,
+                    30);
     ctx.fillStyle = oldStyle;
 };
 
 Powerup.prototype.addFire =  function (player) {
-  console.log(player);
+  player.power++;
 }
 
 Powerup.prototype.addSpeed =  function (player) {
   player.velX += 4;
   player.velY += 4;
-  console.log(player);
 }
 
 Powerup.prototype.addAmmo =  function (player) {
   player.ammo++;
-  console.log(player);
 }
 
 Powerup.prototype.addKick =  function (player) {
-  console.log(player);
+  player.kickPower = true;
 }
 // Maps number to a brick type
 Powerup.prototype.getBricktype =  function (number) {

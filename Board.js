@@ -8,6 +8,7 @@ function Board(descr) {
 
   this._spatialID = spatialManager.getNewSpatialID();
   spatialManager.register(this);
+  spatialManager.registerBoard(this);
 
   // vars used to determine scaling
   const tileBoard = descr.board;
@@ -88,6 +89,19 @@ Board.prototype.getBrickAtWithoutScaling = function (x, y) {
   const j = Math.floor(x / ( this.xStep));
   try {
     return this.board[i][j];
+  } catch (e) {
+    return null;
+  }
+}
+
+Board.prototype.getBrickCenterAt = function (x, y) {
+  const i = Math.floor(x / ( this.xStep));
+  const j = Math.floor(y / ( this.yStep));
+  try {
+    return {
+      cx: i * this.xStep + this.xStep / 2,
+      cy: j * this.yStep + this.yStep / 2,
+    };
   } catch (e) {
     return null;
   }

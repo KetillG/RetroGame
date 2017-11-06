@@ -23,7 +23,7 @@ var spatialManager = {
 _nextSpatialID : 1, // make all valid IDs non-falsey (i.e. don't start at 0)
 
 _entities : [],
-
+_board: null,
 // "PRIVATE" METHODS
 //
 // <none yet>
@@ -38,6 +38,9 @@ getNewSpatialID : function() {
 register: function(entity) {
     this._entities.push(entity);
 },
+registerBoard: function(board) {
+  this._board = board;
+},
 
 unregister: function(entity) {
     var index = this._entities.indexOf(entity);
@@ -46,13 +49,17 @@ unregister: function(entity) {
 },
 
 findEntityInRange: function(posX, posY) {
-  //console.log(posX,posY);
   for(var i = 0; i < this._entities.length; i++) {
     if(this._entities[i].positionOccupied(posX,posY)) {
       return this._entities[i];
     }
   }
   return false;
+},
+
+getValidBombCenter: function(posX, posY) {
+  return this._board.getBrickCenterAt(posX, posY);
+  //return false;
 },
 
 }

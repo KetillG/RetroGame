@@ -82,8 +82,9 @@ spawnPowerup(descr) {
 },
 
 spawnBomb(descr) {
-    this._bombs.push(new Bomb(descr));
-    console.log(this._bombs[0])
+    const bomb = new Bomb(descr);
+    this._bombs.push(bomb);
+    return bomb;
 },
 
 update: function(du) {
