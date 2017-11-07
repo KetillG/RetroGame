@@ -41,20 +41,23 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
         const nextX = pos.posX + xStep;
         const nextY = pos.posY + yStep;
         // Check if hit anything
-        var hitEntity = spatialManager.findEntityInRange(
+        const hitEntities = spatialManager.findEntityInRange(
             nextX, nextY, 30
         );
 
-        if(hitEntity) {
-            console.log(hitEntity)
-            if(hitEntity.constructorType === 'Bomb') {
-                // Explode the bomb, entityManager?
-            } else if (hitEntity.constructorType === 'Character') {
-                // Reduce life
-            } else if (hitEntity.constructorType === 'Board') {
-                hitEntity.tryExplodeBrick(nextX, nextY);
-                return pos;
-            }
+        if(hitEntities.length) {
+            hitEntities.map(hitEntity => {
+                console.log(hitEntity)
+                if(hitEntity.constructorType === 'Bomb') {
+                    // Explode the bomb, entityManager?
+                } else if (hitEntity.constructorType === 'Character') {
+                    // Reduce life
+                } else if (hitEntity.constructorType === 'Board') {
+                    hitEntity.tryExplodeBrick(nextX, nextY);
+                    return pos;
+                }
+            });
+            
         }
         // Update pos
         console.log(pos.posY, nextY)

@@ -92,5 +92,5 @@ Entity.prototype.findHitEntity = function () {
         pos.posX + this.width, pos.posY + this.height, this.getRadius()
     );
     console.log(right, left, up, down);
-    return right || up||left||down;
+    return right.concat(left).concat(up).concat(down);
 };

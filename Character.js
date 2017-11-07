@@ -72,31 +72,40 @@ Character.prototype.update = function (du) {
             newX = this.cx + dir * this.velX * du;
         }
         // Hit detection
-        const hitEntity = this.findHitEntity();
-        if (hitEntity) {
-            console.log(hitEntity);
-            // If you have not left the bomb area you can walk on it
-            if (hitEntity === this.freshBomb) {
-                console.log('Can walk here');
-            } else if (hitEntity.constructorType === 'Powerup') {
-                hitEntity.effect(this);
-                hitEntity.kill();
-            } else if (hitEntity.constructorType === 'Bomb') {
-                // If you hit a bomb and you can kick it, then kick it
-                if (this.kickPower) {
-                    hitEntity.kick();
+        const hitEntities = this.findHitEntity();
+        // If a entity its an 'wall'
+        let illegalMove = false;
+
+        if (hitEntities.length) {
+            console.log('here');
+            hitEntities.map(hitEntity => {
+                // If you have not left the bomb area you can walk on it
+                if (hitEntity === this.freshBomb) {
+                    console.log('Can walk here');
+                } else if (hitEntity.constructorType === 'Powerup') {
+                    hitEntity.effect(this);
+                    hitEntity.kill();
+                } else if (hitEntity.constructorType === 'Bomb') {
+                    // If you hit a bomb and you can kick it, then kick it
+                    if (this.kickPower) {
+                        hitEntity.kick();
+                    }
+                    illegalMove = true;
+                    //this.revertPosition();
+                    //return;
+                } else {
+                    illegalMove = true;
                 }
-                this.revertPosition();
-                return;
-            } else {
-                this.revertPosition();
-                return;
-            }
+            });    
         } else {
             // If nothing is hit then you left fresh bomb
             this.freshBomb = null;
         }
-
+        // Revert position if illegal move
+        if(illegalMove) {
+            this.revertPosition();
+            return;
+        }
         this.oldPosX = this.cx;
         this.oldPosY = this.cy;
         this.cx = newX;
