@@ -26,9 +26,12 @@ Character.prototype.power = 2;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
+Character.prototype.lives = 3;
+
 Character.prototype.radius = 30;
 
 Character.prototype.dirObj = {};
+Character.prototype.recentlyHit = false;
 
 
 Character.prototype.moveDirection = function () {
@@ -101,7 +104,6 @@ Character.prototype.update = function (du) {
             });
         }
         else {
-            console.log(this.cx, this.cy, this.newPosX, this.newPosY);
             // If nothing is hit then you left fresh bomb
             this.setPos(this.newPosX, this.newPosY);
             this.freshBomb = null;
@@ -177,12 +179,16 @@ Character.prototype.positionOccupied = function (x, y) {
 };
 
 Character.prototype.decrementLife = function() {
-    console.log("lives:" + this.lives);
-    --this.lives;
+    if(!this.recentlyHit){
+        --this.lives;
+        console.log(this.lives);
+        this.recentlyHit = true;
+        setTimeout(() => {this.recentlyHit = false;}, 3000);
+    }
+
     // register og unregister
 
     if(this.lives <= 0) {
         this.lives = 0;
     }
-    console.log("lives:" + this.lives);
 }
