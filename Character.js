@@ -26,7 +26,7 @@ Character.prototype.power = 2;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
-Character.prototype.lives = 3;
+Character.prototype.lives = 1;
 Character.prototype.immuneTime = -1;
 
 Character.prototype.radius = 30;
@@ -36,9 +36,10 @@ Character.prototype.recentlyHit = false;
 
 Character.prototype.decrementLife = function () {
     if(this.immuneTime >= 0) return;
-    this.life--;
-    if(this.life < 1) {
+    this.lives--;
+    if(this.lives < 1) {
         this.kill();
+        console.log('died')
     }
     this.immuneTime = 1000 / NOMINAL_UPDATE_INTERVAL;
 }
@@ -69,6 +70,8 @@ Character.prototype.moveDirection = function () {
 
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
+
+    if(this.isDead()) return entityManager.KILL_ME_NOW;
 
     if(this.immuneTime >= 0) {
         this.immuneTime -= du;
