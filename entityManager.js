@@ -102,6 +102,11 @@ trySpawnBomb(descr) {
     return bomb;
 },
 
+getValidBombCenter: function(posX, posY) {
+    return this._board.getBrickCenterAt(posX, posY);
+    //return false;
+  },
+
 update: function(du) {
 
   for (var c = 0; c < this._categories.length; ++c) {

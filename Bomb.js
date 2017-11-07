@@ -28,6 +28,9 @@ Bomb.prototype.kick = function() {
 }
 
 Bomb.prototype.explode = function () {
+    // Return the ammo to player
+    this.owner.ammo++;
+    // Add explosion to entity manager
     entityManager.bombExplode(this);
 }
 
@@ -37,9 +40,9 @@ Bomb.prototype.update = function (du) {
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
-        this.owner.ammo++;
+        // Explode and create fire
         this.explode();
-        this.dropPowerup();
+        //this.dropPowerup();
         return;
         //return entityManager.KILL_ME_NOW;
     }
