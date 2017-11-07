@@ -12,8 +12,6 @@
 function Character(descr){
 
   this.setup(descr);
-  this.oldPosX = this.cx;
-  this.oldPosY = this.cy;
 
   this['constructorType'] = 'Character'
 }
@@ -89,21 +87,16 @@ Character.prototype.update = function(du){
         if(this.kickPower) {
           hitEntity.kick();
         }
-        this.revertPosition();
+        this.changePosition();
         return;
       } else {
-        this.revertPosition();
+        this.changePosition();
         return;
       }
     } else {
       // If nothing is hit then you left fresh bomb
       this.freshBomb = null;
     }
-
-    this.oldPosX = this.cx;
-    this.oldPosY = this.cy;
-    this.cx = newX;
-    this.cy = newY;
   }
 
   // Handle firing
@@ -112,9 +105,9 @@ Character.prototype.update = function(du){
   spatialManager.register(this);
 }
 
-Character.prototype.revertPosition = function () {
-  this.cx = this.oldPosX;
-  this.cy = this.oldPosY;
+Character.prototype.changePosition = function () {
+  this.cx = this.newPosX;
+  this.cy = this.newPosY;
 }
 
 Character.prototype.render = function(ctx){
