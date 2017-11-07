@@ -57,6 +57,8 @@ Entity.prototype.setup = function (descr) {
     // I am not dead yet!
     this._isDeadNow = false;
     this.setWidths();
+    this.newPosX = this.cx;
+    this.newPosY = this.cy;
 };
 
 Entity.prototype.setPos = function (cx, cy) {
@@ -64,8 +66,12 @@ Entity.prototype.setPos = function (cx, cy) {
     this.cy = cy;
 };
 
-Entity.prototype.getPos = function () {
-    return {posX : this.cx, posY : this.cy};
+Entity.prototype.getPos = function(){
+    return {posX:this.cx, posY:this.cy};
+};
+
+Entity.prototype.getFuturePos = function () {
+    return {posX : this.newPosX, posY : this.newPosY};
 };
 
 Entity.prototype.getRadius = function () {
@@ -78,7 +84,7 @@ Entity.prototype.kill = function () {
 };
 
 Entity.prototype.findHitEntity = function () {
-    var pos = this.getPos();
+    var pos = this.getFuturePos();
     var right = spatialManager.findEntityInRange(
         pos.posX - this.width, pos.posY - this.height, this.getRadius()
     );
