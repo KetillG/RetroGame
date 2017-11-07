@@ -46,8 +46,8 @@ _createBoard(board) {
 
 _addPlayers : function (pObj) {
   var player = new Character({
-    cx: 100,
-    cy: 100,
+    cx: 80,
+    cy: 80,
     velX: 4,
     velY: 4,
     keyUp: pObj.up.charCodeAt(0),
@@ -75,7 +75,6 @@ deferredSetup : function () {
 },
 
 init: function() {
-  console.log(g_images);
     var gayBoy = new Sprite(g_images.runar);
     this._createBoard(board);
     var pObj ={
@@ -110,7 +109,6 @@ trySpawnBomb(descr) {
     for(var i = 0; i < this._bombs.length; i++) {
         var temp = this._bombs[i];
         if(temp.cx === descr.cx && temp.cy === descr.cy) {
-            console.log('bomb here already');
             return null;
         }
     }

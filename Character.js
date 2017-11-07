@@ -63,22 +63,23 @@ Character.prototype.update = function(du){
   var newY = this.cy;
 
   if(directionObject) {
+      console.log(this.sprite.width);
     // Directions
     var vel = this.dirObj.vel;
     var dir = this.dirObj.direction;
     if(vel === "velY"){
       this.newPosY = this.cy + dir*this.velY*du;
+      this.newPosX = this.cx;
     }
     else{
       this.newPosX = this.cx + dir*this.velX*du;
+      this.newPosY = this.cy;
     }
     // Hit detection
     var hitEntity = this.findHitEntity();
     if(hitEntity) {
-      console.log(hitEntity)
       // If you have not left the bomb area you can walk on it
       if(hitEntity === this.freshBomb) {
-        console.log('Can walk here')
       } else if (hitEntity.constructorType === 'Powerup') {
         hitEntity.effect(this);
         hitEntity.kill();
@@ -113,7 +114,9 @@ Character.prototype.changePosition = function () {
 Character.prototype.render = function(ctx){
 
   if(this.sprite){
-    this.sprite.drawAt(ctx, this.cx, this.cy);
+    var w = this.sprite.width;
+    var h = this.sprite.height;
+    this.sprite.drawAt(ctx, this.cx-w/2, this.cy+h/2);
   }
   else{
     util.fillCircle(ctx,
@@ -149,7 +152,9 @@ Character.prototype.maybeDropBomb = function () {
 };
 
 Character.prototype.positionOccupied = function (x, y) {
-  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
-  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
+  var w = this.sprite.width/2;
+  var h = this.sprite.height/2;
+  const yHit = this.cy - h < y && this.cy + h > y
+  const xHit = this.cx - w < x && this.cx + w > x
   return xHit && yHit;
 }
