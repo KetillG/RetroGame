@@ -85,6 +85,7 @@ Character.prototype.updatePosition = function(posX, posY){
     // Revert position if illegal move
     if(!this.wallCollide && !this.bombCollide && this.stillOnFreshBomb){
         this.setPos(posX, posY);
+        return;
     }
     if(this.wallCollide && this.bombCollide && !this.stillOnFreshBomb) {
         //this.revertPosition();
@@ -95,7 +96,6 @@ Character.prototype.updatePosition = function(posX, posY){
 
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
-    this.maybeDropBomb();
 
 
     const right = keys[this.keyRight];
@@ -112,7 +112,7 @@ Character.prototype.update = function (du) {
         var newPosY = this.cy + dir*this.velY*du;
         this.updatePosition(this.cx, newPosY);
     }
-
+    this.maybeDropBomb();
 
     // Handle firing
 
