@@ -14,7 +14,6 @@ function Fire(descr) {
     this['paths'] = [];
 };
 
-//Fire.prototype.paths = [];
 Fire.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
@@ -47,14 +46,14 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
         );
 
         let hitWall = false;
-
+        console.log(hitEntities)
         if(hitEntities.length) {
             hitEntities.map(hitEntity => {
                 if(hitEntity.constructorType === 'Bomb') {
                     // Explode the bomb, entityManager?
                 } else if (hitEntity.constructorType === 'Character') {
                     // Reduce life
-                    hitEntity.decrementLife();
+                    hitEntity.decrementLife()
                 } else if (hitEntity.constructorType === 'Board') {
                     hitEntity.tryExplodeBrick(nextX, nextY);
                     hitWall = true;
@@ -93,9 +92,5 @@ Fire.prototype.render = function (ctx) {
                 'red'
             );
         });
-        /*ctx.beginPath();
-        ctx.moveTo(path.center.posX,path.center.posY);
-        ctx.lineTo(path.up.posX,path.up.posY);
-        ctx.stroke();*/
     });
 }
