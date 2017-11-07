@@ -39,7 +39,9 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
+      runar : "https://puu.sh/ygONV/b57ec88c65.png"
     };
+    console.log(requiredImages);
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);
 }
@@ -47,6 +49,8 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
+
+
 
     entityManager.init();
 

@@ -28,6 +28,8 @@ Character.prototype.freshBomb;
 
 Character.prototype.radius = 30;
 
+Character.prototype.dirObj = {};
+
 Character.prototype.moveDirection = function(){
   var right = keys[this.keyRight];
   var left = keys[this.keyLeft];
@@ -37,13 +39,17 @@ Character.prototype.moveDirection = function(){
   var x = left ^ right;
   if(x && !y){
     var dir = right ? 1 : -1;
-    var obj = {vel : "velX", direction : dir, center : "cx"};
-    return obj;
+    this.dirObj.vel = "velX";
+    this.dirObj.direction = dir;
+    this.dirObj.center = "cx";
+    return true;
   }
   else if(y && !x){
     var dir = down ? 1 : -1;
-    var obj = {vel : "velY", direction : dir, center : "cy"}
-    return obj;
+    this.dirObj.vel = "velY";
+    this.dirObj.direction = dir;
+    this.dirObj.center = "cy";
+    return true;
   }
   else{
     return null;
@@ -60,8 +66,8 @@ Character.prototype.update = function(du){
 
   if(directionObject) {
     // Directions
-    var vel = directionObject.vel;
-    var dir = directionObject.direction;
+    var vel = this.dirObj.vel;
+    var dir = this.dirObj.direction;
     if(vel === "velY"){
       newY = this.cy + dir*this.velY*du;
     }

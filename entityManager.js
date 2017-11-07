@@ -44,17 +44,18 @@ _createBoard(board) {
   this._board = new Board({board});
 },
 
-_addPlayers : function () {
+_addPlayers : function (pObj) {
   var player = new Character({
     cx: 100,
     cy: 100,
     velX: 4,
     velY: 4,
-    keyUp: 'W'.charCodeAt(0),
-    keyDown: 'S'.charCodeAt(0),
-    keyLeft: 'A'.charCodeAt(0),
-    keyRight: 'D'.charCodeAt(0),
-    keyFire: ' '.charCodeAt(0),
+    keyUp: pObj.up.charCodeAt(0),
+    keyDown: pObj.down.charCodeAt(0),
+    keyLeft: pObj.left.charCodeAt(0),
+    keyRight: pObj.right.charCodeAt(0),
+    keyFire: pObj.fire.charCodeAt(0),
+    sprite: pObj.sprite
   });
 
   this._players.push(player);
@@ -74,8 +75,18 @@ deferredSetup : function () {
 },
 
 init: function() {
+  console.log(g_images);
+    var gayBoy = new Sprite(g_images.runar);
     this._createBoard(board);
-    this._addPlayers();
+    var pObj ={
+      up: "W",
+      down: "S",
+      right: "D",
+      left: "A",
+      fire: " ",
+      sprite: gayBoy
+    }
+    this._addPlayers(pObj);
 },
 
 spawnPowerup(descr) {
