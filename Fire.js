@@ -45,6 +45,8 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
             nextX, nextY, 30
         );
 
+        let hitWall = false;
+
         if(hitEntities.length) {
             hitEntities.map(hitEntity => {
                 console.log(hitEntity)
@@ -54,13 +56,17 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
                     // Reduce life
                 } else if (hitEntity.constructorType === 'Board') {
                     hitEntity.tryExplodeBrick(nextX, nextY);
-                    return pos;
+                    hitWall = true;
                 }
             });
             
         }
+
+        if(hitWall) {
+            return pos;
+        }
+
         // Update pos
-        console.log(pos.posY, nextY)
         pos.posX = nextX;
         pos.posY = nextY;
     }
