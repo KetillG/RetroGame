@@ -8,6 +8,7 @@ function Board(descr) {
 
   this._spatialID = spatialManager.getNewSpatialID();
   spatialManager.register(this);
+  this['constructorType'] = 'Board'
 
   // vars used to determine scaling
   const tileBoard = descr.board;
@@ -93,9 +94,38 @@ Board.prototype.getBrickAtWithoutScaling = function (x, y) {
   }
 }
 
+Board.prototype.getBrickCenterAt = function (x, y) {
+  const i = Math.floor(x / ( this.xStep));
+  const j = Math.floor(y / ( this.yStep));
+  try {
+    return {
+      cx: i * this.xStep + this.xStep / 2,
+      cy: j * this.yStep + this.yStep / 2,
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
 Board.prototype.positionOccupied = function (x, y) {
   return !this.getBrickAtWithoutScaling(x,y).isWalkable();
 }
+
+Board.prototype.tryExplodeBrick = function (x, y) {
+  const i = Math.floor(y / ( this.yStep));
+  const j = Math.floor(x / ( this.xStep));
+  if(this.board[i][j].isBreakable()) {
+    this.board[i][j].break();
+    this.dropPowerup(i, j);
+  }
+}
+
+Board.prototype.dropPowerup = function (i, j) {
+  const powerupType = Math.floor(Math.random() * 2) + 1;
+  entityManager.spawnPowerup({cx:j * this.xStep + this.xStep / 2,
+                              cy:i * this.yStep + this.yStep / 2,
+                              id:powerupType});
+};
 
 Board.prototype.update = function (du) {
 

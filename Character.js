@@ -14,12 +14,19 @@ function Character(descr){
   this.setup(descr);
   this.oldPosX = this.cx;
   this.oldPosY = this.cy;
+
+  this['constructorType'] = 'Character'
 }
 
 Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
 Character.prototype.ammo = 1;
+Character.prototype.power = 2;
+Character.prototype.kickPower = false;
+Character.prototype.freshBomb;
+
+Character.prototype.radius = 30;
 
 Character.prototype.moveDirection = function(){
   var right = keys[this.keyRight];
@@ -64,15 +71,27 @@ Character.prototype.update = function(du){
     // Hit detection
     var hitEntity = this.findHitEntity();
     if(hitEntity) {
-
-      if (hitEntity.constructorType === 'Powerup') {
+      console.log(hitEntity)
+      // If you have not left the bomb area you can walk on it
+      if(hitEntity === this.freshBomb) {
+        console.log('Can walk here')
+      } else if (hitEntity.constructorType === 'Powerup') {
         hitEntity.effect(this);
         hitEntity.kill();
+      } else if (hitEntity.constructorType === 'Bomb') {
+         // If you hit a bomb and you can kick it, then kick it
+        if(this.kickPower) {
+          hitEntity.kick();
+        }
+        this.revertPosition();
+        return;
+      } else {
+        this.revertPosition();
+        return;
       }
-
-      this.cx = this.oldPosX;
-      this.cy = this.oldPosY;
-      return;
+    } else {
+      // If nothing is hit then you left fresh bomb
+      this.freshBomb = null;
     }
 
     this.oldPosX = this.cx;
@@ -87,21 +106,21 @@ Character.prototype.update = function(du){
   spatialManager.register(this);
 }
 
+Character.prototype.revertPosition = function () {
+  this.cx = this.oldPosX;
+  this.cy = this.oldPosY;
+}
+
 Character.prototype.render = function(ctx){
 
   if(this.sprite){
     this.sprite.drawAt(ctx, this.cx, this.cy);
   }
   else{
-
-    //ctx.beginPath();
-    //ctx.arc(this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT, 50 * consts.RENDER_SCALE_WIDTH, 2 * Math.PI, false);
-    //ctx.fill();
-    //ctx.closePath();
     util.fillCircle(ctx,
-      this.cx * consts.RENDER_SCALE_WIDTH,
-      this.cy * consts.RENDER_SCALE_HEIGHT,
-      30 * consts.RENDER_SCALE_WIDTH);
+      this.cx,
+      this.cy,
+      this.radius);
   }
 }
 
@@ -111,13 +130,27 @@ Character.prototype.setPos = function(x, y){
 }
 
 Character.prototype.maybeDropBomb = function () {
-    if(keys[this.keyFire]) {
-      console.log(this.ammo);
-    }
     if (keys[this.keyFire] && this.ammo > 0) {
-        this.ammo--;
-        entityManager.spawnBomb({cx:this.cx,
-                                cy:this.cy,
-                                owner:this});
+        // Gets correct position from board
+        const pos = entityManager.getValidBombCenter(this.cx,this.cy);
+        // Tries to spawn a bomb
+        const maybeBomb = entityManager.trySpawnBomb({
+          cx:pos.cx,
+          cy:pos.cy,
+          power:this.power,
+          owner:this
+        });
+
+        // If bomb was spawned
+        if(maybeBomb) {
+          this.freshBomb = maybeBomb;
+          this.ammo--;
+        }
     }
 };
+
+Character.prototype.positionOccupied = function (x, y) {
+  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
+  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
+  return xHit && yHit;
+}

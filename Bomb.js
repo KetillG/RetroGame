@@ -8,29 +8,47 @@
 function Bomb(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
+
+    this['constructorType'] = 'Bomb'
 };
 
 Bomb.prototype = new Entity();
 
 Bomb.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
+Bomb.prototype.radius = 30;
+
+Bomb.prototype.positionOccupied = function (x, y) {
+  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
+  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
+  return xHit && yHit;
+}
+
+Bomb.prototype.kick = function() {
+    console.log('kicking bomb');
+}
+
+Bomb.prototype.explode = function () {
+    console.log('exploding')
+    // Return the ammo to player
+    this.owner.ammo++;
+    // Add explosion to entity manager
+    entityManager.bombExplode(this);
+}
 
 Bomb.prototype.update = function (du) {
 
-    //spatialManager.unregister(this);
-    //if (this._isDeadNow) return entityManager.KILL_ME_NOW;
+    spatialManager.unregister(this);
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
-        this.owner.ammo++;
-        this.dropPowerup();
-        return entityManager.KILL_ME_NOW;
+        // Explode and create fire
+        this.explode();
+        //this.dropPowerup();
+        return;
+        //return entityManager.KILL_ME_NOW;
     }
 
-    // Handle firing
-
-
-
-    //spatialManager.register(this);
+    spatialManager.register(this);
 };
 
 Bomb.prototype.render = function (ctx) {
@@ -38,9 +56,9 @@ Bomb.prototype.render = function (ctx) {
     const oldStyle = ctx.fillStyle;
     ctx.fillStyle = "orange";
     util.fillCircle(ctx,
-                    this.cx * consts.RENDER_SCALE_WIDTH,
-                    this.cy * consts.RENDER_SCALE_HEIGHT,
-                    30 * consts.RENDER_SCALE_WIDTH);
+                    this.cx,
+                    this.cy,
+                    30);
     ctx.fillStyle = oldStyle;
 };
 

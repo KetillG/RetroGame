@@ -26,7 +26,6 @@ let Page = (() => {
 
         consts.RENDER_SCALE_WIDTH = ctx.canvas.width / consts.LOGICAL_WIDTH;
         consts.RENDER_SCALE_HEIGHT = ctx.canvas.height / consts.LOGICAL_HEIGHT;
-        console.log(consts.RENDER_SCALE_HEIGHT, consts.RENDER_SCALE_WIDTH)
     };
 
     window.addEventListener('resize', () => {

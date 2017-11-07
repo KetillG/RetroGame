@@ -26,7 +26,10 @@ var util = {
 
   fillCircle: function (ctx, x, y, r) {
       ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.arc(x * consts.RENDER_SCALE_WIDTH, 
+              y * consts.RENDER_SCALE_HEIGHT,
+              r * consts.RENDER_SCALE_WIDTH
+              , 0, Math.PI * 2);
       ctx.fill();
   },
 
@@ -42,6 +45,18 @@ var util = {
         );
       ctx.fillStyle = oldStyle;
   },
+
+  drawLine: function (ctx, xS, yS, xE, yE, style) {
+    var oldStyle = ctx.strokeStyle;
+    ctx.strokeStyle = style;
+
+    ctx.beginPath();
+    ctx.moveTo(xS * consts.RENDER_SCALE_WIDTH, yS * consts.RENDER_SCALE_HEIGHT);
+    ctx.lineTo(xE * consts.RENDER_SCALE_WIDTH, yE * consts.RENDER_SCALE_HEIGHT);
+    ctx.stroke();
+
+    ctx.strokeStyle = oldStyle;
+},
 
 
 
