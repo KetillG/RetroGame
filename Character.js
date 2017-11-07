@@ -16,6 +16,7 @@ function Character(descr) {
     this.setWidths();
     this.originalX = this.cx;
     this.originalY = this.cy;
+    spatialManager.register(this);
 }
 
 Character.prototype = new Entity();
@@ -101,7 +102,7 @@ Character.prototype.updatePosition = function(posX, posY){
 }
 
 Character.prototype.update = function (du) {
-    //spatialManager.unregister(this);
+    spatialManager.unregister(this);
 
 
     const right = keys[this.keyRight];
@@ -123,7 +124,7 @@ Character.prototype.update = function (du) {
     // Handle firing
 
 
-    //spatialManager.register(this);
+    spatialManager.register(this);
 };
 
 Character.prototype.render = function (ctx) {

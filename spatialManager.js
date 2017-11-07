@@ -39,6 +39,7 @@ register: function(entity) {
 
 unregister: function(entity) {
     var index = this._entities.indexOf(entity);
+    console.log(index);
     if(index === -1) return;
     this._entities.splice(index, 1);
 },
@@ -48,7 +49,6 @@ findEntityInRange: function(posX, posY) {
 
   for(var i = 0; i < this._entities.length; i++) {
     if(this._entities[i].positionOccupied(posX,posY)) {
-        console.log(this._entities[i]);
       hitEntities.push(this._entities[i]);
     }
   }
