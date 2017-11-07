@@ -80,16 +80,16 @@ Entity.prototype.kill = function () {
 Entity.prototype.findHitEntity = function () {
     var pos = this.getPos();
     var right = spatialManager.findEntityInRange(
-        pos.posX + this.width, pos.posY, this.getRadius()
+        pos.posX - this.width, pos.posY - this.height, this.getRadius()
     );
     var left = spatialManager.findEntityInRange(
-        pos.posX - this.width, pos.posY, this.getRadius()
+        pos.posX - this.width, pos.posY + this.height, this.getRadius()
     );
     var up = spatialManager.findEntityInRange(
-        pos.posX, pos.posY + this.height, this.getRadius()
+        pos.posX + this.width, pos.posY - this.height, this.getRadius()
     );
     var down = spatialManager.findEntityInRange(
-        pos.posX, pos.posY - this.height, this.getRadius()
+        pos.posX + this.width, pos.posY + this.height, this.getRadius()
     );
     console.log(right, left, up, down);
     return right || up||left||down;
