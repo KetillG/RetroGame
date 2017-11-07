@@ -38,6 +38,7 @@ _board: null,
 _players : [],
 _powerups : [],
 _bombs : [],
+_fires : [],
 
 _createBoard(board) {
   this._board = new Board({board});
@@ -69,7 +70,7 @@ _addPlayers : function () {
 KILL_ME_NOW : -1,
 
 deferredSetup : function () {
-    this._categories = [this._powerups, this._bombs, this._players];
+    this._categories = [this._powerups, this._bombs, this._players, this._fires];
 },
 
 init: function() {
@@ -85,6 +86,11 @@ bombExplode(bomb) {
     // Remove bomb from existance
     const index = this._bombs.indexOf(bomb);
     this._bombs.splice(index, 1);
+
+    // Create fire
+    const fire = new Fire();
+    fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
+    this._fires.push(fire);
     //console.log(this._board.xStep)
 },
 

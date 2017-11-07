@@ -14,15 +14,19 @@ function Character(descr){
   this.setup(descr);
   this.oldPosX = this.cx;
   this.oldPosY = this.cy;
+
+  this['constructorType'] = 'Character'
 }
 
 Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
 Character.prototype.ammo = 1;
-Character.prototype.power = 1;
+Character.prototype.power = 2;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
+
+Character.prototype.radius = 30;
 
 Character.prototype.moveDirection = function(){
   var right = keys[this.keyRight];
@@ -67,6 +71,7 @@ Character.prototype.update = function(du){
     // Hit detection
     var hitEntity = this.findHitEntity();
     if(hitEntity) {
+      console.log(hitEntity)
       // If you have not left the bomb area you can walk on it
       if(hitEntity === this.freshBomb) {
         console.log('Can walk here')
@@ -115,7 +120,7 @@ Character.prototype.render = function(ctx){
     util.fillCircle(ctx,
       this.cx,
       this.cy,
-      30);
+      this.radius);
   }
 }
 
@@ -143,3 +148,9 @@ Character.prototype.maybeDropBomb = function () {
         }
     }
 };
+
+Character.prototype.positionOccupied = function (x, y) {
+  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
+  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
+  return xHit && yHit;
+}

@@ -46,6 +46,18 @@ var util = {
       ctx.fillStyle = oldStyle;
   },
 
+  drawLine: function (ctx, xS, yS, xE, yE, style) {
+    var oldStyle = ctx.strokeStyle;
+    ctx.strokeStyle = style;
+
+    ctx.beginPath();
+    ctx.moveTo(xS * consts.RENDER_SCALE_WIDTH, yS * consts.RENDER_SCALE_HEIGHT);
+    ctx.lineTo(xE * consts.RENDER_SCALE_WIDTH, yE * consts.RENDER_SCALE_HEIGHT);
+    ctx.stroke();
+
+    ctx.strokeStyle = oldStyle;
+},
+
 
 
 };

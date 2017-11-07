@@ -28,6 +28,7 @@ Bomb.prototype.kick = function() {
 }
 
 Bomb.prototype.explode = function () {
+    console.log('exploding')
     // Return the ammo to player
     this.owner.ammo++;
     // Add explosion to entity manager
