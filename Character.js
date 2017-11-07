@@ -99,6 +99,7 @@ Character.prototype.update = function (du) {
 
             });
         } else {
+            console.log(this.cx, this.cy, this.newPosX, this.newPosY);
             // If nothing is hit then you left fresh bomb
             this.setPos(this.newPosX, this.newPosY);
             this.freshBomb = null;
