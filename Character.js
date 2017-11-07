@@ -30,7 +30,6 @@ Character.prototype.radius = 30;
 
 Character.prototype.dirObj = {};
 
-Character.prototype.lives = 3;
 
 Character.prototype.moveDirection = function () {
     const right = keys[this.keyRight];
@@ -82,6 +81,7 @@ Character.prototype.update = function (du) {
             hitEntities.map(hitEntity => {
                 // If you have not left the bomb area you can walk on it
                 if (hitEntity === this.freshBomb) {
+                    this.setPos(this.newPosX, this.newPosY);
                     console.log('Can walk here');
                 } else if (hitEntity.constructorType === 'Powerup') {
                     hitEntity.effect(this);
@@ -97,8 +97,10 @@ Character.prototype.update = function (du) {
                 } else {
                     illegalMove = true;
                 }
+
             });
-        } else {
+        }
+        else {
             console.log(this.cx, this.cy, this.newPosX, this.newPosY);
             // If nothing is hit then you left fresh bomb
             this.setPos(this.newPosX, this.newPosY);
@@ -173,15 +175,3 @@ Character.prototype.positionOccupied = function (x, y) {
     const xHit = this.cx - this.width/2 < x && this.cx + this.width/2 > x;
     return xHit && yHit;
 };
-
-Character.prototype.decrementLife = function() {
-    --this.lives;
-    // asdjkh
-
-    if(this.lives <= 0) {
-        this.lives = 0;
-        spatialManager.unregister(this);
-
-    }
-    console.log("lives:" + this.lives);
-}
