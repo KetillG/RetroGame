@@ -15,6 +15,7 @@ function Character(descr) {
     this.oldPosY = this.cy;
 
     this.constructorType = 'Character';
+    this.setWidths();
 }
 
 Character.prototype = new Entity();
@@ -27,6 +28,9 @@ Character.prototype.freshBomb;
 
 Character.prototype.radius = 30;
 
+Character.prototype.dirObj = {};
+
+
 Character.prototype.moveDirection = function () {
     const right = keys[this.keyRight];
     const left = keys[this.keyLeft];
@@ -36,12 +40,16 @@ Character.prototype.moveDirection = function () {
     const x = left ^ right;
     if (x && !y) {
         var dir = right ? 1 : -1;
-        var obj = { vel: 'velX', direction: dir, center: 'cx' };
-        return obj;
+        this.dirObj.vel = "velX";
+        this.dirObj.direction = dir;
+        this.dirObj.center = "cx";
+        return true;
     } else if (y && !x) {
         var dir = down ? 1 : -1;
-        var obj = { vel: 'velY', direction: dir, center: 'cy' };
-        return obj;
+        this.dirObj.vel = "velY";
+        this.dirObj.direction = dir;
+        this.dirObj.center = "cy";
+        return true;
     }
 
     return null;
@@ -56,8 +64,8 @@ Character.prototype.update = function (du) {
 
     if (directionObject) {
     // Directions
-        const vel = directionObject.vel;
-        const dir = directionObject.direction;
+        const vel = this.dirObj.vel;
+        const dir = this.dirObj.direction;
         if (vel === 'velY') {
             newY = this.cy + dir * this.velY * du;
         } else {
@@ -145,7 +153,7 @@ Character.prototype.maybeDropBomb = function () {
 };
 
 Character.prototype.positionOccupied = function (x, y) {
-    const yHit = this.cy - this.radius < y && this.cy + this.radius > y;
-    const xHit = this.cx - this.radius < x && this.cx + this.radius > x;
+    const yHit = this.cy - this.height/2 < y && this.cy + this.height/2 > y;
+    const xHit = this.cx - this.width/2 < x && this.cx + this.width/2 > x;
     return xHit && yHit;
 };

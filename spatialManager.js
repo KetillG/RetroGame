@@ -44,7 +44,6 @@ unregister: function(entity) {
 },
 
 findEntityInRange: function(posX, posY) {
-  console.log(this._entities)
   for(var i = 0; i < this._entities.length; i++) {
     if(this._entities[i].positionOccupied(posX,posY)) {
       return this._entities[i];
