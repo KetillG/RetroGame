@@ -25,14 +25,12 @@ Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
     // Fire directions
     // Up
     path.directions.push(this.addPath(bomb.power, bomb.getPos(), 0 , -1 * yStep));
-    //path['up'] = this.addPath(bomb.power, bomb.getPos(), 0 , -1 * yStep);
     // Right
     path.directions.push(this.addPath(bomb.power, bomb.getPos(), xStep , 0));
     // Down
     path.directions.push(this.addPath(bomb.power, bomb.getPos(), 0 , yStep));
     // Left
     path.directions.push(this.addPath(bomb.power, bomb.getPos(), -1 * xStep , 0));
-    console.log(path)
     this.paths.push(path);
 }
 
@@ -54,7 +52,7 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
             } else if (hitEntity.constructorType === 'Character') {
                 // Reduce life
             } else if (hitEntity.constructorType === 'Board') {
-                // Break brick
+                hitEntity.tryExplodeBrick(nextX, nextY);
                 return pos;
             }
         }

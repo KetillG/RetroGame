@@ -111,6 +111,22 @@ Board.prototype.positionOccupied = function (x, y) {
   return !this.getBrickAtWithoutScaling(x,y).isWalkable();
 }
 
+Board.prototype.tryExplodeBrick = function (x, y) {
+  const i = Math.floor(y / ( this.yStep));
+  const j = Math.floor(x / ( this.xStep));
+  if(this.board[i][j].isBreakable()) {
+    this.board[i][j].break();
+    this.dropPowerup(i, j);
+  }
+}
+
+Board.prototype.dropPowerup = function (i, j) {
+  const powerupType = Math.floor(Math.random() * 2) + 1;
+  entityManager.spawnPowerup({cx:j * this.xStep + this.xStep / 2,
+                              cy:i * this.yStep + this.yStep / 2,
+                              id:powerupType});
+};
+
 Board.prototype.update = function (du) {
 
 }
