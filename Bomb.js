@@ -14,13 +14,13 @@ function Bomb(descr) {
 
 Bomb.prototype = new Entity();
 
-Bomb.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
-Bomb.prototype.radius = 30;
+Bomb.prototype.lifeSpan = 5000 / NOMINAL_UPDATE_INTERVAL;
+//Bomb.prototype.radius = 35;
 
 Bomb.prototype.positionOccupied = function (x, y) {
-  const yHit = this.cy - this.radius < y && this.cy + this.radius > y
-  const xHit = this.cx - this.radius < x && this.cx + this.radius > x
-  return xHit && yHit;
+    const yHit = this.cy - this.height < y && this.cy + this.height > y;
+    const xHit = this.cx - this.width < x && this.cx + this.width > x;
+    return xHit && yHit;
 }
 
 Bomb.prototype.kick = function() {
@@ -28,7 +28,6 @@ Bomb.prototype.kick = function() {
 }
 
 Bomb.prototype.explode = function () {
-    console.log('exploding')
     // Return the ammo to player
     this.owner.ammo++;
     // Add explosion to entity manager
@@ -52,14 +51,14 @@ Bomb.prototype.update = function (du) {
 };
 
 Bomb.prototype.render = function (ctx) {
-    // Draw circle shit
-    const oldStyle = ctx.fillStyle;
-    ctx.fillStyle = "orange";
-    util.fillCircle(ctx,
-                    this.cx,
-                    this.cy,
-                    30);
-    ctx.fillStyle = oldStyle;
+    util.fillBox(
+        ctx,
+        this.cx - this.width,
+        this.cy - this.height,
+        this.width * 2,
+        this.height * 2,
+        'orange',
+    )
 };
 
 Bomb.prototype.dropPowerup = function () {

@@ -44,13 +44,15 @@ unregister: function(entity) {
 },
 
 findEntityInRange: function(posX, posY) {
-  console.log(this._entities)
+  const hitEntities = [];
+
   for(var i = 0; i < this._entities.length; i++) {
     if(this._entities[i].positionOccupied(posX,posY)) {
-      return this._entities[i];
+      hitEntities.push(this._entities[i]);
     }
   }
-  return false;
+
+  return hitEntities;
 },
 
 }

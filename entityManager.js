@@ -46,8 +46,8 @@ _createBoard(board) {
 
 _addPlayers : function () {
   var player = new Character({
-    cx: 100,
-    cy: 100,
+    cx: 125,
+    cy: 125,
     velX: 4,
     velY: 4,
     keyUp: 'W'.charCodeAt(0),
@@ -89,9 +89,10 @@ bombExplode(bomb) {
 
     // Create fire
     const fire = new Fire();
+    console.log(fire)
     fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
     this._fires.push(fire);
-    //console.log(this._board.xStep)
+    console.log(this._fires)
 },
 
 trySpawnBomb(descr) {
@@ -103,7 +104,7 @@ trySpawnBomb(descr) {
             return null;
         }
     }
-    const bomb = new Bomb(descr);
+    const bomb = new Bomb({...descr, radius: 0.5 * consts.LOGICAL_WIDTH / this._board.boardsize});
     this._bombs.push(bomb);
     return bomb;
 },

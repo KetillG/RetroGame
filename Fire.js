@@ -11,10 +11,11 @@ function Fire(descr) {
     }
 
     this['constructorType'] = 'Fire'
+    this['paths'] = [];
 };
 
-Fire.prototype.paths = [];
-Fire.prototype.lifeSpan = 10000 / NOMINAL_UPDATE_INTERVAL;
+//Fire.prototype.paths = [];
+Fire.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
     // New fire path added to fire
@@ -41,23 +42,32 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
         const nextX = pos.posX + xStep;
         const nextY = pos.posY + yStep;
         // Check if hit anything
-        var hitEntity = spatialManager.findEntityInRange(
+        const hitEntities = spatialManager.findEntityInRange(
             nextX, nextY, 30
         );
 
-        if(hitEntity) {
-            console.log(hitEntity)
-            if(hitEntity.constructorType === 'Bomb') {
-                // Explode the bomb, entityManager?
-            } else if (hitEntity.constructorType === 'Character') {
-                // Reduce life
-            } else if (hitEntity.constructorType === 'Board') {
-                hitEntity.tryExplodeBrick(nextX, nextY);
-                return pos;
-            }
+        let hitWall = false;
+
+        if(hitEntities.length) {
+            hitEntities.map(hitEntity => {
+                if(hitEntity.constructorType === 'Bomb') {
+                    // Explode the bomb, entityManager?
+                } else if (hitEntity.constructorType === 'Character') {
+                    // Reduce life
+                    hitEntity.decrementLife();
+                } else if (hitEntity.constructorType === 'Board') {
+                    hitEntity.tryExplodeBrick(nextX, nextY);
+                    hitWall = true;
+                }
+            });
+
         }
+
+        if(hitWall) {
+            return pos;
+        }
+
         // Update pos
-        console.log(pos.posY, nextY)
         pos.posX = nextX;
         pos.posY = nextY;
     }
@@ -82,7 +92,7 @@ Fire.prototype.render = function (ctx) {
                 dir.posY,
                 'red'
             );
-        });  
+        });
         /*ctx.beginPath();
         ctx.moveTo(path.center.posX,path.center.posY);
         ctx.lineTo(path.up.posX,path.up.posY);
