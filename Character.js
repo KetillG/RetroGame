@@ -11,11 +11,11 @@
 // keyRight : Which key corresponds to right
 function Character(descr) {
     this.setup(descr);
-    this.oldPosX = this.cx;
-    this.oldPosY = this.cy;
 
     this.constructorType = 'Character';
     this.setWidths();
+    this.originalX = this.cx;
+    this.originalY = this.cy;
 }
 
 Character.prototype = new Entity();
@@ -77,9 +77,11 @@ Character.prototype.update = function (du) {
         let illegalMove = false;
 
         if (hitEntities.length) {
+            console.log('here');
             hitEntities.map(hitEntity => {
                 // If you have not left the bomb area you can walk on it
                 if (hitEntity === this.freshBomb) {
+                    console.log('Can walk here');
                 } else if (hitEntity.constructorType === 'Powerup') {
                     hitEntity.effect(this);
                     hitEntity.kill();
@@ -101,16 +103,11 @@ Character.prototype.update = function (du) {
             this.setPos(this.newPosX, this.newPosY);
             this.freshBomb = null;
         }
-
         // Revert position if illegal move
         if(illegalMove) {
-            this.revertPosition();
+            this.setPos(this.cx, this.cy);
             return;
         }
-        this.oldPosX = this.cx;
-        this.oldPosY = this.cy;
-        this.cx = newX;
-        this.cy = newY;
     }
 
     // Handle firing
@@ -120,8 +117,8 @@ Character.prototype.update = function (du) {
 };
 
 Character.prototype.revertPosition = function () {
-    this.cx = this.oldPosX;
-    this.cy = this.oldPosY;
+    this.cx = this.originalX;
+    this.cy = this.originalY;
 };
 
 Character.prototype.render = function (ctx) {
