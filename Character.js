@@ -11,11 +11,11 @@
 // keyRight : Which key corresponds to right
 function Character(descr) {
     this.setup(descr);
-    this.oldPosX = this.cx;
-    this.oldPosY = this.cy;
 
     this.constructorType = 'Character';
     this.setWidths();
+    this.originalX = this.cx;
+    this.originalY = this.cy;
 }
 
 Character.prototype = new Entity();
@@ -67,9 +67,9 @@ Character.prototype.update = function (du) {
         const vel = this.dirObj.vel;
         const dir = this.dirObj.direction;
         if (vel === 'velY') {
-            newY = this.cy + dir * this.velY * du;
+            this.newPosY = this.cy + dir * this.velY * du;
         } else {
-            newX = this.cx + dir * this.velX * du;
+            this.newPosX = this.cx + dir * this.velX * du;
         }
         // Hit detection
         const hitEntities = this.findHitEntity();
@@ -78,10 +78,13 @@ Character.prototype.update = function (du) {
         let bombCollide = false;
         let stillOnFreshBomb = false;
         if (hitEntities.length) {
+            console.log('here');
             hitEntities.map(hitEntity => {
                 // If you have not left the bomb area you can walk on it
                 if (hitEntity === this.freshBomb) {
                     stillOnFreshBomb = true;
+                    this.setPos(this.newPosX, this.newPosY);
+                    console.log('Can walk here');
                 } else if (hitEntity.constructorType === 'Powerup') {
                     hitEntity.effect(this);
                     hitEntity.kill();
@@ -96,20 +99,21 @@ Character.prototype.update = function (du) {
                 } else {
                     wallCollide = true;
                 }
-            });    
-        } else {
+
+            });
+        }
+        else {
+            console.log(this.cx, this.cy, this.newPosX, this.newPosY);
             // If nothing is hit then you left fresh bomb
+            this.setPos(this.newPosX, this.newPosY);
             this.freshBomb = null;
         }
         // Revert position if illegal move
         if(wallCollide || (bombCollide && !stillOnFreshBomb)) {
-            this.revertPosition();
+            //this.revertPosition();
+            this.setPos(this.cx, this.cy);
             return;
         }
-        this.oldPosX = this.cx;
-        this.oldPosY = this.cy;
-        this.cx = newX;
-        this.cy = newY;
     }
 
     // Handle firing
@@ -119,8 +123,8 @@ Character.prototype.update = function (du) {
 };
 
 Character.prototype.revertPosition = function () {
-    this.cx = this.oldPosX;
-    this.cy = this.oldPosY;
+    this.cx = this.originalX;
+    this.cy = this.originalY;
 };
 
 Character.prototype.render = function (ctx) {
@@ -168,3 +172,14 @@ Character.prototype.positionOccupied = function (x, y) {
     const xHit = this.cx - this.width/2 < x && this.cx + this.width/2 > x;
     return xHit && yHit;
 };
+
+Character.prototype.decrementLife = function() {
+    console.log("lives:" + this.lives);
+    --this.lives;
+    // register og unregister
+
+    if(this.lives <= 0) {
+        this.lives = 0;
+    }
+    console.log("lives:" + this.lives);
+}

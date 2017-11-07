@@ -54,12 +54,13 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
                     // Explode the bomb, entityManager?
                 } else if (hitEntity.constructorType === 'Character') {
                     // Reduce life
+                    hitEntity.decrementLife();
                 } else if (hitEntity.constructorType === 'Board') {
                     hitEntity.tryExplodeBrick(nextX, nextY);
                     hitWall = true;
                 }
             });
-            
+
         }
 
         if(hitWall) {
@@ -91,7 +92,7 @@ Fire.prototype.render = function (ctx) {
                 dir.posY,
                 'red'
             );
-        });  
+        });
         /*ctx.beginPath();
         ctx.moveTo(path.center.posX,path.center.posY);
         ctx.lineTo(path.up.posX,path.up.posY);

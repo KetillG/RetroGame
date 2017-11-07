@@ -46,8 +46,8 @@ _createBoard(board) {
 
 _addPlayers : function () {
   var player = new Character({
-    cx: 130,
-    cy: 130,
+    cx: 125,
+    cy: 125,
     velX: 4,
     velY: 4,
     keyUp: 'W'.charCodeAt(0),
