@@ -21,7 +21,7 @@ function Character(descr) {
 Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
-Character.prototype.ammo = 1;
+Character.prototype.ammo = 3;
 Character.prototype.power = 2;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
@@ -74,12 +74,15 @@ Character.prototype.update = function (du) {
         // Hit detection
         const hitEntities = this.findHitEntity();
         // If a entity its an 'wall'
-        let illegalMove = false;
-
+        let wallCollide = false;
+        let bombCollide = false;
+        let stillOnFreshBomb = false;
         if (hitEntities.length) {
             hitEntities.map(hitEntity => {
                 // If you have not left the bomb area you can walk on it
                 if (hitEntity === this.freshBomb) {
+                    stillOnFreshBomb = true;
+                    console.log('freshbomb!')
                 } else if (hitEntity.constructorType === 'Powerup') {
                     hitEntity.effect(this);
                     hitEntity.kill();
@@ -88,11 +91,11 @@ Character.prototype.update = function (du) {
                     if (this.kickPower) {
                         hitEntity.kick();
                     }
-                    illegalMove = true;
+                    bombCollide = true;
                     //this.revertPosition();
                     //return;
                 } else {
-                    illegalMove = true;
+                    wallCollide = true;
                 }
             });    
         } else {
@@ -100,7 +103,7 @@ Character.prototype.update = function (du) {
             this.freshBomb = null;
         }
         // Revert position if illegal move
-        if(illegalMove) {
+        if(wallCollide || (bombCollide && !stillOnFreshBomb)) {
             this.revertPosition();
             return;
         }
@@ -125,12 +128,6 @@ Character.prototype.render = function (ctx) {
     if (this.sprite) {
         this.sprite.drawAt(ctx, this.cx, this.cy);
     } else {
-        util.fillCircle(
-            ctx,
-            this.cx,
-            this.cy,
-            this.radius,
-        );
         util.fillBox(
             ctx,
             this.cx - this.width,
