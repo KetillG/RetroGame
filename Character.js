@@ -40,7 +40,7 @@ Character.prototype.hitSomething = function(hitEntities){
         // If you have not left the bomb area you can walk on it
         if (hitEntity === this.freshBomb) {
             stillOnFreshBomb = true;
-            this.setPos(this.newPosX, this.newPosY);
+            this.setPos(this.newPosX, this.newPosY)
         } else if (hitEntity.constructorType === 'Powerup') {
             hitEntity.effect(this);
             hitEntity.kill();
@@ -79,7 +79,7 @@ Character.prototype.updatePosition = function(posX, posY){
         this.freshBomb = null;
     }
     // Revert position if illegal move
-    if(wallCollide || (bombCollide && !stillOnFreshBomb)) {
+    if(wallCollide || bombCollide && !stillOnFreshBomb) {
         //this.revertPosition();
         this.setPos(this.cx, this.cy);
         return;
@@ -88,6 +88,7 @@ Character.prototype.updatePosition = function(posX, posY){
 
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
+
 
     const right = keys[this.keyRight];
     const left = keys[this.keyLeft];
@@ -103,10 +104,10 @@ Character.prototype.update = function (du) {
         var newPosY = this.cy + dir*this.velY*du;
         this.updatePosition(this.cx, newPosY);
     }
-
+    this.maybeDropBomb();
 
     // Handle firing
-    this.maybeDropBomb();
+
 
     spatialManager.register(this);
 };
