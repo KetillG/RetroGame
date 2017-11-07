@@ -21,7 +21,7 @@ function Character(descr) {
 Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
-Character.prototype.ammo = 3;
+Character.prototype.ammo = 30;
 Character.prototype.power = 2;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
@@ -82,7 +82,6 @@ Character.prototype.update = function (du) {
                 // If you have not left the bomb area you can walk on it
                 if (hitEntity === this.freshBomb) {
                     stillOnFreshBomb = true;
-                    console.log('freshbomb!')
                 } else if (hitEntity.constructorType === 'Powerup') {
                     hitEntity.effect(this);
                     hitEntity.kill();

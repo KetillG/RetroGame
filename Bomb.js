@@ -14,7 +14,7 @@ function Bomb(descr) {
 
 Bomb.prototype = new Entity();
 
-Bomb.prototype.lifeSpan = 30000 / NOMINAL_UPDATE_INTERVAL;
+Bomb.prototype.lifeSpan = 5000 / NOMINAL_UPDATE_INTERVAL;
 Bomb.prototype.radius = 35;
 
 Bomb.prototype.positionOccupied = function (x, y) {
@@ -28,7 +28,6 @@ Bomb.prototype.kick = function() {
 }
 
 Bomb.prototype.explode = function () {
-    console.log('exploding')
     // Return the ammo to player
     this.owner.ammo++;
     // Add explosion to entity manager
