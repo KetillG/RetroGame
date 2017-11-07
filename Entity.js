@@ -31,7 +31,8 @@ function Entity() {
 */
 
 };
-
+Entity.prototype.newPosX = 0;
+Entity.prototype.newPosY = 0;
 Entity.prototype.setup = function (descr) {
 
     // Apply all setup properies from the (optional) descriptor
@@ -65,11 +66,8 @@ Entity.prototype.kill = function () {
 
 Entity.prototype.findHitEntity = function () {
     var pos = this.getPos();
-    console.log(pos);
+    console.log(this);
     return spatialManager.findEntityInRange(
         pos.posX, pos.posY, this.getRadius()
     );
 };
-
-Entity.prototype.newPosX = this.cx;
-Eneity.prototype.newPosY = this.cy;

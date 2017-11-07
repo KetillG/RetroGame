@@ -67,10 +67,10 @@ Character.prototype.update = function(du){
     var vel = this.dirObj.vel;
     var dir = this.dirObj.direction;
     if(vel === "velY"){
-      newY = this.cy + dir*this.velY*du;
+      this.newPosY = this.cy + dir*this.velY*du;
     }
     else{
-      newX = this.cx + dir*this.velX*du;
+      this.newPosX = this.cx + dir*this.velX*du;
     }
     // Hit detection
     var hitEntity = this.findHitEntity();
