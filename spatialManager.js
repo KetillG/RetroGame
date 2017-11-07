@@ -51,6 +51,7 @@ findEntityInRange: function(posX, posY) {
       hitEntities.push(this._entities[i]);
     }
   }
+
   return hitEntities;
 },
 

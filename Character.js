@@ -174,13 +174,12 @@ Character.prototype.positionOccupied = function (x, y) {
 };
 
 Character.prototype.decrementLife = function() {
+    console.log("lives:" + this.lives);
     --this.lives;
-    // asdjkh
+    // register og unregister
 
     if(this.lives <= 0) {
         this.lives = 0;
-        spatialManager.unregister(this);
-
     }
     console.log("lives:" + this.lives);
 }
