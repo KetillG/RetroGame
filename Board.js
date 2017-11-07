@@ -8,7 +8,6 @@ function Board(descr) {
 
   this._spatialID = spatialManager.getNewSpatialID();
   spatialManager.register(this);
-  spatialManager.registerBoard(this);
 
   // vars used to determine scaling
   const tileBoard = descr.board;

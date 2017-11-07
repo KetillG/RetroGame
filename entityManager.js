@@ -85,7 +85,7 @@ bombExplode(bomb) {
     // Remove bomb from existance
     const index = this._bombs.indexOf(bomb);
     this._bombs.splice(index, 1);
-    console.log(this._board.xStep)
+    //console.log(this._board.xStep)
 },
 
 trySpawnBomb(descr) {
