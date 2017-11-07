@@ -11,10 +11,11 @@ function Fire(descr) {
     }
 
     this['constructorType'] = 'Fire'
+    this['paths'] = [];
 };
 
-Fire.prototype.paths = [];
-Fire.prototype.lifeSpan = 10000 / NOMINAL_UPDATE_INTERVAL;
+//Fire.prototype.paths = [];
+Fire.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
     // New fire path added to fire
@@ -49,7 +50,6 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
 
         if(hitEntities.length) {
             hitEntities.map(hitEntity => {
-                console.log(hitEntity)
                 if(hitEntity.constructorType === 'Bomb') {
                     // Explode the bomb, entityManager?
                 } else if (hitEntity.constructorType === 'Character') {

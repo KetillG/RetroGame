@@ -92,6 +92,7 @@ bombExplode(bomb) {
     console.log(fire)
     fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
     this._fires.push(fire);
+    console.log(this._fires)
 },
 
 trySpawnBomb(descr) {
