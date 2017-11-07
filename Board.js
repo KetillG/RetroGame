@@ -19,6 +19,7 @@ function Board(descr) {
   // Adds step to the object
   this['xStep'] = xStep;
   this['yStep'] = yStep;
+  this['boardsize'] = boardSize;
 
   for(var i = 0; i < tileBoard.length; i++) {
     for(var j = 0; j < tileBoard[i].length; j++) {
