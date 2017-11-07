@@ -15,7 +15,7 @@ function Bomb(descr) {
 Bomb.prototype = new Entity();
 
 Bomb.prototype.lifeSpan = 5000 / NOMINAL_UPDATE_INTERVAL;
-Bomb.prototype.radius = 35;
+//Bomb.prototype.radius = 35;
 
 Bomb.prototype.positionOccupied = function (x, y) {
     const yHit = this.cy - this.height < y && this.cy + this.height > y;
