@@ -84,6 +84,10 @@ Entity.prototype.kill = function () {
     this._isDeadNow = true;
 };
 
+Entity.prototype.isDead = function () {
+    return this._isDeadNow;
+};
+
 Entity.prototype.findHitEntity = function () {
     var pos = this.getFuturePos();
     var right = spatialManager.findEntityInRange(

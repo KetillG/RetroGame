@@ -27,13 +27,23 @@ Character.prototype.power = 2;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
-Character.prototype.lives = 3;
+Character.prototype.lives = 1;
+Character.prototype.immuneTime = -1;
 
 Character.prototype.radius = 30;
 
 Character.prototype.dirObj = {};
 Character.prototype.recentlyHit = false;
 
+Character.prototype.decrementLife = function () {
+    if(this.immuneTime >= 0) return;
+    this.lives--;
+    if(this.lives < 1) {
+        this.kill();
+        console.log('died')
+    }
+    this.immuneTime = 1000 / NOMINAL_UPDATE_INTERVAL;
+}
 
 
 Character.prototype.hitSomething = function(hitEntities){
@@ -98,7 +108,11 @@ Character.prototype.updatePosition = function(posX, posY){
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
 
+    if(this.isDead()) return entityManager.KILL_ME_NOW;
 
+    if(this.immuneTime >= 0) {
+        this.immuneTime -= du;
+    }
     const right = keys[this.keyRight];
     const left = keys[this.keyLeft];
     const up = keys[this.keyUp];
@@ -122,6 +136,9 @@ Character.prototype.update = function (du) {
 };
 
 Character.prototype.render = function (ctx) {
+    const blinkCheck = 100 / NOMINAL_UPDATE_INTERVAL;
+    const blink = Math.floor(this.immuneTime / blinkCheck) % 2 === 0;
+    if(this.immuneTime >= 0 && blink) ctx.globalAlpha = 0.5
     if (this.sprite) {
         this.sprite.drawAt(ctx, this.cx, this.cy);
     } else {
@@ -134,6 +151,7 @@ Character.prototype.render = function (ctx) {
             this.colour,
         )
     }
+    ctx.globalAlpha = 1;
 };
 
 Character.prototype.setPos = function (x, y) {
@@ -162,22 +180,8 @@ Character.prototype.maybeDropBomb = function () {
 };
 
 Character.prototype.positionOccupied = function (x, y) {
-    const yHit = this.cy - this.height/2 < y && this.cy + this.height/2 > y;
-    const xHit = this.cx - this.width/2 < x && this.cx + this.width/2 > x;
+    const yHit = this.cy - this.height < y && this.cy + this.height > y;
+    const xHit = this.cx - this.width < x && this.cx + this.width > x;
     return xHit && yHit;
 };
 
-Character.prototype.decrementLife = function() {
-    if(!this.recentlyHit){
-        --this.lives;
-        console.log(this.lives);
-        this.recentlyHit = true;
-        setTimeout(() => {this.recentlyHit = false;}, 3000);
-    }
-
-    // register og unregister
-
-    if(this.lives <= 0) {
-        this.lives = 0;
-    }
-}
