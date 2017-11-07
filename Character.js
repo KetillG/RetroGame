@@ -106,10 +106,8 @@ Character.prototype.update = function (du) {
             });
         }
         else {
-<<<<<<< HEAD
-=======
+
             // If nothing is hit then you left fresh bomb
->>>>>>> 687b7dec4b2189578ba70b1cccfee5d63ed01971
             this.setPos(this.newPosX, this.newPosY);
             this.freshBomb = null;
         }
