@@ -51,6 +51,10 @@ Character.prototype.hitSomething = function(hitEntities){
             this.bombCollide = true;
             //this.revertPosition();
             //return;
+        }
+        else if(hitEntity.constructorType === 'character'){
+            console.log("bjo dumb");
+            this.playerCollide = true;
         } else {
             this.wallCollide = true;
         }
@@ -61,12 +65,14 @@ Character.prototype.hitSomething = function(hitEntities){
 Character.prototype.wallCollide = false;
 Character.prototype.bombCollide = false;
 Character.prototype.stillOnFreshBomb = false;
+Character.prototype.playerCollide = false;
 Character.prototype.updatePosition = function(posX, posY){
     this.newPosX = posX;
     this.newPosY = posY;
     this.stillOnFreshBomb = false;
     this.bombCollide = false;
     this.wallCollide = false;
+    this.playerCollide = false;
 
 
     const hitEntities = this.findHitEntity();
@@ -83,7 +89,7 @@ Character.prototype.updatePosition = function(posX, posY){
         this.freshBomb = null;
     }
     // Revert position if illegal move
-    if(!this.wallCollide && !this.bombCollide && this.stillOnFreshBomb){
+    if(!this.wallCollide && !this.bombCollide && !this.playerCollide && this.stillOnFreshBomb){
         this.setPos(posX, posY);
         return;
     }
@@ -95,7 +101,7 @@ Character.prototype.updatePosition = function(posX, posY){
 }
 
 Character.prototype.update = function (du) {
-    spatialManager.unregister(this);
+    //spatialManager.unregister(this);
 
 
     const right = keys[this.keyRight];
@@ -117,7 +123,7 @@ Character.prototype.update = function (du) {
     // Handle firing
 
 
-    spatialManager.register(this);
+    //spatialManager.register(this);
 };
 
 Character.prototype.render = function (ctx) {
@@ -130,7 +136,7 @@ Character.prototype.render = function (ctx) {
             this.cy - this.height,
             this.width * 2,
             this.height * 2,
-            'red',
+            this.colour,
         )
     }
 };
