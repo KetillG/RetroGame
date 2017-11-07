@@ -55,9 +55,23 @@ _addPlayers : function () {
     keyLeft: 'A'.charCodeAt(0),
     keyRight: 'D'.charCodeAt(0),
     keyFire: ' '.charCodeAt(0),
+    colour: "Black"
+  });
+  var player2 = new Character({
+    cx: 500,
+    cy: 125,
+    velX: 4,
+    velY: 4,
+    keyUp: 'I'.charCodeAt(0),
+    keyDown: 'K'.charCodeAt(0),
+    keyLeft: 'J'.charCodeAt(0),
+    keyRight: 'L'.charCodeAt(0),
+    keyFire: 'M'.charCodeAt(0),
+    colour: "Red"
   });
 
   this._players.push(player);
+  this._players.push(player2);
   //this._categories.push(this._players);
 },
 
