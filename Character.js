@@ -39,8 +39,7 @@ Character.prototype.hitSomething = function(hitEntities){
     hitEntities.map(hitEntity => {
         // If you have not left the bomb area you can walk on it
         if (hitEntity === this.freshBomb) {
-            stillOnFreshBomb = true;
-            this.setPos(this.newPosX, this.newPosY)
+            this.stillOnFreshBomb = true;
         } else if (hitEntity.constructorType === 'Powerup') {
             hitEntity.effect(this);
             hitEntity.kill();
@@ -49,45 +48,54 @@ Character.prototype.hitSomething = function(hitEntities){
             if (this.kickPower) {
                 hitEntity.kick();
             }
-            bombCollide = true;
+            this.bombCollide = true;
             //this.revertPosition();
             //return;
         } else {
-            wallCollide = true;
+            this.wallCollide = true;
         }
 
     });
 }
 
+Character.prototype.wallCollide = false;
+Character.prototype.bombCollide = false;
+Character.prototype.stillOnFreshBomb = false;
 Character.prototype.updatePosition = function(posX, posY){
     this.newPosX = posX;
     this.newPosY = posY;
+    this.stillOnFreshBomb = false;
+    this.bombCollide = false;
+    this.wallCollide = false;
+
 
     const hitEntities = this.findHitEntity();
     // If a entity its an 'wall'
-    let wallCollide = false;
-    let bombCollide = false;
-    let stillOnFreshBomb = false;
     if (hitEntities.length) {
-        console.log('here');
+
         this.hitSomething(hitEntities);
+
     }
     else {
 
         // If nothing is hit then you left fresh bomb
-        this.setPos(this.newPosX, this.newPosY);
+        this.setPos(posX,posY);
         this.freshBomb = null;
     }
     // Revert position if illegal move
-    if(wallCollide || bombCollide && !stillOnFreshBomb) {
+    if(!this.wallCollide && !this.bombCollide && this.stillOnFreshBomb){
+        this.setPos(posX, posY);
+    }
+    if(this.wallCollide && this.bombCollide && !this.stillOnFreshBomb) {
         //this.revertPosition();
         this.setPos(this.cx, this.cy);
-        return;
+        //return;
     }
 }
 
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
+    this.maybeDropBomb();
 
 
     const right = keys[this.keyRight];
@@ -104,7 +112,7 @@ Character.prototype.update = function (du) {
         var newPosY = this.cy + dir*this.velY*du;
         this.updatePosition(this.cx, newPosY);
     }
-    this.maybeDropBomb();
+
 
     // Handle firing
 
