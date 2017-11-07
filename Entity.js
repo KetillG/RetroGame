@@ -91,6 +91,5 @@ Entity.prototype.findHitEntity = function () {
     var down = spatialManager.findEntityInRange(
         pos.posX + this.width, pos.posY + this.height, this.getRadius()
     );
-    console.log(right, left, up, down);
     return right.concat(left).concat(up).concat(down);
 };
