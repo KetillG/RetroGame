@@ -67,9 +67,9 @@ Character.prototype.update = function (du) {
         const vel = this.dirObj.vel;
         const dir = this.dirObj.direction;
         if (vel === 'velY') {
-            newY = this.cy + dir * this.velY * du;
+            this.newPosY = this.cy + dir * this.velY * du;
         } else {
-            newX = this.cx + dir * this.velX * du;
+            this.newPosX = this.cx + dir * this.velX * du;
         }
         // Hit detection
         const hitEntity = this.findHitEntity();
@@ -86,21 +86,17 @@ Character.prototype.update = function (du) {
                 if (this.kickPower) {
                     hitEntity.kick();
                 }
-                this.revertPosition();
+                this.setPos(this.cx, this.cy);
                 return;
             } else {
-                this.revertPosition();
+                this.setPos(this.cx, this.cy);
                 return;
             }
         } else {
             // If nothing is hit then you left fresh bomb
+            this.setPos(this.newPosX, this.newPosY);
             this.freshBomb = null;
         }
-
-        this.oldPosX = this.cx;
-        this.oldPosY = this.cy;
-        this.cx = newX;
-        this.cy = newY;
     }
 
     // Handle firing
