@@ -131,6 +131,14 @@ Character.prototype.render = function (ctx) {
             this.cy,
             this.radius,
         );
+        util.fillBox(
+            ctx,
+            this.cx - this.width,
+            this.cy - this.height,
+            this.width * 2,
+            this.height * 2,
+            'red',
+        )
     }
 };
 
