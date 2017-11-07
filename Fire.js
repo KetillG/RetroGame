@@ -46,7 +46,6 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
         );
 
         let hitWall = false;
-        console.log(hitEntities)
         if(hitEntities.length) {
             hitEntities.map(hitEntity => {
                 if(hitEntity.constructorType === 'Bomb') {
