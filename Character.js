@@ -77,11 +77,9 @@ Character.prototype.update = function (du) {
         let illegalMove = false;
 
         if (hitEntities.length) {
-            console.log('here');
             hitEntities.map(hitEntity => {
                 // If you have not left the bomb area you can walk on it
                 if (hitEntity === this.freshBomb) {
-                    console.log('Can walk here');
                 } else if (hitEntity.constructorType === 'Powerup') {
                     hitEntity.effect(this);
                     hitEntity.kill();
