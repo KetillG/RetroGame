@@ -34,90 +34,76 @@ Character.prototype.dirObj = {};
 Character.prototype.recentlyHit = false;
 
 
-Character.prototype.moveDirection = function () {
-    const right = keys[this.keyRight];
-    const left = keys[this.keyLeft];
-    const up = keys[this.keyUp];
-    const down = keys[this.keyDown];
-    const y = up ^ down;
-    const x = left ^ right;
-    if (x && !y) {
-        var dir = right ? 1 : -1;
-        this.dirObj.vel = "velX";
-        this.dirObj.direction = dir;
-        this.dirObj.center = "cx";
-        return true;
-    } else if (y && !x) {
-        var dir = down ? 1 : -1;
-        this.dirObj.vel = "velY";
-        this.dirObj.direction = dir;
-        this.dirObj.center = "cy";
-        return true;
-    }
 
-    return null;
-};
+Character.prototype.hitSomething = function(hitEntities){
+    hitEntities.map(hitEntity => {
+        // If you have not left the bomb area you can walk on it
+        if (hitEntity === this.freshBomb) {
+            stillOnFreshBomb = true;
+            this.setPos(this.newPosX, this.newPosY);
+        } else if (hitEntity.constructorType === 'Powerup') {
+            hitEntity.effect(this);
+            hitEntity.kill();
+        } else if (hitEntity.constructorType === 'Bomb') {
+            // If you hit a bomb and you can kick it, then kick it
+            if (this.kickPower) {
+                hitEntity.kick();
+            }
+            bombCollide = true;
+            //this.revertPosition();
+            //return;
+        } else {
+            wallCollide = true;
+        }
+
+    });
+}
+
+Character.prototype.updatePosition = function(posX, posY){
+    this.newPosX = posX;
+    this.newPosY = posY;
+
+    const hitEntities = this.findHitEntity();
+    // If a entity its an 'wall'
+    let wallCollide = false;
+    let bombCollide = false;
+    let stillOnFreshBomb = false;
+    if (hitEntities.length) {
+        console.log('here');
+        this.hitSomething(hitEntities);
+    }
+    else {
+
+        // If nothing is hit then you left fresh bomb
+        this.setPos(this.newPosX, this.newPosY);
+        this.freshBomb = null;
+    }
+    // Revert position if illegal move
+    if(wallCollide || (bombCollide && !stillOnFreshBomb)) {
+        //this.revertPosition();
+        this.setPos(this.cx, this.cy);
+        return;
+    }
+}
 
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
 
-    const directionObject = this.moveDirection();
-    let newX = this.cx;
-    let newY = this.cy;
-
-    if (directionObject) {
-    // Directions
-        const vel = this.dirObj.vel;
-        const dir = this.dirObj.direction;
-        if (vel === 'velY') {
-            this.newPosY = this.cy + dir * this.velY * du;
-        } else {
-            this.newPosX = this.cx + dir * this.velX * du;
-        }
-        // Hit detection
-        const hitEntities = this.findHitEntity();
-        // If a entity its an 'wall'
-        let wallCollide = false;
-        let bombCollide = false;
-        let stillOnFreshBomb = false;
-        if (hitEntities.length) {
-            console.log('here');
-            hitEntities.map(hitEntity => {
-                // If you have not left the bomb area you can walk on it
-                if (hitEntity === this.freshBomb) {
-                    stillOnFreshBomb = true;
-                    this.setPos(this.newPosX, this.newPosY);
-                    console.log('Can walk here');
-                } else if (hitEntity.constructorType === 'Powerup') {
-                    hitEntity.effect(this);
-                    hitEntity.kill();
-                } else if (hitEntity.constructorType === 'Bomb') {
-                    // If you hit a bomb and you can kick it, then kick it
-                    if (this.kickPower) {
-                        hitEntity.kick();
-                    }
-                    bombCollide = true;
-                    //this.revertPosition();
-                    //return;
-                } else {
-                    wallCollide = true;
-                }
-
-            });
-        }
-        else {
-
-            // If nothing is hit then you left fresh bomb
-            this.setPos(this.newPosX, this.newPosY);
-            this.freshBomb = null;
-        }
-        // Revert position if illegal move
-        if(wallCollide || (bombCollide && !stillOnFreshBomb)) {
-            //this.revertPosition();
-            this.setPos(this.cx, this.cy);
-            return;
-        }
+    const right = keys[this.keyRight];
+    const left = keys[this.keyLeft];
+    const up = keys[this.keyUp];
+    const down = keys[this.keyDown];
+    if(right || left){
+        var dir = right ? 1 : -1;
+        var newPosX = this.cx + dir*this.velX*du;
+        this.updatePosition(newPosX, this.cy);
     }
+    if(up || down){
+        var dir = down ? 1 : -1;
+        var newPosY = this.cy + dir*this.velY*du;
+        this.updatePosition(this.cx, newPosY);
+    }
+
 
     // Handle firing
     this.maybeDropBomb();
