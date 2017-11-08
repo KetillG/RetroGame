@@ -66,6 +66,9 @@ Character.prototype.hitSomething = function(hitEntities){
             this.bombCollide = true;
             //this.revertPosition();
             //return;
+        }
+        else if(hitEntity.constructorType === "Character"){
+            this.playerCollision = true;
         } else {
             this.wallCollide = true;
         }
@@ -76,6 +79,7 @@ Character.prototype.hitSomething = function(hitEntities){
 Character.prototype.wallCollide = false;
 Character.prototype.bombCollide = false;
 Character.prototype.stillOnFreshBomb = false;
+Character.prototype.playerCollision = false;
 
 Character.prototype.updatePosition = function(posX, posY){
     this.newPosX = posX;
@@ -83,6 +87,7 @@ Character.prototype.updatePosition = function(posX, posY){
     this.stillOnFreshBomb = false;
     this.bombCollide = false;
     this.wallCollide = false;
+    this.playerCollision = false;
 
 
     const hitEntities = this.findHitEntity();
@@ -99,7 +104,7 @@ Character.prototype.updatePosition = function(posX, posY){
         this.freshBomb = null;
     }
     // Revert position if illegal move
-    if(!this.wallCollide && !this.bombCollide && this.stillOnFreshBomb){
+    if(!this.wallCollide && !this.bombCollide && (this.stillOnFreshBomb || this.playerCollision)){
         this.setPos(posX, posY);
         return;
     }
