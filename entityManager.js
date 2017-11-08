@@ -52,19 +52,17 @@ _addPlayers : function () {
     keyDown: 'S'.charCodeAt(0),
     keyLeft: 'A'.charCodeAt(0),
     keyRight: 'D'.charCodeAt(0),
-    keyFire: ' '.charCodeAt(0),
+    keyFire: 220,
     colour: "Black"
   });
   var player2 = new Character({
     cx: this._board.xStep * 10.5,
     cy: this._board.xStep * 10.5,
-    velX: 4,
-    velY: 4,
-    keyUp: 'I'.charCodeAt(0),
-    keyDown: 'K'.charCodeAt(0),
-    keyLeft: 'J'.charCodeAt(0),
-    keyRight: 'L'.charCodeAt(0),
-    keyFire: 'M'.charCodeAt(0),
+    keyUp: 38,
+    keyDown: 40,
+    keyLeft: 37,
+    keyRight: 39,
+    keyFire: 'O'.charCodeAt(0),
     colour: "Red"
   });
 
