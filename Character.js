@@ -165,7 +165,7 @@ Character.prototype.setPos = function (x, y) {
 };
 
 Character.prototype.maybeDropBomb = function () {
-    if (keys[this.keyFire] && this.ammo > 0) {
+    if (eatKey(this.keyFire) && this.ammo > 0) {
         // Gets correct position from board
         const pos = entityManager.getValidBombCenter(this.cx, this.cy);
         // Tries to spawn a bomb

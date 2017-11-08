@@ -47,6 +47,11 @@ Powerup.prototype.render = function (ctx) {
                     this.cx,
                     this.cy,
                     30);
+    ctx.fillStyle = "black";
+    ctx.font = "25px Comic Sans MS";
+    ctx.textBaseline =  'middle';
+    ctx.textAlign = 'center';
+    ctx.fillText(this.description[0], this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT); 
     ctx.fillStyle = oldStyle;
 };
 
@@ -98,7 +103,7 @@ Powerup.prototype.getBricktype =  function (number) {
         return {
           sprite: '..path',
           color: 'cyan',
-          description: 'Player can kick bomb',
+          description: 'Kick bomb power for substring',
           effect: this.addKick,
         }
         break;
