@@ -23,9 +23,14 @@ function Board(descr) {
 
   for(var i = 0; i < tileBoard.length; i++) {
     for(var j = 0; j < tileBoard[i].length; j++) {
-      // Changes numbers to bricks
+      // Randomly creates board
+      let blockID = tileBoard[i][j];
+      if( tileBoard[i][j] === 0 ) {
+        blockID = Math.random() < 0.75 ? 2 : 0;
+      }
+      // Creates brick from id
       tileBoard[i][j] = new Brick({
-        id: tileBoard[i][j],
+        id: blockID,
         x: (j + 1) * yStep,
         y: (i + 1) * xStep,
         width: xStep,

@@ -84,6 +84,15 @@ Brick.prototype.getBricktype =  function (number) {
         description: 'Endgame block, indicates tile is dead',
       }
       break;
+    case 4:
+      return {
+        walkable: true,
+        breakable: false,
+        sprite: '..path',
+        color: 'green',
+        description: 'Walkable spawn block',
+      }
+      break;
     default:
       console.log('No block found');
   }
