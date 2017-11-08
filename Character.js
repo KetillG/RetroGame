@@ -44,7 +44,7 @@ Character.prototype.decrementLife = function () {
     this.lives--;
     if(this.lives < 1) {
         this.kill();
-        console.log('died')
+        //console.log('died')
     }
     this.immuneTime = 1000 / NOMINAL_UPDATE_INTERVAL;
 }
@@ -189,4 +189,3 @@ Character.prototype.positionOccupied = function (x, y) {
     const xHit = this.cx - this.width < x && this.cx + this.width > x;
     return xHit && yHit;
 };
-

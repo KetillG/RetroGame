@@ -51,7 +51,7 @@ Powerup.prototype.render = function (ctx) {
     ctx.font = "25px Comic Sans MS";
     ctx.textBaseline =  'middle';
     ctx.textAlign = 'center';
-    ctx.fillText(this.description[0], this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT); 
+    ctx.fillText(this.description[0], this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT);
     ctx.fillStyle = oldStyle;
 };
 
@@ -62,7 +62,7 @@ Powerup.prototype.addFire = function (player) {
 Powerup.prototype.addSpeed =  function (player) {
   if(player.velX < player.maxVelX) player.velX += 1;
   if(player.velY < player.maxVelY) player.velY += 1;
-  console.log(player.velX,player.velY);
+  //console.log(player.velX,player.velY);
 }
 
 Powerup.prototype.addAmmo =  function (player) {

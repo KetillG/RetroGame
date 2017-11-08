@@ -101,10 +101,10 @@ bombExplode(bomb) {
 
     // Create fire
     const fire = new Fire();
-    console.log(fire)
+    //console.log(fire)
     fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
     this._fires.push(fire);
-    console.log(this._fires)
+    //console.log(this._fires)
 },
 
 trySpawnBomb(descr) {
@@ -112,7 +112,7 @@ trySpawnBomb(descr) {
     for(var i = 0; i < this._bombs.length; i++) {
         var temp = this._bombs[i];
         if(temp.cx === descr.cx && temp.cy === descr.cy) {
-            console.log('bomb here already');
+            //console.log('bomb here already');
             return null;
         }
     }
