@@ -50,6 +50,7 @@ Entity.prototype.setup = function (descr) {
     for (var property in descr) {
         this[property] = descr[property];
     }
+    this['constructorType'] = 'Character'
 
 
     this._spatialID = spatialManager.getNewSpatialID();
