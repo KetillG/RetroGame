@@ -22,14 +22,18 @@ function Character(descr) {
 Character.prototype = new Entity();
 // Character.prototype.board = new Board();
 
-Character.prototype.ammo = 30;
-Character.prototype.power = 2;
+Character.prototype.ammo = 1;
+Character.prototype.power = 1;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
-Character.prototype.lives = 1;
+Character.prototype.lives = 3;
 Character.prototype.immuneTime = -1;
 
+Character.prototype.velX = 4,
+Character.prototype.velY = 4,
+Character.prototype.maxVelX = 10,
+Character.prototype.maxVelY = 10,
 Character.prototype.radius = 30;
 
 Character.prototype.dirObj = {};
@@ -72,6 +76,7 @@ Character.prototype.hitSomething = function(hitEntities){
 Character.prototype.wallCollide = false;
 Character.prototype.bombCollide = false;
 Character.prototype.stillOnFreshBomb = false;
+
 Character.prototype.updatePosition = function(posX, posY){
     this.newPosX = posX;
     this.newPosY = posY;

@@ -127,7 +127,7 @@ Board.prototype.tryExplodeBrick = function (x, y) {
 }
 
 Board.prototype.dropPowerup = function (i, j) {
-  const powerupType = Math.floor(Math.random() * 2) + 1;
+  const powerupType = Math.floor(Math.random() * 4);
   entityManager.spawnPowerup({cx:j * this.xStep + this.xStep / 2,
                               cy:i * this.yStep + this.yStep / 2,
                               id:powerupType});

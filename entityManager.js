@@ -48,8 +48,6 @@ _addPlayers : function () {
   var player = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,
-    velX: 4,
-    velY: 4,
     keyUp: 'W'.charCodeAt(0),
     keyDown: 'S'.charCodeAt(0),
     keyLeft: 'A'.charCodeAt(0),

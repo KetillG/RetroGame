@@ -42,7 +42,7 @@ Powerup.prototype.update = function (du) {
 Powerup.prototype.render = function (ctx) {
     // Draw circle shit
     const oldStyle = ctx.fillStyle;
-    ctx.fillStyle = "pink";
+    ctx.fillStyle = this.color;
     util.fillCircle(ctx,
                     this.cx,
                     this.cy,
@@ -50,13 +50,14 @@ Powerup.prototype.render = function (ctx) {
     ctx.fillStyle = oldStyle;
 };
 
-Powerup.prototype.addFire =  function (player) {
+Powerup.prototype.addFire = function (player) {
   player.power++;
 }
 
 Powerup.prototype.addSpeed =  function (player) {
-  player.velX += 1;
-  player.velY += 1;
+  if(player.velX < player.maxVelX) player.velX += 1;
+  if(player.velY < player.maxVelY) player.velY += 1;
+  console.log(player.velX,player.velY);
 }
 
 Powerup.prototype.addAmmo =  function (player) {
@@ -72,7 +73,7 @@ Powerup.prototype.getBricktype =  function (number) {
       case 0:
         return {
           sprite: '..path',
-          color: 'green',
+          color: 'MediumSeaGreen',
           description: 'Bigger fire',
           effect: this.addFire,
         }

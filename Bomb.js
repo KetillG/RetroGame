@@ -14,7 +14,7 @@ function Bomb(descr) {
 
 Bomb.prototype = new Entity();
 
-Bomb.prototype.lifeSpan = 5000 / NOMINAL_UPDATE_INTERVAL;
+Bomb.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 //Bomb.prototype.radius = 35;
 
 Bomb.prototype.positionOccupied = function (x, y) {

@@ -14,7 +14,7 @@ function Fire(descr) {
     this['paths'] = [];
 };
 
-Fire.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
+Fire.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
 Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
     // New fire path added to fire
@@ -80,6 +80,7 @@ Fire.prototype.update = function (du) {
 }
 
 Fire.prototype.render = function (ctx) {
+    ctx.globalAlpha = this.lifeSpan / (1000 / NOMINAL_UPDATE_INTERVAL)
     this.paths.map(path => {
         path.directions.map(dir => {
             util.drawLine(
@@ -92,4 +93,5 @@ Fire.prototype.render = function (ctx) {
             );
         });
     });
+    ctx.globalAlpha = 1;    
 }
