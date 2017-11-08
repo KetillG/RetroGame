@@ -21,16 +21,16 @@ with suitable 'data' and 'methods'.
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
-var board = [[0,0,0,0,0,0,0,0,0,0],
-             [0,1,0,1,0,0,1,0,1,0],
+var board = [[4,4,0,0,0,0,0,0,0,0],
+             [4,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,0,0,0,0,0,0],
              [0,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,2,2,0,0,0,0],
              [0,0,0,0,2,2,0,0,0,0],
              [0,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,0,0,0,0,0,0],
-             [0,1,0,1,0,0,1,0,1,0],
-             [0,0,0,0,0,0,0,0,0,0]]
+             [0,1,0,1,0,0,1,0,1,4],
+             [0,0,0,0,0,0,0,0,4,4]]
 
 var entityManager = {
 
@@ -46,8 +46,8 @@ _createBoard(board) {
 
 _addPlayers : function () {
   var player = new Character({
-    cx: 125,
-    cy: 125,
+    cx: this._board.xStep * 1.5,
+    cy: this._board.yStep * 1.5,
     velX: 4,
     velY: 4,
     keyUp: 'W'.charCodeAt(0),
@@ -58,8 +58,8 @@ _addPlayers : function () {
     colour: "Black"
   });
   var player2 = new Character({
-    cx: 500,
-    cy: 125,
+    cx: this._board.xStep * 10.5,
+    cy: this._board.xStep * 10.5,
     velX: 4,
     velY: 4,
     keyUp: 'I'.charCodeAt(0),
