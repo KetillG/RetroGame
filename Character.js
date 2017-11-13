@@ -150,7 +150,7 @@ Character.prototype.render = function (ctx) {
     const blink = Math.floor(this.immuneTime / blinkCheck) % 2 === 0;
     if(this.immuneTime >= 0 && blink) ctx.globalAlpha = 0.5
     if (this.sprite) {
-        this.sprite.drawAt(ctx, this.cx, this.cy);
+        this.sprite.drawCentredAt(ctx, this.cx, this.cy);
     } else {
         util.fillBox(
             ctx,

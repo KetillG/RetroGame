@@ -45,7 +45,11 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
-  var cat = new Sprite(g_images.cat)
+  var cat = new Sprite(g_images.cat);
+  cat.width = (canvas.width/board[0].length);
+  cat.height = (canvas.height/board.length);
+  cat.scaleX = (canvas.width/board[0].length)/cat.width;
+  cat.scaleY = (canvas.height/board[0].length)/cat.height;
   var player = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,

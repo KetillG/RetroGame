@@ -37,6 +37,10 @@ Entity.prototype.setWidths = function(){
         this.width = this.sprite.width;
         this.height = this.sprite.height;
     }
+    else if (this.sprite) {
+      this.width = this.sprite.width;
+      this.height = this.sprite.height;
+    }
     else{
         this.width = this.radius;
         this.height = this.radius;
