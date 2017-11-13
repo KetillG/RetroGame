@@ -10,6 +10,8 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .menu-container {
@@ -19,19 +21,43 @@ html, body {
   background-color: rgba(10,10,10, 0.9);
   flex-direction: column;
   color: rgba(255,255,255,1);
-  padding: 30px;
-  border: 2px outset black;
-  max-width: 800px;
-  min-width: 250px;
+  padding: 1.875em;
+  border: 0.125em outset black;
+  max-width: 53em;
+  min-width: 1em;
+}
+
+@media (max-width: 310px) {
+    #main-container {
+        top: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    #instructions-container {
+          top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #about-container {
+          top: 0;
+    }
+}
+
+@media (max-width: 260px) {
+    #gameover-container {
+          top: 0;
+    }
 }
 
 .subtitle {
   font-weight: bold;
-  margin: 10px 0;
+  margin: 0.625em 0;
 }
 
 #instructions-container p {
-  margin-bottom: 15px;
+  margin-bottom: 1em;
 }
 
 #main-container {
@@ -43,18 +69,18 @@ h1 {
 }
 
 .lg {
-  font-size: 20px;
+  font-size: 1.25em;
   text-align: left;
 }
 
 .btn {
-  margin: 5px;
-  padding: 5px;
-  font-size: 18px;
+  margin: 0.25em;
+  padding: 0.25em;
+  font-size: 1.125em;
   background: linear-gradient(to right, orangered, orange );
   width: 100%;
   border: none;
-  border-radius: 2px;
+  border-radius: 0.125em;
   filter:  contrast(80%);
 }
 
@@ -63,7 +89,7 @@ h1 {
 }
 
 hr {
-  height: 1px;
+  height: 0.05em;
   color: white;
   background-color: white;
   border-color: white;
@@ -71,5 +97,5 @@ hr {
 }
 
 li {
-    padding-bottom: 10px;
+    padding-bottom: 0.625em;
 }

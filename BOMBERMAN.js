@@ -5,10 +5,7 @@
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
-
-
-
-//aaaaaaaaaaaaaaaaa
+// HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
@@ -54,9 +51,6 @@ function gameOver(playerName) {
     menuGameOver.style.display = "flex";
     document.getElementById("winner").innerHTML = playerName + ' lost!';
 }
-
-
-//aaaaaaaaaaaa
 
 // =============
 // GATHER INPUTS
