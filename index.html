@@ -1,47 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>BOMBERMAN!</title>
-  </head>
-  <body style="margin:0">
-
-	<canvas id="myCanvas" width="700" height="700"
-		style="border: 1px solid black;">
-	Sorry, but your browser does not support the HTML5 canvas tag.
-	</canvas>
-
-    <div id="output"></div>
-
-    <script src="globals.js"></script>
-    <script src="audio/sounds.js"></script>
-    <script src="consts.js"></script>
-    <script src="util.js"></script>
-    <script src="keys.js"></script>
-    <script src="handleMouse.js"></script>
-
-    <script src="index.js"></script>
-
-    <script src="spatialManager.js"></script>
-    <script src="entityManager.js"></script>
-
-    <script src="Sprite.js"></script>
-
-    <script src="Entity.js"></script>
-    <script src="Character.js"></script>
-    <script src="Board.js"></script>
-    <script src="Brick.js"></script>
-    <script src="Powerup.js"></script>
-    <script src="Bomb.js"></script>
-    <script src="Fire.js"></script>
-
-    <script src="update.js"></script>
-    <script src="render.js"></script>
-
-    <script src="imagesPreload.js"></script>
-    <script src="main.js"></script>
-
-    <script src="BOMBERMAN.js"></script>
-
-  </body>
+   <head>
+      <meta charset="UTF-8">
+      <title>BOMBERMAN!</title>
+      <link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+      <div class="container">
+         <div class="menu-container" id="main-container">
+            <h1 id="game-title">Bomberman</h1>
+            <button type="button" class="btn" id="btn-newgame">New game</button>
+            <hr>
+            <button type="button" class="btn" id="btn-instructions">Instructions</button>
+            <button type="button" class="btn" id="btn-about">About the game</button>
+         </div>
+         <div class="menu-container" id="instructions-container" style="display: none;">
+            <article>
+               <h1>Instructions</h1>
+               <hr>
+               <p class="subtitle lg">Controls:</p>
+               <p><span class="subtitle">Player 1: </span>Moves with ASDW.<p>
+               <p><span class="subtitle">Player 2: </span>Moves with arrow keys.<p>
+                  <img src="image.png" alt="Keyboard" height="210" width="750">
+               <p class="subtitle lg">Aim of the game:</p>
+               <p><span class="subtitle"></span>
+                  Blow up your oppnenet before they kill you. All players have three lives.
+               </p>
+            </article>
+            <div class="nav-controls">
+               <button type="button" class="btn btn-back" id="btn-back-instructions">Back</button>
+            </div>
+         </div>
+         <div class="menu-container" id="about-container" style="display: none;">
+            <article>
+               <h1>About the game</h1>
+               <hr>
+               <p class="subtitle lg">The authors:</p>
+               <ul>
+                   <li>Björn Guðmundsson</li>
+                   <li>Ketill Guðmundsson</li>
+                   <li>Sindri Pétur Ingimundarson</li>
+                   <li>Stella Rut Guðmundsdóttir</li>
+               </ul>
+               <span>
+               </span>
+               <p class="subtitle lg ">The game:</p>
+               <p>
+               This game is a final assignment in the course Computer Game Programming at the University of Iceland.
+           </p>
+            </article>
+            <div class="nav-controls">
+               <button type="button" class="btn btn-back" id="btn-back-about">Back</button>
+            </div>
+        </div>
+        <div class="menu-container" id="gameover-container" style="display: none;">
+           <article>
+              <h1>Game over</h1>
+              <hr>
+              <p id="winner"></p>
+           </article>
+           <div class="nav-controls">
+               <button type="button" class="btn btn-back" id="btn-gameover">Another Game</button>
+           </div>
+        </div>
+         <canvas id="myCanvas" width="700" height="700"
+            style="border: 1px solid black;">
+            Sorry, but your browser does not support the HTML5 canvas tag.
+         </canvas>
+      </div>
+      <div id="output"></div>
+      <script src="globals.js"></script>
+      <script src="audio/sounds.js"></script>
+      <script src="consts.js"></script>
+      <script src="util.js"></script>
+      <script src="keys.js"></script>
+      <script src="handleMouse.js"></script>
+      <script src="index.js"></script>
+      <script src="spatialManager.js"></script>
+      <script src="entityManager.js"></script>
+      <script src="Sprite.js"></script>
+      <script src="Entity.js"></script>
+      <script src="Character.js"></script>
+      <script src="Board.js"></script>
+      <script src="Brick.js"></script>
+      <script src="Powerup.js"></script>
+      <script src="Bomb.js"></script>
+      <script src="Fire.js"></script>
+      <script src="update.js"></script>
+      <script src="render.js"></script>
+      <script src="imagesPreload.js"></script>
+      <script src="main.js"></script>
+      <script src="BOMBERMAN.js"></script>
+   </body>
 </html>

@@ -44,7 +44,6 @@ Character.prototype.decrementLife = function () {
     this.lives--;
     if(this.lives < 1) {
         this.kill();
-        //console.log('died')
     }
     this.immuneTime = 1000 / NOMINAL_UPDATE_INTERVAL;
 }

@@ -1,0 +1,71 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: left;
+  font-family: Sans-serif, Verdana;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-container {
+  position: absolute;
+  justify-content: left;
+  align-items: left;
+  background-color: rgba(10,10,10, 0.9);
+  flex-direction: column;
+  color: rgba(255,255,255,1);
+  padding: 30px;
+  border: 2px outset black;
+  max-width: 800px;
+  min-width: 250px;
+}
+
+.subtitle {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+#instructions-container p {
+  margin-bottom: 15px;
+}
+
+#main-container {
+  display: flex;
+}
+
+h1 {
+    text-align: left;
+}
+
+.lg {
+  font-size: 20px;
+  text-align: left;
+}
+
+.btn {
+  margin: 5px;
+  padding: 5px;
+  font-size: 18px;
+  background: linear-gradient(to right, orangered, orange );
+  width: 100%;
+  border: none;
+  border-radius: 2px;
+  filter:  contrast(80%) ;
+}
+
+hr {
+  height: 1px;
+  color: white;
+  background-color: white;
+  border-color: white;
+  width: 100%;
+}
+
+li {
+    padding-bottom: 10px;
+}

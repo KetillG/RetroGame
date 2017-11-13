@@ -45,28 +45,30 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
-  var player = new Character({
-    cx: this._board.xStep * 1.5,
-    cy: this._board.yStep * 1.5,
+  var player2 = new Character({
+    cx: this._board.xStep * 10.5,
+    cy: this._board.yStep * 10.5,
     keyUp: 'W'.charCodeAt(0),
     keyDown: 'S'.charCodeAt(0),
     keyLeft: 'A'.charCodeAt(0),
     keyRight: 'D'.charCodeAt(0),
     keyFire: 220,
-    colour: "Black"
+    colour: "Black",
+    name: "Player 2"
   });
-  var player2 = new Character({
-    cx: this._board.xStep * 10.5,
-    cy: this._board.xStep * 10.5,
+  var player1 = new Character({
+    cx: this._board.xStep * 1.5,
+    cy: this._board.xStep * 1.5,
     keyUp: 38,
     keyDown: 40,
     keyLeft: 37,
     keyRight: 39,
     keyFire: 'O'.charCodeAt(0),
-    colour: "Red"
+    colour: "Red",
+    name: "Player 1"
   });
 
-  this._players.push(player);
+  this._players.push(player1);
   this._players.push(player2);
   //this._categories.push(this._players);
 },
@@ -85,6 +87,9 @@ deferredSetup : function () {
 
 init: function() {
     this._createBoard(board);
+},
+
+initPlayers() {
     this._addPlayers();
 },
 
@@ -137,6 +142,9 @@ update: function(du) {
       if (status === this.KILL_ME_NOW) {
           // remove the dead guy, and shuffle the others down to
           // prevent a confusing gap from appearing in the array
+          if(aCategory[i].constructorType === 'Character') {
+              gameOver(aCategory[i].name);
+          }
           aCategory.splice(i,1);
       }
       else {
