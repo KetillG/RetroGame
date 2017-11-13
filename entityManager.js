@@ -45,6 +45,7 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
+    var cat = new Sprite(g_images.cat)
   var player = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,
@@ -53,7 +54,8 @@ _addPlayers : function () {
     keyLeft: 'A'.charCodeAt(0),
     keyRight: 'D'.charCodeAt(0),
     keyFire: 220,
-    colour: "Black"
+    colour: "Black",
+    sprite: cat
   });
   var player2 = new Character({
     cx: this._board.xStep * 10.5,
@@ -63,7 +65,8 @@ _addPlayers : function () {
     keyLeft: 37,
     keyRight: 39,
     keyFire: 'O'.charCodeAt(0),
-    colour: "Red"
+    colour: "Red",
+    sprite: cat
   });
 
   this._players.push(player);
