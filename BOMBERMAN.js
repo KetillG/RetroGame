@@ -48,7 +48,6 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
-
     entityManager.init();
 
     main.init();

@@ -45,7 +45,7 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
-    var cat = new Sprite(g_images.cat)
+  var cat = new Sprite(g_images.cat)
   var player = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,
