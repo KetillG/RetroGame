@@ -39,6 +39,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
+        cat: 'https://news.nationalgeographic.com/content/dam/news/photos/000/755/75552.ngsversion.1422285553360.adapt.1900.1.jpg'
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);
