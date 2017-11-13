@@ -55,7 +55,11 @@ h1 {
   width: 100%;
   border: none;
   border-radius: 2px;
-  filter:  contrast(80%) ;
+  filter:  contrast(80%);
+}
+
+.btn:hover {
+    color: white;
 }
 
 hr {
