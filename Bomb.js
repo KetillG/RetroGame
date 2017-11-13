@@ -32,6 +32,7 @@ Bomb.prototype.explode = function () {
     this.owner.ammo++;
     // Add explosion to entity manager
     entityManager.bombExplode(this);
+    util.playBombSound(bombSounds);
 }
 
 Bomb.prototype.update = function (du) {
