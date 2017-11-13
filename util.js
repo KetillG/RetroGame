@@ -26,7 +26,7 @@ var util = {
 
   fillCircle: function (ctx, x, y, r) {
       ctx.beginPath();
-      ctx.arc(x * consts.RENDER_SCALE_WIDTH, 
+      ctx.arc(x * consts.RENDER_SCALE_WIDTH,
               y * consts.RENDER_SCALE_HEIGHT,
               r * consts.RENDER_SCALE_WIDTH
               , 0, Math.PI * 2);
@@ -58,6 +58,10 @@ var util = {
 
     ctx.strokeStyle = oldStyle;
 },
+    playBombSound: function(bomb){
+        bomb.currentTime = 1.5;
+        bomb.play();
+    }
 
 
 
