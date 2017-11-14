@@ -34,8 +34,9 @@ function Entity() {
 
 Entity.prototype.setWidths = function(){
     if(this.sprite){
-        this.width = this.sprite.width*consts.RENDER_SCALE_WIDTH;
-        this.height = this.sprite.height*consts.RENDER_SCALE_HEIGHT;
+        console.log(this.sprite)
+        this.width = this.sprite.width / 2;
+        this.height = this.sprite.height / 2;
     }
     else{
         this.width = this.radius;
