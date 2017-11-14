@@ -38,8 +38,8 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
     while(power > 0) {
         power--;
         // Next position
-        const nextX = pos.posX + xStep;
-        const nextY = pos.posY + yStep;
+        let nextX = pos.posX + xStep;
+        let nextY = pos.posY + yStep;
         // Check if hit anything
         const hitEntities = spatialManager.findEntityInRange(
             nextX, nextY, 30
@@ -54,7 +54,13 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
                     // Reduce life
                     hitEntity.decrementLife()
                 } else if (hitEntity.constructorType === 'Board') {
-                    hitEntity.tryExplodeBrick(nextX, nextY);
+                    // If brick explodes, extend fire by 1 length
+                    console.log('exploding')
+                    if(hitEntity.tryExplodeBrick(nextX, nextY)) {
+                        console.log('exploded')
+                        pos.posX = nextX;
+                        pos.posY = nextY;
+                    }
                     hitWall = true;
                 }
             });

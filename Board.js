@@ -123,7 +123,9 @@ Board.prototype.tryExplodeBrick = function (x, y) {
   if(this.board[i][j].isBreakable()) {
     this.board[i][j].break();
     this.dropPowerup(i, j);
+    return true;
   }
+  return false;
 }
 
 Board.prototype.dropPowerup = function (i, j) {
