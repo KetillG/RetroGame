@@ -49,6 +49,12 @@ var g_sprites = {};
 
 function preloadDone() {
 
+    // Makes character sprite scale
+    var cat = g_images.cat;
+    cat.scale = consts.CHARACTER_SCALING;
+    cat.width = cat.width * cat.scale;
+    cat.height = cat.height * cat.scale;
+    
     entityManager.init();
 
     main.init();

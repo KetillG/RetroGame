@@ -34,7 +34,6 @@ function Entity() {
 
 Entity.prototype.setWidths = function(){
     if(this.sprite){
-        console.log(this.sprite)
         this.width = this.sprite.width / 2;
         this.height = this.sprite.height / 2;
     }

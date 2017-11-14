@@ -61,14 +61,7 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
-
-  var CHARACTER_SCALING = 0.05;
-
-  var cat = new Sprite(g_images.cat);
-  cat.scale = CHARACTER_SCALING;
-  cat.width = g_images.cat.width * cat.scale;
-  cat.height = g_images.cat.height * cat.scale;
-  console.log(cat);
+  // Player 1  
   var player = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,
@@ -78,8 +71,9 @@ _addPlayers : function () {
     keyRight: 'D'.charCodeAt(0),
     keyFire: 220,
     colour: "Black",
-    sprite:cat
+    sprite: new Sprite(g_images.cat),
   });
+  // Player 2
   var player2 = new Character({
     cx: this._board.xStep * 10.5,
     cy: this._board.xStep * 10.5,
@@ -88,12 +82,12 @@ _addPlayers : function () {
     keyLeft: 37,
     keyRight: 39,
     keyFire: 'O'.charCodeAt(0),
-    colour: "Red"
+    colour: "Red",
+    sprite: new Sprite(g_images.cat),
   });
 
   this._players.push(player);
   this._players.push(player2);
-  //this._categories.push(this._players);
 },
 
 // PUBLIC METHODS
