@@ -55,9 +55,7 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
                     hitEntity.decrementLife()
                 } else if (hitEntity.constructorType === 'Board') {
                     // If brick explodes, extend fire by 1 length
-                    console.log('exploding')
                     if(hitEntity.tryExplodeBrick(nextX, nextY)) {
-                        console.log('exploded')
                         pos.posX = nextX;
                         pos.posY = nextY;
                     }
