@@ -79,7 +79,6 @@ function imagesPreload(requiredImages,
     // whose `name` property will have been set appropriately.
     //
     // NO SPRITES HARDCODE return
-    completionCallback();
     preloadHandler = function () {
 
         console.log("preloadHandler called with this=", this);

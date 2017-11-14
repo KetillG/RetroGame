@@ -21,6 +21,9 @@ with suitable 'data' and 'methods'.
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
+
+
+
 var board = [[4,4,0,0,0,0,0,0,0,0],
              [4,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,0,0,0,0,0,0],
@@ -31,6 +34,19 @@ var board = [[4,4,0,0,0,0,0,0,0,0],
              [0,0,0,0,0,0,0,0,0,0],
              [0,1,0,1,0,0,1,0,1,4],
              [0,0,0,0,0,0,0,0,4,4]]
+function scalePlayers(player){
+    var maxWidth = 0.8*canvas.width/board[0].length;
+    var maxHeight = 0.8*canvas.height/board.length;
+
+    var width = player.width;
+    var height = player.height;
+
+    var ratioWidth = maxWidth/width;
+    var ratioHeight = maxHeight/height;
+
+    $(player).css("width", maxWidth*ratioWidth);
+    $(player).css("height", maxHeight*ratioHeight);
+}
 
 var entityManager = {
 
@@ -54,23 +70,25 @@ _addPlayers : function () {
     keyRight: 'D'.charCodeAt(0),
     keyFire: 220,
     colour: "Black",
+    sprite: new Sprite(g_images.cat),
     name: "Player 2"
   });
   var player1 = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.xStep * 1.5,
+
     keyUp: 38,
     keyDown: 40,
     keyLeft: 37,
     keyRight: 39,
     keyFire: 'O'.charCodeAt(0),
     colour: "Red",
+    sprite: new Sprite(g_images.cat),
     name: "Player 1"
   });
 
   this._players.push(player1);
   this._players.push(player2);
-  //this._categories.push(this._players);
 },
 
 // PUBLIC METHODS
