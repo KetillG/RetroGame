@@ -39,6 +39,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
+      cat : 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);

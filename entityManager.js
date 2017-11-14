@@ -21,6 +21,9 @@ with suitable 'data' and 'methods'.
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
+
+
+
 var board = [[4,4,0,0,0,0,0,0,0,0],
              [4,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,0,0,0,0,0,0],
@@ -31,6 +34,19 @@ var board = [[4,4,0,0,0,0,0,0,0,0],
              [0,0,0,0,0,0,0,0,0,0],
              [0,1,0,1,0,0,1,0,1,4],
              [0,0,0,0,0,0,0,0,4,4]]
+function scalePlayers(player){
+    var maxWidth = 0.8*canvas.width/board[0].length;
+    var maxHeight = 0.8*canvas.height/board.length;
+
+    var width = player.width;
+    var height = player.height;
+
+    var ratioWidth = maxWidth/width;
+    var ratioHeight = maxHeight/height;
+
+    $(player).css("width", maxWidth*ratioWidth);
+    $(player).css("height", maxHeight*ratioHeight);
+}
 
 var entityManager = {
 
@@ -45,6 +61,13 @@ _createBoard(board) {
 },
 
 _addPlayers : function () {
+
+  var cat = new Sprite(g_images.cat);
+  cat.scaleX = 30/g_images.cat.width;
+  cat.scaleY = 30/g_images.cat.width;
+  cat.width = 30;
+  cat.height = 30;
+  console.log(cat);
   var player = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,
@@ -53,7 +76,8 @@ _addPlayers : function () {
     keyLeft: 'A'.charCodeAt(0),
     keyRight: 'D'.charCodeAt(0),
     keyFire: 220,
-    colour: "Black"
+    colour: "Black",
+    sprite:cat
   });
   var player2 = new Character({
     cx: this._board.xStep * 10.5,
