@@ -32,8 +32,8 @@ Sprite.prototype.drawAt = function (ctx, x, y) {
 Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
     if (rotation === undefined) rotation = 0;
 
-    var w = g_images.cat.width,
-        h = g_images.cat.height;
+    var w = g_images.cat.width;
+    var h = g_images.cat.height;
     ctx.save();
     ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
     ctx.rotate(rotation);

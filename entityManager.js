@@ -62,8 +62,10 @@ _createBoard(board) {
 
 _addPlayers : function () {
 
+  var CHARACTER_SCALING = 0.05;
+
   var cat = new Sprite(g_images.cat);
-  cat.scale = 0.05;
+  cat.scale = CHARACTER_SCALING;
   cat.width = g_images.cat.width * cat.scale;
   cat.height = g_images.cat.height * cat.scale;
   console.log(cat);

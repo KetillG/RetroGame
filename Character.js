@@ -151,13 +151,6 @@ Character.prototype.render = function (ctx) {
     if(this.immuneTime >= 0 && blink) ctx.globalAlpha = 0.5
     if (this.sprite) {
         this.sprite.drawCentredAt(ctx, this.cx, this.cy);
-        
-        if(Math.random() < 0.04) {
-
-            console.log(this.height)
-            console.log(this.width)
-            //console.log(this.cy)
-        }
     } else {
         util.fillBox(
             ctx,
