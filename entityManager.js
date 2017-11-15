@@ -62,8 +62,8 @@ _createBoard(board) {
 
 _addPlayers : function () {
   var player1 = new Character({
-    cx: this._board.xStep * 1.5,
-    cy: this._board.xStep * 1.5,
+    cx: this._board.xStep * 10.5,
+    cy: this._board.xStep * 10.5,
     keyUp: 38,
     keyDown: 40,
     keyLeft: 37,
@@ -74,8 +74,8 @@ _addPlayers : function () {
     name: "Player 1"
   });
   var player2 = new Character({
-    cx: this._board.xStep * 10.5,
-    cy: this._board.yStep * 10.5,
+    cx: this._board.xStep * 1.5,
+    cy: this._board.yStep * 1.5,
     keyUp: 'W'.charCodeAt(0),
     keyDown: 'S'.charCodeAt(0),
     keyLeft: 'A'.charCodeAt(0),

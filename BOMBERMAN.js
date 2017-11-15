@@ -86,7 +86,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-      cat : 'https://www.petfinder.com/wp-content/uploads/2012/11/91615172-find-a-lump-on-cats-skin-632x475.jpg'
+      cat : './sprite/cat_template.png'
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -99,7 +99,7 @@ function preloadDone() {
     // Makes character sprite scale
     var cat = g_images.cat;
     cat.scale = consts.CHARACTER_SCALING;
-    cat.width = cat.width * cat.scale;
+    cat.width = cat.width * cat.scale / consts.CHARACTER_FRAMES;
     cat.height = cat.height * cat.scale;
     
     entityManager.init();
