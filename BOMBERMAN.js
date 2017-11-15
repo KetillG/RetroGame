@@ -30,12 +30,11 @@ btnAbout.onclick = function() {
 btnNewGame.onclick = function() {
   menuMain.style.display = "none";
   entityManager.initPlayers();
+  // reset everything
 }
 
 btnRestart.onclick = function() {
     menuMain.style.display = "none";
-    requestPreloads();
-    entityManager.initPlayers();
 }
 
 for (var i = 0; i < btnsBack.length; i++) {
