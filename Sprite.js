@@ -30,7 +30,7 @@ Sprite.prototype.drawAt = function (ctx, x, y) {
                   x, y);
 };
 
-Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frame) {
+Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, frameY) {
     if (rotation === undefined) rotation = 0;
 
     var w = this.width / this.scale;
@@ -47,8 +47,8 @@ Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frame) {
     // coords accordingly, to draw our sprite centred at the origin
     ctx.drawImage(
         this.image,
-        w * frame,
-        0,
+        w * frameX,
+        h * frameY,
         w,
         h,
         0.5 * -w,

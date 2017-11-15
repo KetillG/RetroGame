@@ -103,6 +103,19 @@ deferredSetup : function () {
 
 init: function() {
     this._createBoard(board);
+
+    // Add fire sprite
+    const explosionSprite = g_images.explosion;
+    const scale = 0.9 *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
+    console.log('initing')
+    console.log(explosionSprite.width)
+    
+    explosionSprite.scale = scale;
+    console.log(scale)
+    explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
+    console.log(explosionSprite.width * scale);
+    explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
+    
 },
 
 initPlayers() {
@@ -118,12 +131,20 @@ bombExplode(bomb) {
     const index = this._bombs.indexOf(bomb);
     this._bombs.splice(index, 1);
 
+    const brickWidth = this._board.xStep;
+
     // Create fire
-    const fire = new Fire();
-    //console.log(fire)
+    const fire = new Fire({
+        sprite: new Sprite(g_images.explosion),
+        xStep: this._board.xStep,
+        yStep: this._board.yStep,
+    });
+
+    
+    //sprite: new Sprite(g_images.catWhite),
+
     fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
     this._fires.push(fire);
-    //console.log(this._fires)
 },
 
 trySpawnBomb(descr) {

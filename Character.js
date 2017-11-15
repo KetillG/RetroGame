@@ -17,8 +17,6 @@ function Character(descr) {
     this.originalX = this.cx;
     this.originalY = this.cy;
 
-    console.log('char')
-    console.log(this.width, this.height)
 }
 
 Character.prototype = new Entity();
@@ -149,6 +147,9 @@ Character.prototype.update = function (du) {
 };
 
 Character.prototype.render = function (ctx) {
+    var a = new Sprite(g_images.explosion)
+
+
     // Make character blink if hit
     const blinkCheck = 100 / NOMINAL_UPDATE_INTERVAL;
     const blink = Math.floor(this.immuneTime / blinkCheck) % 2 === 0;
@@ -161,6 +162,7 @@ Character.prototype.render = function (ctx) {
             this.cy,
             0,
             Math.floor(0.8 * this.timeAlive / consts.CHARACTER_FRAMES) % consts.CHARACTER_FRAMES,
+            0,
         );
     } else {
         util.fillBox(

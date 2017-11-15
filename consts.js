@@ -15,4 +15,6 @@ var consts = {
     RENDER_SCALE_HEIGHT: 1,
     CHARACTER_SCALING: 1.15,
     CHARACTER_FRAMES: 6,
+    BOMB_FRAMES_X: 9,
+    BOMB_FRAMES_Y: 9,
 };
