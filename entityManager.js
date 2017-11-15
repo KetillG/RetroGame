@@ -106,14 +106,11 @@ init: function() {
 
     // Add fire sprite
     const explosionSprite = g_images.explosion;
-    const scale = 0.9 *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
-    console.log('initing')
-    console.log(explosionSprite.width)
+    const FIRE_TO_BRICK_RATIO = 0.9;
+    const scale = FIRE_TO_BRICK_RATIO *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
     
     explosionSprite.scale = scale;
-    console.log(scale)
     explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
-    console.log(explosionSprite.width * scale);
     explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
     
 },
