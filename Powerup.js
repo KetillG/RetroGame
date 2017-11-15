@@ -22,7 +22,7 @@ function Powerup(descr) {
 
 
 Powerup.prototype = new Entity();
-Powerup.prototype.radius = 30;
+Powerup.prototype.radius = 33;
 
 Powerup.prototype.positionOccupied = function (x, y) {
   const yHit = this.cy - this.radius < y && this.cy + this.radius > y

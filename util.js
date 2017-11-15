@@ -50,7 +50,7 @@ var util = {
     var oldStyle = ctx.strokeStyle;
     ctx.strokeStyle = style;
 
-    ctx.lineWidth=20;
+    ctx.lineWidth=60* consts.RENDER_SCALE_WIDTH;
     ctx.beginPath();
     ctx.moveTo(xS * consts.RENDER_SCALE_WIDTH, yS * consts.RENDER_SCALE_HEIGHT);
     ctx.lineTo(xE * consts.RENDER_SCALE_WIDTH, yE * consts.RENDER_SCALE_HEIGHT);

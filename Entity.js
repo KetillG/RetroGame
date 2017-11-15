@@ -91,16 +91,16 @@ Entity.prototype.isDead = function () {
 Entity.prototype.findHitEntity = function () {
     var pos = this.getFuturePos();
     var right = spatialManager.findEntityInRange(
-        pos.posX - this.width, pos.posY - this.height, this.getRadius()
+        pos.posX - this.width, pos.posY - this.height
     );
     var left = spatialManager.findEntityInRange(
-        pos.posX - this.width, pos.posY + this.height, this.getRadius()
+        pos.posX - this.width, pos.posY + this.height
     );
     var up = spatialManager.findEntityInRange(
-        pos.posX + this.width, pos.posY - this.height, this.getRadius()
+        pos.posX + this.width, pos.posY - this.height
     );
     var down = spatialManager.findEntityInRange(
-        pos.posX + this.width, pos.posY + this.height, this.getRadius()
+        pos.posX + this.width, pos.posY + this.height
     );
     return right.concat(left).concat(up).concat(down);
 };

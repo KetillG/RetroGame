@@ -200,7 +200,7 @@ Character.prototype.maybeDropBomb = function () {
     }
 };
 
-Character.prototype.positionOccupied = function (x, y) {
+Character.prototype.positionOccupied = function (x, y, radius = 0) {
     const yHit = this.cy - this.height < y && this.cy + this.height> y;
     const xHit = this.cx - this.width < x && this.cx + this.width > x;
     return xHit && yHit;
