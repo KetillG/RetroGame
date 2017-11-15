@@ -16,7 +16,6 @@ function Character(descr) {
     this.setWidths();
     this.originalX = this.cx;
     this.originalY = this.cy;
-    //spatialManager.register(this);
 }
 
 Character.prototype = new Entity();
@@ -94,9 +93,7 @@ Character.prototype.updatePosition = function(posX, posY){
     const hitEntities = this.findHitEntity();
     // If a entity its an 'wall'
     if (hitEntities.length) {
-
         this.hitSomething(hitEntities);
-
     }
     else {
 
@@ -149,13 +146,12 @@ Character.prototype.update = function (du) {
 };
 
 Character.prototype.render = function (ctx) {
+    // Make character blink if hit
     const blinkCheck = 100 / NOMINAL_UPDATE_INTERVAL;
     const blink = Math.floor(this.immuneTime / blinkCheck) % 2 === 0;
     if(this.immuneTime >= 0 && blink) ctx.globalAlpha = 0.5
+    // Draw sprite if exist, else template block
     if (this.sprite) {
-        //this.sprite.drawCentredAt(ctx, this.cx, this.cy);
-        //console.log(this.timeAlive)
-        //console.log(Math.floor(0.1 * this.timeAlive / consts.CHARACTER_FRAMES) % consts.CHARACTER_FRAMES);
         this.sprite.drawFrameCenteredAt(
             ctx, 
             this.cx, 
