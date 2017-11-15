@@ -70,7 +70,7 @@ _addPlayers : function () {
     keyRight: 39,
     keyFire: 'O'.charCodeAt(0),
     colour: "Red",
-    sprite: new Sprite(g_images.cat),
+    sprite: new Sprite(g_images.catBlack),
     name: "Player 1"
   });
   var player2 = new Character({
@@ -82,7 +82,7 @@ _addPlayers : function () {
     keyRight: 'D'.charCodeAt(0),
     keyFire: 220,
     colour: "Black",
-    sprite: new Sprite(g_images.cat),
+    sprite: new Sprite(g_images.catWhite),
     name: "Player 2"
   });
   this._players.push(player1);

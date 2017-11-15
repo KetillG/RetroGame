@@ -86,7 +86,8 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-      cat : './sprite/cat_template.png'
+      catBlack : './sprite/Cat_Black_Frame.png',
+      catWhite : './sprite/Cat_White_Frame.png',
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -95,13 +96,17 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
+    // Should rewrite this
+    // Makes character sprite scale
+    var catBlack = g_images.catBlack;
+    catBlack.scale = consts.CHARACTER_SCALING;
+    catBlack.width = catBlack.width / consts.CHARACTER_FRAMES;
 
     // Makes character sprite scale
-    var cat = g_images.cat;
-    cat.scale = consts.CHARACTER_SCALING;
-    cat.width = cat.width * cat.scale / consts.CHARACTER_FRAMES;
-    cat.height = cat.height * cat.scale;
-    
+    var catWhite = g_images.catWhite;
+    catWhite.scale = consts.CHARACTER_SCALING;
+    catWhite.width = catWhite.width / consts.CHARACTER_FRAMES;
+
     entityManager.init();
 
     main.init();
