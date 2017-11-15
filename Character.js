@@ -16,6 +16,9 @@ function Character(descr) {
     this.setWidths();
     this.originalX = this.cx;
     this.originalY = this.cy;
+
+    console.log('char')
+    console.log(this.width, this.height)
 }
 
 Character.prototype = new Entity();

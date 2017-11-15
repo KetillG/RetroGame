@@ -17,9 +17,10 @@
 function Sprite(image) {
     this.image = image;
 
-    this.width = image.width;
-    this.height = image.height;
     this.scale = image.scale;
+    this.width = this.scale * image.width;
+    this.height = this.scale * image.height;
+    
     this.scaleX = 1;
     this.scaleY = 1;
 }
