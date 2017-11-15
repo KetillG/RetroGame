@@ -29,7 +29,7 @@ btnAbout.onclick = function() {
 
 btnNewGame.onclick = function() {
   menuMain.style.display = "none";
-  entityManager.initPlayers();
+  entityManager.init();
 }
 
 btnRestart.onclick = function() {
@@ -107,6 +107,16 @@ function preloadDone() {
     var catWhite = g_images.catWhite;
     catWhite.scale = consts.CHARACTER_SCALING;
     catWhite.width = catWhite.width / consts.CHARACTER_FRAMES;
+
+    // Add fire sprite
+    const explosionSprite = g_images.explosion;
+    const FIRE_TO_BRICK_RATIO = 0.9;
+    const scale = FIRE_TO_BRICK_RATIO * (consts.LOGICAL_WIDTH / board.length) / ( explosionSprite.width / consts.BOMB_FRAMES_X );
+    
+    explosionSprite.scale = scale;
+    explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
+    explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
+    
 
     entityManager.init();
 

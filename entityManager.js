@@ -102,17 +102,11 @@ deferredSetup : function () {
 },
 
 init: function() {
+    //this._board = null;
+    /*this._categories.forEach(element => {
+        element = [];
+    });*/
     this._createBoard(board);
-
-    // Add fire sprite
-    const explosionSprite = g_images.explosion;
-    const FIRE_TO_BRICK_RATIO = 0.9;
-    const scale = FIRE_TO_BRICK_RATIO *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
-    
-    explosionSprite.scale = scale;
-    explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
-    explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
-    
 },
 
 initPlayers() {
