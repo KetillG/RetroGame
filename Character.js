@@ -39,6 +39,8 @@ Character.prototype.radius = 30;
 Character.prototype.dirObj = {};
 Character.prototype.recentlyHit = false;
 
+Character.prototype.timeAlive = 0;
+
 Character.prototype.decrementLife = function () {
     if(this.immuneTime >= 0) return;
     this.lives--;
@@ -119,6 +121,8 @@ Character.prototype.update = function (du) {
 
     if(this.isDead()) return entityManager.KILL_ME_NOW;
 
+    this.timeAlive += du;
+
     if(this.immuneTime >= 0) {
         this.immuneTime -= du;
     }
@@ -149,7 +153,16 @@ Character.prototype.render = function (ctx) {
     const blink = Math.floor(this.immuneTime / blinkCheck) % 2 === 0;
     if(this.immuneTime >= 0 && blink) ctx.globalAlpha = 0.5
     if (this.sprite) {
-        this.sprite.drawCentredAt(ctx, this.cx, this.cy);
+        //this.sprite.drawCentredAt(ctx, this.cx, this.cy);
+        //console.log(this.timeAlive)
+        //console.log(Math.floor(0.1 * this.timeAlive / consts.CHARACTER_FRAMES) % consts.CHARACTER_FRAMES);
+        this.sprite.drawFrameCenteredAt(
+            ctx, 
+            this.cx, 
+            this.cy,
+            0,
+            Math.floor(0.8 * this.timeAlive / consts.CHARACTER_FRAMES) % consts.CHARACTER_FRAMES,
+        );
     } else {
         util.fillBox(
             ctx,
