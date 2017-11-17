@@ -87,7 +87,10 @@ function requestPreloads() {
     var requiredImages = {
       catBlack : './sprite/Cat_Black_Frame.png',
       catWhite : './sprite/Cat_White_Frame.png',
-      explosion: './sprite/Explosion.png'
+      explosion: './sprite/Explosion.png',
+      brick0: './sprite/Brick_0.png',
+      brick1: './sprite/Brick_1_test.png',
+      brick2: './sprite/Brick_2_test.png',
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);

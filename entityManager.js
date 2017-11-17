@@ -102,17 +102,36 @@ deferredSetup : function () {
 },
 
 init: function() {
+    // Refactor to a better location
+    // Scale brick
+    const brickSprite0 = g_images.brick0;
+    const brickScale0 = (consts.LOGICAL_WIDTH / (board.length + 2)) / brickSprite0.width;
+
+    g_images.brick0.scale = brickScale0;
+
+
+    const brickSprite1 = g_images.brick2;
+    const brickScale1 = (consts.LOGICAL_WIDTH / (board.length + 2)) / brickSprite1.width;
+
+    g_images.brick1.scale = brickScale1;
+    g_images.brick2.scale = brickScale1;
+
     this._createBoard(board);
 
     // Add fire sprite
     const explosionSprite = g_images.explosion;
     const FIRE_TO_BRICK_RATIO = 0.9;
-    const scale = FIRE_TO_BRICK_RATIO *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
+    const fireScale = FIRE_TO_BRICK_RATIO *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
     
-    explosionSprite.scale = scale;
+    explosionSprite.scale = fireScale;
     explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
     explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
-    
+
+
+    //brickSprite.width = brickSprite.width / consts.BOMB_FRAMES_X;
+    //brickSprite.height = brickSprite.height / consts.BOMB_FRAMES_Y;
+
+
 },
 
 initPlayers() {
