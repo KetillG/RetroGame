@@ -34,8 +34,8 @@ function Entity() {
 
 Entity.prototype.setWidths = function(){
     if(this.sprite){
-        this.width = this.sprite.scale * this.sprite.width / 2;
-        this.height = this.sprite.scale * this.sprite.height / 2;
+        this.width = this.sprite.width / 2;
+        this.height = this.sprite.height / 2;
     }
     else{
         this.width = this.radius;
@@ -89,6 +89,8 @@ Entity.prototype.isDead = function () {
 };
 
 Entity.prototype.findHitEntity = function () {
+    const tempHitEntitiesStep = [];
+
     var pos = this.getFuturePos();
     var right = spatialManager.findEntityInRange(
         pos.posX - this.width, pos.posY - this.height
@@ -102,5 +104,35 @@ Entity.prototype.findHitEntity = function () {
     var down = spatialManager.findEntityInRange(
         pos.posX + this.width, pos.posY + this.height
     );
-    return right.concat(left).concat(up).concat(down);
+
+    var north = spatialManager.findEntityInRange(
+        pos.posX, pos.posY - this.height
+    );
+    var south = spatialManager.findEntityInRange(
+        pos.posX, pos.posY + this.height
+    );
+    var west = spatialManager.findEntityInRange(
+        pos.posX - this.width, pos.posY
+    );
+    var east = spatialManager.findEntityInRange(
+        pos.posX + this.width, pos.posY
+    );
+    this.addUniqueToArray(tempHitEntitiesStep,right);
+    this.addUniqueToArray(tempHitEntitiesStep,left);
+    this.addUniqueToArray(tempHitEntitiesStep,up);
+    this.addUniqueToArray(tempHitEntitiesStep,down);
+    this.addUniqueToArray(tempHitEntitiesStep,north);
+    this.addUniqueToArray(tempHitEntitiesStep,south);
+    this.addUniqueToArray(tempHitEntitiesStep,west);
+    this.addUniqueToArray(tempHitEntitiesStep,east);
+    return tempHitEntitiesStep;
+    //return right.concat(left).concat(up).concat(down).concat(north).concat(south).concat(east).concat(west);
 };
+
+Entity.prototype.addUniqueToArray = function(main, add) {
+    add.forEach(element => {
+        if(main.indexOf(element) === -1) {
+            main.push(element);
+        }
+    });
+}

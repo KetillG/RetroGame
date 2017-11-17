@@ -12,14 +12,12 @@ function Fire(descr) {
 
     this['constructorType'] = 'Fire'
     this['paths'] = [];
-    console.log(this.sprite)
     if(this.sprite){
         this.radius = this.sprite.scale * this.sprite.width / 2;
     }
     else{
         this.radius = 30;
     }
-    console.log(this.radius);
 };
 
 Fire.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
@@ -94,14 +92,16 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
             );
             this.addUniqueToArray(hitEntities,tempHitEntities);
         }
-        
-        console.log(hitEntities);
 
         let hitWall = false;
         if(hitEntities.length) {
             hitEntities.map(hitEntity => {
                 if(hitEntity.constructorType === 'Bomb') {
                     // Explode the bomb, entityManager?
+                    hitEntity.owner.ammo++;
+                    // Add explosion to entity manager
+                    entityManager.bombExplode(hitEntity);
+                    console.log('a')
                 } else if (hitEntity.constructorType === 'Character') {
                     // Reduce life
                     hitEntity.decrementLife()
@@ -158,9 +158,6 @@ Fire.prototype.render = function (ctx) {
 
                 const xDir = stepX === 0 ? 0  : stepX / Math.abs(stepX);
                 const yDir = stepY === 0 ? 0  : stepY / Math.abs(stepY);
-
-                console.log(Math.floor(frame / consts.BOMB_FRAMES_Y),
-                frame % consts.BOMB_FRAMES_X,);
 
                 // Hmm
                 for(let i = 0; i <= Math.abs(stepX + stepY); i++) {

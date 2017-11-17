@@ -22,7 +22,19 @@ Brick.prototype.update = function (du) {
 }
 
 Brick.prototype.render = function (ctx) {
-  util.fillBox(ctx,this.x,this.y,this.width*0.99,this.height*0.99,this.color)
+  //console.log(this.sprite)
+  if (this.sprite) {
+    this.sprite.drawFrameCenteredAt(
+      ctx, 
+      this.x + this.width / 2,
+      this.y + this.height / 2,
+      0,
+      0,
+      0,
+    );
+  } else {
+    util.fillBox(ctx,this.x,this.y,this.width*0.99,this.height*0.99,this.color)
+  }
 }
 
 Brick.prototype.isWalkable = function () {
@@ -52,7 +64,7 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         walkable: true,
         breakable: false,
-        sprite: '..path',
+        sprite: new Sprite(g_images.brick0),
         color: 'green',
         description: 'Walkable base block',
       }
@@ -61,7 +73,7 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         walkable: false,
         breakable: false,
-        sprite: '..path',
+        sprite: new Sprite(g_images.brick1),
         color: 'gray',
         description: 'Solid block that is not breakable',
       }
@@ -70,7 +82,7 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         walkable: false,
         breakable: true,
-        sprite: '..path',
+        sprite: new Sprite(g_images.brick2),
         color: 'navy',
         description: 'Solid block that is breakable',
       }
@@ -79,7 +91,7 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         walkable: false,
         breakable: false,
-        sprite: '..path',
+        sprite: false,
         color: 'cyan',
         description: 'Endgame block, indicates tile is dead',
       }
@@ -88,7 +100,7 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         walkable: true,
         breakable: false,
-        sprite: '..path',
+        sprite: new Sprite(g_images.brick0),
         color: 'green',
         description: 'Walkable spawn block',
       }

@@ -103,16 +103,6 @@ deferredSetup : function () {
 
 init: function() {
     this._createBoard(board);
-
-    // Add fire sprite
-    const explosionSprite = g_images.explosion;
-    const FIRE_TO_BRICK_RATIO = 0.9;
-    const scale = FIRE_TO_BRICK_RATIO *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
-    
-    explosionSprite.scale = scale;
-    explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
-    explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
-    
 },
 
 initPlayers() {
@@ -125,6 +115,7 @@ spawnPowerup(descr) {
 
 bombExplode(bomb) {
     // Remove bomb from existance
+    spatialManager.unregister(bomb);
     const index = this._bombs.indexOf(bomb);
     this._bombs.splice(index, 1);
 
@@ -149,11 +140,14 @@ trySpawnBomb(descr) {
     for(var i = 0; i < this._bombs.length; i++) {
         var temp = this._bombs[i];
         if(temp.cx === descr.cx && temp.cy === descr.cy) {
-            //console.log('bomb here already');
             return null;
         }
     }
-    const bomb = new Bomb({...descr, radius: 0.5 * consts.LOGICAL_WIDTH / this._board.boardsize});
+    const bomb = new Bomb({
+        ...descr, 
+        radius: 0.5 * consts.LOGICAL_WIDTH / this._board.boardsize,
+        sprite: new Sprite(g_images.bombNew),
+    });
     this._bombs.push(bomb);
     return bomb;
 },
