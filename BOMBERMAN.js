@@ -92,6 +92,9 @@ function requestPreloads() {
       brick1: './sprite/Brick_1_test.png',
       brick2: './sprite/Brick_2_test.png',
       bombNew: './sprite/Bomb2.png',
+      powerupBomb: './sprite/Powerup_Bomb.png',
+      powerupFire: './sprite/Powerup_Fire.png',
+      powerupSpeed: './sprite/Powerup_Fast.png',
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -108,6 +111,14 @@ function preloadDone() {
     const CHARACTER_TO_BRICK_RATIO = 0.33;
     initSprites(g_images.catWhite, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
     initSprites(g_images.catBlack, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+
+    // Powerup
+    const POWERUP_TO_BRICK_RATIO = 0.6;
+    initSprites(g_images.powerupBomb, POWERUP_TO_BRICK_RATIO, brickSize);
+    initSprites(g_images.powerupFire, POWERUP_TO_BRICK_RATIO, brickSize);
+    initSprites(g_images.powerupSpeed, POWERUP_TO_BRICK_RATIO, brickSize);
+
+        
     // Brick 0
     initSprites(g_images.brick0, 1, brickSize);
 

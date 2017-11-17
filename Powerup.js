@@ -40,19 +40,33 @@ Powerup.prototype.update = function (du) {
 };
 
 Powerup.prototype.render = function (ctx) {
+  if (this.sprite) {
+    this.sprite.drawFrameCenteredAt(
+      ctx, 
+      this.cx,
+      this.cy,
+      0,
+      0,
+      0,
+    );
+  } else {
     // Draw circle shit
     const oldStyle = ctx.fillStyle;
     ctx.fillStyle = this.color;
-    util.fillCircle(ctx,
-                    this.cx,
-                    this.cy,
-                    30);
+    util.fillCircle(
+      ctx,
+      this.cx,
+      this.cy,
+      30
+    );
     ctx.fillStyle = "black";
     ctx.font = "25px Comic Sans MS";
     ctx.textBaseline =  'middle';
     ctx.textAlign = 'center';
     ctx.fillText(this.description[0], this.cx * consts.RENDER_SCALE_WIDTH, this.cy * consts.RENDER_SCALE_HEIGHT);
     ctx.fillStyle = oldStyle;
+  }
+
 };
 
 Powerup.prototype.addFire = function (player) {
@@ -77,7 +91,7 @@ Powerup.prototype.getBricktype =  function (number) {
     switch (number) {
       case 0:
         return {
-          sprite: '..path',
+          sprite: new Sprite(g_images.powerupFire),
           color: 'MediumSeaGreen',
           description: 'Bigger fire',
           effect: this.addFire,
@@ -85,7 +99,7 @@ Powerup.prototype.getBricktype =  function (number) {
         break;
       case 1:
         return {
-          sprite: '..path',
+          sprite: new Sprite(g_images.powerupSpeed),
           color: 'gray',
           description: 'Faster character',
           effect: this.addSpeed,
@@ -93,7 +107,7 @@ Powerup.prototype.getBricktype =  function (number) {
         break;
       case 2:
         return {
-          sprite: '..path',
+          sprite: new Sprite(g_images.powerupBomb),
           color: 'navy',
           description: 'More bombs',
           effect: this.addAmmo,
@@ -101,7 +115,7 @@ Powerup.prototype.getBricktype =  function (number) {
         break;
       case 3:
         return {
-          sprite: '..path',
+          sprite: new Sprite(g_images.powerupBomb),
           color: 'cyan',
           description: 'Kick bomb power for substring',
           effect: this.addKick,
