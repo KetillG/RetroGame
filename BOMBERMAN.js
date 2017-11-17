@@ -100,20 +100,7 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
-    // Should rewrite this
-    // Makes character sprite scale
-    /*
-    console.log('aaaa')
-    var catBlack = g_images.catBlack;
-    catBlack.scale = consts.CHARACTER_SCALING;
-    catBlack.width = catBlack.width / consts.CHARACTER_FRAMES;
-    // Makes character sprite scale
-    var catWhite = g_images.catWhite;
-    catWhite.scale = consts.CHARACTER_SCALING;
-    catWhite.width = catWhite.width / consts.CHARACTER_FRAMES;
 
-    console.log(catWhite.scale,catWhite.width)
-    */
     // Size of a single brick
     const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
     // Inits the sprites
@@ -137,7 +124,6 @@ function preloadDone() {
     // Fire
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
-    
 
     entityManager.init();
 
