@@ -91,6 +91,7 @@ function requestPreloads() {
       brick0: './sprite/Brick_0.png',
       brick1: './sprite/Brick_1_test.png',
       brick2: './sprite/Brick_2_test.png',
+      bombNew: './sprite/Bomb2.png',
     };
     console.log('preloading');
     imagesPreload(requiredImages, g_images, preloadDone);

@@ -10,6 +10,9 @@ function Bomb(descr) {
     this.setup(descr);
 
     this['constructorType'] = 'Bomb'
+
+    this.width /= this.sprite.scale;
+    this.height /= this.sprite.scale;
 };
 
 Bomb.prototype = new Entity();
@@ -52,14 +55,25 @@ Bomb.prototype.update = function (du) {
 };
 
 Bomb.prototype.render = function (ctx) {
-    util.fillBox(
-        ctx,
-        this.cx - this.width,
-        this.cy - this.height,
-        this.width * 2,
-        this.height * 2,
-        'orange',
-    )
+    if (this.sprite) {
+        this.sprite.drawFrameCenteredAt(
+          ctx, 
+          this.cx,
+          this.cy,
+          0,
+          0,
+          0,
+        );
+      } else {
+        util.fillBox(
+            ctx,
+            this.cx - this.width,
+            this.cy - this.height,
+            this.width * 2,
+            this.height * 2,
+            'orange',
+        )
+    }
 };
 
 Bomb.prototype.dropPowerup = function () {

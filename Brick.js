@@ -32,7 +32,7 @@ Brick.prototype.render = function (ctx) {
       0,
       0,
     );
-  } else{
+  } else {
     util.fillBox(ctx,this.x,this.y,this.width*0.99,this.height*0.99,this.color)
   }
 }

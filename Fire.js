@@ -159,9 +159,6 @@ Fire.prototype.render = function (ctx) {
                 const xDir = stepX === 0 ? 0  : stepX / Math.abs(stepX);
                 const yDir = stepY === 0 ? 0  : stepY / Math.abs(stepY);
 
-                console.log(Math.floor(frame / consts.BOMB_FRAMES_Y),
-                frame % consts.BOMB_FRAMES_X,);
-
                 // Hmm
                 for(let i = 0; i <= Math.abs(stepX + stepY); i++) {
                     this.sprite.drawFrameCenteredAt(

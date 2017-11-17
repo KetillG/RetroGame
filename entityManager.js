@@ -127,9 +127,13 @@ init: function() {
     explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
     explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
 
-
-    //brickSprite.width = brickSprite.width / consts.BOMB_FRAMES_X;
-    //brickSprite.height = brickSprite.height / consts.BOMB_FRAMES_Y;
+    // Add bomb sprite
+    const bombSprite = g_images.bombNew;
+    const BOMB_TO_BRICK_RATIO = 0.6;
+    const bombScale = BOMB_TO_BRICK_RATIO *this._board.xStep / bombSprite.width;
+    console.log('bombscae' + bombScale)
+    console.log(bombSprite.width);
+    g_images.bombNew.scale = bombScale;
 
 
 },
@@ -168,11 +172,15 @@ trySpawnBomb(descr) {
     for(var i = 0; i < this._bombs.length; i++) {
         var temp = this._bombs[i];
         if(temp.cx === descr.cx && temp.cy === descr.cy) {
-            //console.log('bomb here already');
             return null;
         }
     }
-    const bomb = new Bomb({...descr, radius: 0.5 * consts.LOGICAL_WIDTH / this._board.boardsize});
+    const bomb = new Bomb({
+        ...descr, 
+        radius: 0.5 * consts.LOGICAL_WIDTH / this._board.boardsize,
+        sprite: new Sprite(g_images.bombNew),
+    });
+    console.log(bomb)
     this._bombs.push(bomb);
     return bomb;
 },

@@ -102,5 +102,18 @@ Entity.prototype.findHitEntity = function () {
     var down = spatialManager.findEntityInRange(
         pos.posX + this.width, pos.posY + this.height
     );
-    return right.concat(left).concat(up).concat(down);
+
+    var north = spatialManager.findEntityInRange(
+        pos.posX, pos.posY - this.height
+    );
+    var south = spatialManager.findEntityInRange(
+        pos.posX, pos.posY + this.height
+    );
+    var west = spatialManager.findEntityInRange(
+        pos.posX - this.width, pos.posY
+    );
+    var east = spatialManager.findEntityInRange(
+        pos.posX + this.width, pos.posY
+    );
+    return right.concat(left).concat(up).concat(down).concat(north).concat(south).concat(east).concat(west);
 };
