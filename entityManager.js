@@ -105,8 +105,11 @@ deferredSetup : function () {
 },
 
 init: function() {
+    // Inits sprite scaling
+    //initSprites();
     // Refactor to a better location
     // Scale brick
+    /*
     const brickSprite0 = g_images.brick0;
     const brickScale0 = (consts.LOGICAL_WIDTH / (board.length + 2)) / brickSprite0.width;
 
@@ -118,10 +121,12 @@ init: function() {
 
     g_images.brick1.scale = brickScale1;
     g_images.brick2.scale = brickScale1;
-
+*/
     this._createBoard(board);
 
     // Add fire sprite
+    /*
+
     const explosionSprite = g_images.explosion;
     const FIRE_TO_BRICK_RATIO = 0.9;
     const fireScale = FIRE_TO_BRICK_RATIO *this._board.xStep / ( explosionSprite.width / consts.BOMB_FRAMES_X );
@@ -129,14 +134,13 @@ init: function() {
     explosionSprite.scale = fireScale;
     explosionSprite.width = explosionSprite.width / consts.BOMB_FRAMES_X;
     explosionSprite.height = explosionSprite.height / consts.BOMB_FRAMES_Y;
-
+*/
     // Add bomb sprite
-    const bombSprite = g_images.bombNew;
+    /*const bombSprite = g_images.bombNew;
     const BOMB_TO_BRICK_RATIO = 0.6;
     const bombScale = BOMB_TO_BRICK_RATIO *this._board.xStep / bombSprite.width;
-    console.log('bombscae' + bombScale)
-    console.log(bombSprite.width);
-    g_images.bombNew.scale = bombScale;
+
+    g_images.bombNew.scale = bombScale;*/
 
 
 },

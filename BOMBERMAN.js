@@ -102,19 +102,59 @@ var g_sprites = {};
 function preloadDone() {
     // Should rewrite this
     // Makes character sprite scale
+    /*
+    console.log('aaaa')
     var catBlack = g_images.catBlack;
     catBlack.scale = consts.CHARACTER_SCALING;
     catBlack.width = catBlack.width / consts.CHARACTER_FRAMES;
-
     // Makes character sprite scale
     var catWhite = g_images.catWhite;
     catWhite.scale = consts.CHARACTER_SCALING;
     catWhite.width = catWhite.width / consts.CHARACTER_FRAMES;
 
+    console.log(catWhite.scale,catWhite.width)
+    */
+    // Size of a single brick
+    const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
+    // Inits the sprites
+    // Characters
+    const CHARACTER_TO_BRICK_RATIO = 0.33;
+    initSprites(g_images.catWhite, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+    initSprites(g_images.catBlack, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+    // Brick 0
+    initSprites(g_images.brick0, 1, brickSize);
+
+    // Brick 1
+    initSprites(g_images.brick1, 1, brickSize);
+
+    // Brick 2
+    initSprites(g_images.brick2, 1, brickSize);
+
+    // Bomb
+    const BOMB_TO_BRICK_RATIO = 0.6;
+    initSprites(g_images.bombNew, BOMB_TO_BRICK_RATIO, brickSize);
+
+    // Fire
+    const FIRE_TO_BRICK_RATIO = 0.9;
+    initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
+    
+
     entityManager.init();
 
     main.init();
 }
+
+function initSprites(sprite, ratio, brickSize, xFrames = 1, yFrames = 1) {
+    const bombScale = ratio * brickSize / ( sprite.width / xFrames );
+    sprite.scale = bombScale;
+    sprite.width = sprite.width / xFrames;
+    sprite.height = sprite.height / yFrames;
+}
+
+function initSpriteFrames() {
+
+}
+
 
 // Kick it off
 requestPreloads();
