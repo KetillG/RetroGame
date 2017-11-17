@@ -12,14 +12,12 @@ function Fire(descr) {
 
     this['constructorType'] = 'Fire'
     this['paths'] = [];
-    console.log(this.sprite)
     if(this.sprite){
         this.radius = this.sprite.scale * this.sprite.width / 2;
     }
     else{
         this.radius = 30;
     }
-    console.log(this.radius);
 };
 
 Fire.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
@@ -94,8 +92,6 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
             );
             this.addUniqueToArray(hitEntities,tempHitEntities);
         }
-        
-        console.log(hitEntities);
 
         let hitWall = false;
         if(hitEntities.length) {
