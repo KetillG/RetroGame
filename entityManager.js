@@ -73,6 +73,7 @@ _addPlayers : function () {
     sprite: new Sprite(g_images.catBlack),
     name: "Player 1"
   });
+  console.log(new Sprite(g_images.catWhite))
   var player2 = new Character({
     cx: this._board.xStep * 1.5,
     cy: this._board.yStep * 1.5,
@@ -85,6 +86,8 @@ _addPlayers : function () {
     sprite: new Sprite(g_images.catWhite),
     name: "Player 2"
   });
+  console.log('aaa')
+  console.log(player2)
   this._players.push(player1);
   this._players.push(player2);
 },

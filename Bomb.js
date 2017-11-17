@@ -11,8 +11,8 @@ function Bomb(descr) {
 
     this['constructorType'] = 'Bomb'
 
-    this.width /= this.sprite.scale;
-    this.height /= this.sprite.scale;
+    //this.width /= this.sprite.scale;
+    //this.height /= this.sprite.scale;
 };
 
 Bomb.prototype = new Entity();
