@@ -120,7 +120,7 @@ Board.prototype.positionOccupied = function (x, y) {
 Board.prototype.tryExplodeBrick = function (x, y) {
   const i = Math.floor(y / ( this.yStep));
   const j = Math.floor(x / ( this.xStep));
-  if(this.board[i][j].isBreakable()) {
+  if(this.board[i][j].isBreakable() && !this.board[i][j].isBroken()) {
     this.board[i][j].break();
     this.dropPowerup(i, j);
     return true;
@@ -138,7 +138,11 @@ Board.prototype.dropPowerup = function (i, j) {
 };
 
 Board.prototype.update = function (du) {
-
+  for(var i = 0; i < this.board.length; i++) {
+    for(var j = 0; j < this.board[i].length; j++) {
+      this.board[i][j].update(du);
+    }
+  }
 }
 
 Board.prototype.render = function (ctx) {

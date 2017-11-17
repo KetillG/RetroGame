@@ -18,7 +18,9 @@ function Brick(descr) {
 //Brick.prototype.height = consts.LOGICAL_HEIGHT / 7;
 
 Brick.prototype.update = function (du) {
-
+  if(this.broken) {
+    this.updateBroken();
+  }
 }
 
 Brick.prototype.render = function (ctx) {
@@ -50,8 +52,16 @@ Brick.prototype.isBreakable = function () {
 }
 
 Brick.prototype.break = function () {
-  var brick = this.getBricktype(0)
+  this.broken = true;
+}
 
+Brick.prototype.isBroken = function () {
+  return this.broken;
+}
+
+Brick.prototype.updateBroken = function () {
+  var brick = this.getBricktype(0)
+  
   for (var property in brick) {
       this[property] = brick[property];
   }
@@ -82,6 +92,7 @@ Brick.prototype.getBricktype =  function (number) {
       return {
         walkable: false,
         breakable: true,
+        broken: false,
         sprite: new Sprite(g_images.brick2),
         color: 'navy',
         description: 'Solid block that is breakable',
