@@ -118,6 +118,7 @@ spawnPowerup(descr) {
 
 bombExplode(bomb) {
     // Remove bomb from existance
+    spatialManager.unregister(bomb);
     const index = this._bombs.indexOf(bomb);
     this._bombs.splice(index, 1);
 

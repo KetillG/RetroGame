@@ -102,6 +102,10 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
             hitEntities.map(hitEntity => {
                 if(hitEntity.constructorType === 'Bomb') {
                     // Explode the bomb, entityManager?
+                    hitEntity.owner.ammo++;
+                    // Add explosion to entity manager
+                    entityManager.bombExplode(hitEntity);
+                    console.log('a')
                 } else if (hitEntity.constructorType === 'Character') {
                     // Reduce life
                     hitEntity.decrementLife()

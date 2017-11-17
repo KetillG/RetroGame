@@ -70,7 +70,9 @@ Powerup.prototype.render = function (ctx) {
 };
 
 Powerup.prototype.addFire = function (player) {
+  console.log(player.power)
   player.power++;
+  console.log(player.power)
 }
 
 Powerup.prototype.addSpeed =  function (player) {

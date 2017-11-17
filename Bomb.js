@@ -13,6 +13,7 @@ function Bomb(descr) {
 
     //this.width /= this.sprite.scale;
     //this.height /= this.sprite.scale;
+    console.log(this.power)
 };
 
 Bomb.prototype = new Entity();

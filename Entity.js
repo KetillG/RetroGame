@@ -89,6 +89,8 @@ Entity.prototype.isDead = function () {
 };
 
 Entity.prototype.findHitEntity = function () {
+    const tempHitEntitiesStep = [];
+
     var pos = this.getFuturePos();
     var right = spatialManager.findEntityInRange(
         pos.posX - this.width, pos.posY - this.height
@@ -115,5 +117,22 @@ Entity.prototype.findHitEntity = function () {
     var east = spatialManager.findEntityInRange(
         pos.posX + this.width, pos.posY
     );
-    return right.concat(left).concat(up).concat(down).concat(north).concat(south).concat(east).concat(west);
+    this.addUniqueToArray(tempHitEntitiesStep,right);
+    this.addUniqueToArray(tempHitEntitiesStep,left);
+    this.addUniqueToArray(tempHitEntitiesStep,up);
+    this.addUniqueToArray(tempHitEntitiesStep,down);
+    this.addUniqueToArray(tempHitEntitiesStep,north);
+    this.addUniqueToArray(tempHitEntitiesStep,south);
+    this.addUniqueToArray(tempHitEntitiesStep,west);
+    this.addUniqueToArray(tempHitEntitiesStep,east);
+    return tempHitEntitiesStep;
+    //return right.concat(left).concat(up).concat(down).concat(north).concat(south).concat(east).concat(west);
 };
+
+Entity.prototype.addUniqueToArray = function(main, add) {
+    add.forEach(element => {
+        if(main.indexOf(element) === -1) {
+            main.push(element);
+        }
+    });
+}
