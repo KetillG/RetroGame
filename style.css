@@ -99,3 +99,44 @@ hr {
 li {
     padding-bottom: 0.625em;
 }
+
+ul {
+    list-style: none;
+    padding-left: 0.5em;
+}
+
+.powerup {
+    padding-right: 1em;
+}
+
+.scoreboard {
+  background-color: rgba(10,10,10, 0.9);
+  /*flex-direction: column;*/
+  color: rgba(255,255,255,1);
+  padding: 1em;
+  border: 0.125em outset black; 
+}
+.players-list {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+}
+.player-container {
+  display: flex;
+  height: 25%;
+  margin: 2px;
+}
+.player-image {
+  flex: 1;
+  background-color: red;
+}
+.player-score {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+}
+.player-score > div {
+  background-color: rgb(102, 62, 247);
+  width: 50%;
+  height: 50%;
+}

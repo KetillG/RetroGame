@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     Page.init();
   });
-  
+
 let Page = (() => {
 
     let init = () => {
@@ -14,12 +14,11 @@ let Page = (() => {
 
     // Resize canvas, and bind to resize event
     let resizeCanvas = () => {
-        wWidth = window.innerWidth - 30;
+        wWidth = window.innerWidth - 30 - document.getElementById('scoreboard-container').offsetWidth;
         wHeight = window.innerHeight;
 
         wWidth = Math.min(wWidth, wHeight);
         wHeight = wWidth;
-
 
         g_ctx.canvas.width  = wWidth;
         g_ctx.canvas.height = wHeight;
@@ -34,6 +33,7 @@ let Page = (() => {
 
     return {
         init,
+        resizeCanvas,
     };
 
 })();

@@ -17,9 +17,10 @@ var menuMain = document.getElementById("main-container");
 var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
+var menuScoreboard = document.getElementById("scoreboard-container");
 
 btnInstructions.onclick = function() {
-    console.log('instruction')
+  console.log('instruction')
   menuMain.style.display = "none";
   menuInstructions.style.display = "flex";
 }
@@ -37,7 +38,13 @@ btnNewGame.onclick = function() {
   entityManager.init();
   entityManager.deferredSetup();*/
   entityManager.initPlayers();
+  menuScoreboard.style.display = "flex";
+  Page.resizeCanvas();
   // reset everything
+
+  // Init scoreboard
+  scoreboard.init();
+  scoreboard.start(entityManager.getPlayers());
 }
 
 btnNewGameAI.onclick = function() {
@@ -75,6 +82,7 @@ for (var i = 0; i < btnsBack.length; i++) {
 function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
+    menuScoreboard.style.display = "none";
     document.getElementById("winner").innerHTML = playerName + ' lost!';
 }
 
@@ -91,6 +99,7 @@ function gatherInputs() {
 
 function updateSimulation(du) {
 
+    scoreboard.update(du);
     entityManager.update(du);
 
 }
@@ -162,6 +171,8 @@ function preloadDone() {
     // Fire
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
+    
+    scoreboard.init();
 
     entityManager.init();
 
