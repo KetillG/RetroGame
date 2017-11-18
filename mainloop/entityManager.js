@@ -92,6 +92,31 @@ _addPlayers : function () {
 getPlayers: function () {
     return this._players;
 },
+  
+_addComputerPlayer : function () {
+    var player1 = new Character({
+        cx: this._board.xStep * 10.5,
+        cy: this._board.xStep * 10.5,
+        colour: "Red",
+        sprite: new Sprite(g_images.catBlack),
+        name: "Computer 1",
+        computer: true,
+      });
+      var player2 = new Character({
+        cx: this._board.xStep * 1.5,
+        cy: this._board.yStep * 1.5,
+        keyUp: 'W'.charCodeAt(0),
+        keyDown: 'S'.charCodeAt(0),
+        keyLeft: 'A'.charCodeAt(0),
+        keyRight: 'D'.charCodeAt(0),
+        keyFire: 220,
+        colour: "Black",
+        sprite: new Sprite(g_images.catWhite),
+        name: "Player 2"
+      });
+      this._players.push(player1);
+      this._players.push(player2);
+},
 
 // PUBLIC METHODS
 
@@ -104,13 +129,24 @@ KILL_ME_NOW : -1,
 deferredSetup : function () {
     this._categories = [this._powerups, this._bombs, this._players, this._fires];
 },
-
+restartEntityManager: function () {
+    this._players = [];
+    this._powerups = [];
+    this._bombs = [];
+    this._fires = [];
+    this._categories = [this._powerups, this._bombs, this._players, this._fires];
+},
 init: function() {
     this._createBoard(board);
+    //this._createBoard(board);
 },
 
-initPlayers() {
+initPlayers() {x
     this._addPlayers();
+},
+
+initSoloPlayer() {
+    this._addComputerPlayer();
 },
 
 spawnPowerup(descr) {

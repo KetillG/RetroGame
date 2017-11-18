@@ -7,6 +7,7 @@ var g_ctx = g_canvas.getContext("2d");
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
+var btnNewGameAI = document.getElementById("btn-newgameai");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
@@ -33,6 +34,9 @@ btnAbout.onclick = function() {
 btnNewGame.onclick = function() {
   console.log('I am newGame')
   menuMain.style.display = "none";
+  /*spatialManager.restart();
+  entityManager.init();
+  entityManager.deferredSetup();*/
   entityManager.initPlayers();
   menuScoreboard.style.display = "flex";
   Page.resizeCanvas();
@@ -43,12 +47,26 @@ btnNewGame.onclick = function() {
   scoreboard.start(entityManager.getPlayers());
 }
 
+btnNewGameAI.onclick = function() {
+    console.log('I am computah gamerino');
+    menuMain.style.display = "none";
+    
+    entityManager.initSoloPlayer();
+}
+
 btnRestart.onclick = function() {
     console.log('I am restart')
     for (var j = 0; j < menuContainers.length; j++) {
         menuContainers[j].style.display = "none";
       }
-      menuMain.style.display = "flex";
+    menuMain.style.display = "flex";
+    // "new" spatial manage
+    spatialManager.restart();
+    // Clear entityManager
+    entityManager.deferredSetup();
+    entityManager.restartEntityManager();
+    // New board
+    entityManager.init();
 }
 
 for (var i = 0; i < btnsBack.length; i++) {

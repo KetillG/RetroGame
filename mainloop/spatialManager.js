@@ -28,7 +28,9 @@ _entities : [],
 
 
 // PUBLIC METHODS
-
+restart: function() {
+  this._entities = [];
+},
 getNewSpatialID : function() {
     return this._nextSpatialID++;
 },
