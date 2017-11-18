@@ -91,7 +91,7 @@ _addPlayers : function () {
 
 getPlayers: function () {
     return this._players;
-}
+},
 
 // PUBLIC METHODS
 
