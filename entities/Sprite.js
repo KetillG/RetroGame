@@ -60,6 +60,68 @@ Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, 
     ctx.restore();
 };
 
+Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, frameY) {
+    if (rotation === undefined) rotation = 0;
+
+    var w = this.width / this.scale;
+    var h = this.height / this.scale;
+    
+    ctx.save();
+    ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
+    ctx.rotate(rotation);
+    ctx.scale(
+        this.scale * consts.RENDER_SCALE_WIDTH, 
+        this.scale * consts.RENDER_SCALE_HEIGHT
+    );
+    // drawImage expects "top-left" coords, so we offset our destination
+    // coords accordingly, to draw our sprite centred at the origin
+    ctx.drawImage(
+        this.image,
+        w * frameX,
+        h * frameY,
+        w,
+        h,
+        0.5 * -w,
+        0.5 * -h,
+        w,
+        h
+    );
+
+    ctx.restore();
+};
+Sprite.prototype.drawFrameCenteredAtExtra = function (ctx, cx, cy, rotation, frameX, frameY) {
+    if (rotation === undefined) rotation = 0;
+    const image = this.image;
+
+    var test = 1
+    var w = image.width / 6;
+    var h = image.height / test;
+    //console.log(this)
+    //console.log(w,h)
+    //console.log(this.scale)
+    ctx.save();
+    //ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
+    ctx.rotate(rotation);
+    /*ctx.scale(
+        5,5
+    );*/
+    // drawImage expects "top-left" coords, so we offset our destination
+    // coords accordingly, to draw our sprite centred at the origin
+    ctx.drawImage(
+        image,
+        w * frameX,
+        0,
+        w,
+        h,
+        0,
+        0,
+        w*6,
+        h*3
+    );
+
+    ctx.restore();
+};
+
 Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
     if (rotation === undefined) rotation = 0;
 

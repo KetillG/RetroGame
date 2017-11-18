@@ -4,6 +4,8 @@
 
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
+console.log('ket')
+console.log(g_ctx)
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
@@ -130,6 +132,7 @@ function requestPreloads() {
 
     var requiredImages = {
       catBlack : './sprite/Cat_Black_Frame.png',
+      catBlack2 : './sprite/Cat_Black_Frame.png',
       catWhite : './sprite/Cat_White_Frame.png',
       explosion: './sprite/Explosion.png',
       brick0: './sprite/Brick_0.png',
