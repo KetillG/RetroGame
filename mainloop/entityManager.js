@@ -110,7 +110,7 @@ init: function() {
     //this._createBoard(board);
 },
 
-initPlayers() {
+initPlayers() {x
     this._addPlayers();
 },
 

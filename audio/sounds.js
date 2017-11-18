@@ -3,7 +3,7 @@ console.log(bombermanSoundtrack);
 bombermanSoundtrack.play();
 bombermanSoundtrack.addEventListener("ended", function(){
      bombermanSoundtrack.currentTime = 0;
-     console.log("ended");
+     bombermanSoundtrack.play();
 });
 
 const bombSounds = new Audio("audio/bombSounds.mp3");
