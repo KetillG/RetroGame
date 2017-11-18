@@ -91,7 +91,7 @@ _addPlayers : function () {
 
 getPlayers: function () {
     return this._players;
-}
+},
 
 // PUBLIC METHODS
 
@@ -132,7 +132,7 @@ bombExplode(bomb) {
         yStep: this._board.yStep,
     });
 
-    
+
     //sprite: new Sprite(g_images.catWhite),
 
     fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
@@ -148,7 +148,7 @@ trySpawnBomb(descr) {
         }
     }
     const bomb = new Bomb({
-        ...descr, 
+        ...descr,
         radius: 0.5 * consts.LOGICAL_WIDTH / this._board.boardsize,
         sprite: new Sprite(g_images.bombNew),
     });
