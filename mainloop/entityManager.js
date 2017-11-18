@@ -103,6 +103,7 @@ deferredSetup : function () {
 
 init: function() {
     this._createBoard(board);
+    //this._createBoard(board);
 },
 
 initPlayers() {
