@@ -36,7 +36,6 @@ btnNewGame.onclick = function() {
   entityManager.initPlayers();
   scoreboard.style.display = "flex";
   Page.resizeCanvas();
-  startScoreboard();
   // reset everything
 
   // Init scoreboard
@@ -122,7 +121,7 @@ var g_sprites = {};
 function preloadDone() {
 
     // Size of a single brick
-    const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);    
+    const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
     // Inits the sprites
     // Characters
     const CHARACTER_TO_BRICK_RATIO = 0.33;
