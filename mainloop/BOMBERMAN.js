@@ -32,6 +32,9 @@ btnAbout.onclick = function() {
 btnNewGame.onclick = function() {
   console.log('I am newGame')
   menuMain.style.display = "none";
+  spatialManager.restart();
+  entityManager.init();
+  entityManager.deferredSetup();
   entityManager.initPlayers();
   // reset everything
 }
@@ -134,7 +137,7 @@ function preloadDone() {
     initSprites(g_images.powerupFire, POWERUP_TO_BRICK_RATIO, brickSize);
     initSprites(g_images.powerupSpeed, POWERUP_TO_BRICK_RATIO, brickSize);
 
-        
+
     // Brick 0
     initSprites(g_images.brick0, 1, brickSize);
 
