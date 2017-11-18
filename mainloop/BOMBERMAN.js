@@ -52,6 +52,14 @@ btnNewGameAI.onclick = function() {
     menuMain.style.display = "none";
     
     entityManager.initSoloPlayer();
+
+    menuScoreboard.style.display = "flex";
+    Page.resizeCanvas();
+    // reset everything
+  
+    // Init scoreboard
+    scoreboard.init();
+    scoreboard.start(entityManager.getPlayers());
 }
 
 btnRestart.onclick = function() {
