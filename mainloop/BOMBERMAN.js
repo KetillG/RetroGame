@@ -153,6 +153,8 @@ function preloadDone() {
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
 
+    scoreboard.init();
+
     entityManager.init();
 
     main.init();
