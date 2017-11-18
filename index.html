@@ -7,6 +7,14 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
    </head>
    <body>
+
+       <div class="scoreboard" id="scoreboard-container" style="display: none">
+           <article>
+               <h1>Scoreboard</h1>
+
+           </article>
+       </div>
+
       <div class="container">
          <div class="menu-container" id="main-container">
             <h1 id="game-title">Bomberman</h1>
@@ -26,6 +34,20 @@
                <p class="subtitle lg">Aim of the game:</p>
                <p><span class="subtitle"></span>
                   Blow up your oppnenet before they kill you. All players have three lives.
+               </p>
+               <p class="subtitle lg">Powerups:</p>
+               <p><span class="subtitle"></span>
+                  <ul>
+                      <li>
+                          <img class="powerup" src="sprite/Powerup_Bomb.png" alt="Bomb powerup" height="3%" width="3%">Collect bombs to be able to drop more than one bomb at a time.
+                      </li>
+                      <li>
+                          <img class="powerup" src="sprite/Powerup_Fast.png" alt="Walk faster powerup" height="3%" width="3%">Collect shoes to run faster.
+                      </li>
+                      <li>
+                          <img class="powerup" src="sprite/Powerup_Fire.png" alt="Bigger bombs powerup" height="3%" width="3%">Collect the fire to increase the power of your bombs.
+                      </li>
+                  </ul>
                </p>
             </article>
             <div class="nav-controls">
@@ -85,7 +107,7 @@
       <script src="entities/Powerup.js"></script>
       <script src="entities/Bomb.js"></script>
       <script src="entities/Fire.js"></script>
-      
+
       <script src="mainloop/index.js"></script>
       <script src="mainloop/spatialManager.js"></script>
       <script src="mainloop/entityManager.js"></script>
