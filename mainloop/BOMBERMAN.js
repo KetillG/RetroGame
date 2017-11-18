@@ -18,27 +18,35 @@ var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
 
 btnInstructions.onclick = function() {
+    console.log('instruction')
   menuMain.style.display = "none";
   menuInstructions.style.display = "flex";
 }
 
 btnAbout.onclick = function() {
+    console.log('about')
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
 
 btnNewGame.onclick = function() {
+  console.log('I am newGame')
   menuMain.style.display = "none";
   entityManager.initPlayers();
   // reset everything
 }
 
 btnRestart.onclick = function() {
-    menuMain.style.display = "none";
+    console.log('I am restart')
+    for (var j = 0; j < menuContainers.length; j++) {
+        menuContainers[j].style.display = "none";
+      }
+      menuMain.style.display = "flex";
 }
 
 for (var i = 0; i < btnsBack.length; i++) {
-   btnsBack[i].onclick = function() {
+    btnsBack[i].onclick = function() {
+        console.log('I am back')
      for (var j = 0; j < menuContainers.length; j++) {
        menuContainers[j].style.display = "none";
      }
@@ -47,6 +55,7 @@ for (var i = 0; i < btnsBack.length; i++) {
 }
 
 function gameOver(playerName) {
+    console.log('gameover')
     menuGameOver.style.display = "flex";
     document.getElementById("winner").innerHTML = playerName + ' lost!';
 }
