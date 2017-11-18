@@ -100,7 +100,15 @@ KILL_ME_NOW : -1,
 deferredSetup : function () {
     this._categories = [this._powerups, this._bombs, this._players, this._fires];
 },
-
+da: function () {
+    this._players = [];
+    this._powerups = [];
+    this._bombs = [];
+    this._fires = [];
+    this._categories = [this._powerups, this._bombs, this._players, this._fires];
+    
+    console.log(this._categories)
+},
 init: function() {
     this._createBoard(board);
     //this._createBoard(board);
