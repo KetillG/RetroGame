@@ -42,6 +42,9 @@ btnRestart.onclick = function() {
         menuContainers[j].style.display = "none";
       }
     menuMain.style.display = "flex";
+    // "new" spatial manage
+    spatialManager.restart();
+    // New board
     entityManager.init();
 }
 
