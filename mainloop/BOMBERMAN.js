@@ -41,7 +41,8 @@ btnRestart.onclick = function() {
     for (var j = 0; j < menuContainers.length; j++) {
         menuContainers[j].style.display = "none";
       }
-      menuMain.style.display = "flex";
+    menuMain.style.display = "flex";
+    entityManager.init();
 }
 
 for (var i = 0; i < btnsBack.length; i++) {
