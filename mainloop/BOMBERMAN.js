@@ -63,7 +63,7 @@ for (var i = 0; i < btnsBack.length; i++) {
 function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
-    scoreboard.style.display = "none";
+    menuScoreboard.style.display = "none";
     document.getElementById("winner").innerHTML = playerName + ' lost!';
 }
 

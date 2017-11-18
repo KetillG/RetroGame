@@ -15,7 +15,12 @@ var scoreboard = {
         const MAX_PLAYERS = 4;
         for (let index = 0; index < MAX_PLAYERS; index++) {
             if(this._players[index]) {
-                const stats =  this._players[index].getStats();
+                const stats = Object.values(this._players[index].getStats());
+                const statBoxes = this._playersDOM[index].querySelector('.player-score').children;
+                const STAT_COUNT = 4;
+                for (let i = 0; i < STAT_COUNT; i++) {
+                    statBoxes[i].innerHTML = stats[i];
+                }
             }
         }
     },
