@@ -27,7 +27,7 @@ Character.prototype.power = 1;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
-Character.prototype.lives = 1;
+Character.prototype.lives = 3;
 Character.prototype.immuneTime = -1;
 
 Character.prototype.velX = 4,
@@ -66,16 +66,16 @@ Character.prototype.hitSomething = function(hitEntities){
             if (this.kickPower) {
                 hitEntity.kick();
             }
-            dumbAiChangeDir();
+            this.dumbAiChangeDir();
             this.bombCollide = true;
             //this.revertPosition();
             //return;
         }
         else if(hitEntity.constructorType === "Character"){
-            dumbAiChangeDir();
+            this.dumbAiChangeDir();
             this.playerCollision = true;
         } else {
-            dumbAiChangeDir();
+            this.dumbAiChangeDir();
             this.wallCollide = true;
         }
 
