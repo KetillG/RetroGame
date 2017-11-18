@@ -17,7 +17,6 @@ var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
 var scoreboard = document.getElementById("scoreboard-container");
-var player1 = document.getElementById("player1");
 
 btnInstructions.onclick = function() {
   console.log('instruction')
@@ -123,7 +122,7 @@ var g_sprites = {};
 function preloadDone() {
 
     // Size of a single brick
-    const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
+    const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);    
     // Inits the sprites
     // Characters
     const CHARACTER_TO_BRICK_RATIO = 0.33;
