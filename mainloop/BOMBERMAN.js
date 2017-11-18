@@ -17,7 +17,6 @@ var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
 var menuScoreboard = document.getElementById("scoreboard-container");
-var player1 = document.getElementById("player1");
 
 btnInstructions.onclick = function() {
   console.log('instruction')
@@ -37,7 +36,6 @@ btnNewGame.onclick = function() {
   entityManager.initPlayers();
   menuScoreboard.style.display = "flex";
   Page.resizeCanvas();
-  startScoreboard();
   // reset everything
 
   // Init scoreboard
