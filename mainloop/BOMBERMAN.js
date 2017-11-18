@@ -18,27 +18,45 @@ var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
 
 btnInstructions.onclick = function() {
+    console.log('instruction')
   menuMain.style.display = "none";
   menuInstructions.style.display = "flex";
 }
 
 btnAbout.onclick = function() {
+    console.log('about')
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
 
 btnNewGame.onclick = function() {
+  console.log('I am newGame')
   menuMain.style.display = "none";
+  /*spatialManager.restart();
+  entityManager.init();
+  entityManager.deferredSetup();*/
   entityManager.initPlayers();
   // reset everything
 }
 
 btnRestart.onclick = function() {
-    menuMain.style.display = "none";
+    console.log('I am restart')
+    for (var j = 0; j < menuContainers.length; j++) {
+        menuContainers[j].style.display = "none";
+      }
+    menuMain.style.display = "flex";
+    // "new" spatial manage
+    spatialManager.restart();
+    // Clear entityManager
+    entityManager.deferredSetup();
+    entityManager.restartEntityManager();
+    // New board
+    entityManager.init();
 }
 
 for (var i = 0; i < btnsBack.length; i++) {
-   btnsBack[i].onclick = function() {
+    btnsBack[i].onclick = function() {
+        console.log('I am back')
      for (var j = 0; j < menuContainers.length; j++) {
        menuContainers[j].style.display = "none";
      }
@@ -47,6 +65,7 @@ for (var i = 0; i < btnsBack.length; i++) {
 }
 
 function gameOver(playerName) {
+    console.log('gameover')
     menuGameOver.style.display = "flex";
     document.getElementById("winner").innerHTML = playerName + ' lost!';
 }
@@ -118,7 +137,7 @@ function preloadDone() {
     initSprites(g_images.powerupFire, POWERUP_TO_BRICK_RATIO, brickSize);
     initSprites(g_images.powerupSpeed, POWERUP_TO_BRICK_RATIO, brickSize);
 
-        
+
     // Brick 0
     initSprites(g_images.brick0, 1, brickSize);
 

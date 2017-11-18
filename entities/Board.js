@@ -11,6 +11,10 @@ function Board(descr) {
   this['constructorType'] = 'Board'
 
   // vars used to determine scaling
+  const arrCopy = descr.board.map(line => {
+    return line.slice();
+  });
+  descr.board = arrCopy;
   const tileBoard = descr.board;
   const boardSize = tileBoard.length + 2;
   const xStep = consts.LOGICAL_WIDTH / boardSize;
