@@ -92,7 +92,7 @@ _addPlayers : function () {
 getPlayers: function () {
     return this._players;
 },
-  
+
 _addComputerPlayer : function () {
     var player1 = new Character({
         cx: this._board.xStep * 10.5,
@@ -141,7 +141,7 @@ init: function() {
     //this._createBoard(board);
 },
 
-initPlayers() {x
+initPlayers() {
     this._addPlayers();
 },
 
