@@ -7,6 +7,7 @@ var g_ctx = g_canvas.getContext("2d");
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
+var btnNewGameAI = document.getElementById("btn-newgameai");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
@@ -37,6 +38,13 @@ btnNewGame.onclick = function() {
   entityManager.deferredSetup();*/
   entityManager.initPlayers();
   // reset everything
+}
+
+btnNewGameAI.onclick = function() {
+    console.log('I am computah gamerino');
+    menuMain.style.display = "none";
+    
+    entityManager.initSoloPlayer();
 }
 
 btnRestart.onclick = function() {
