@@ -32,9 +32,9 @@ btnAbout.onclick = function() {
 btnNewGame.onclick = function() {
   console.log('I am newGame')
   menuMain.style.display = "none";
-  spatialManager.restart();
+  /*spatialManager.restart();
   entityManager.init();
-  entityManager.deferredSetup();
+  entityManager.deferredSetup();*/
   entityManager.initPlayers();
   // reset everything
 }
@@ -49,7 +49,7 @@ btnRestart.onclick = function() {
     spatialManager.restart();
     // Clear entityManager
     entityManager.deferredSetup();
-    entityManager.da();
+    entityManager.restartEntityManager();
     // New board
     entityManager.init();
 }
