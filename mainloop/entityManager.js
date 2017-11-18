@@ -89,6 +89,10 @@ _addPlayers : function () {
   this._players.push(player2);
 },
 
+getPlayers: function () {
+    return this._players;
+}
+
 // PUBLIC METHODS
 
 // A special return value, used by other objects,

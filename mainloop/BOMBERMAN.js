@@ -39,6 +39,9 @@ btnNewGame.onclick = function() {
   Page.resizeCanvas();
   startScoreboard();
   // reset everything
+
+  // Init scoreboard
+  scoreboard.start(entityManager.getPlayers());
 }
 
 btnRestart.onclick = function() {
