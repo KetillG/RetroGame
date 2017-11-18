@@ -16,7 +16,7 @@ var menuMain = document.getElementById("main-container");
 var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
-var scoreboard = document.getElementById("scoreboard-container");
+var menuScoreboard = document.getElementById("scoreboard-container");
 var player1 = document.getElementById("player1");
 
 btnInstructions.onclick = function() {
@@ -35,7 +35,7 @@ btnNewGame.onclick = function() {
   console.log('I am newGame')
   menuMain.style.display = "none";
   entityManager.initPlayers();
-  scoreboard.style.display = "flex";
+  menuScoreboard.style.display = "flex";
   Page.resizeCanvas();
   startScoreboard();
   // reset everything
@@ -82,6 +82,7 @@ function gatherInputs() {
 
 function updateSimulation(du) {
 
+    scoreboard.update(du);
     entityManager.update(du);
 
 }

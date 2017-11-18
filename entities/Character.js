@@ -41,6 +41,15 @@ Character.prototype.recentlyHit = false;
 
 Character.prototype.timeAlive = 0;
 
+Character.prototype.getStats = function () {
+    return {
+        life: this.lives,
+        power: this.power,
+        bombs: this.ammo,
+        speed: this.velX,
+    }
+}
+
 Character.prototype.decrementLife = function () {
     if(this.immuneTime >= 0) return;
     this.lives--;

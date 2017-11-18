@@ -1,3 +1,5 @@
+"use strict";
+
 var scoreboard = {
     _players: [],
     _playersDOM: [],
@@ -10,7 +12,8 @@ var scoreboard = {
     update: function (du) {
         const MAX_PLAYERS = 4;
         for (let index = 0; index < MAX_PLAYERS; index++) {
-            //update
+            const stats =  this._players[i].getStats();
+            console.log(stats);
         }
     },
 
