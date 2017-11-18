@@ -141,7 +141,7 @@ init: function() {
     //this._createBoard(board);
 },
 
-initPlayers() {x
+initPlayers() {
     this._addPlayers();
 },
 
