@@ -27,7 +27,7 @@ Character.prototype.power = 1;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
-Character.prototype.lives = 1;
+Character.prototype.lives = 3;
 Character.prototype.immuneTime = -1;
 
 Character.prototype.velX = 4,
@@ -40,6 +40,8 @@ Character.prototype.dirObj = {};
 Character.prototype.recentlyHit = false;
 
 Character.prototype.timeAlive = 0;
+
+Character.prototype.aiMovement = 0;
 
 Character.prototype.decrementLife = function () {
     if(this.immuneTime >= 0) return;
@@ -64,17 +66,27 @@ Character.prototype.hitSomething = function(hitEntities){
             if (this.kickPower) {
                 hitEntity.kick();
             }
+            this.dumbAiChangeDir();
             this.bombCollide = true;
             //this.revertPosition();
             //return;
         }
         else if(hitEntity.constructorType === "Character"){
+            this.dumbAiChangeDir();
             this.playerCollision = true;
         } else {
+            this.dumbAiChangeDir();
             this.wallCollide = true;
         }
 
     });
+}
+
+Character.prototype.dumbAiChangeDir = function () {
+    if (this.computer) {
+        this.aiMovement = Math.floor(Math.random() * 4);        
+        this.maybeDropBomb();
+    }
 }
 
 Character.prototype.wallCollide = false;
@@ -124,24 +136,53 @@ Character.prototype.update = function (du) {
     if(this.immuneTime >= 0) {
         this.immuneTime -= du;
     }
-    const right = keys[this.keyRight];
-    const left = keys[this.keyLeft];
-    const up = keys[this.keyUp];
-    const down = keys[this.keyDown];
-    if(right || left){
-        var dir = right ? 1 : -1;
-        var newPosX = this.cx + dir*this.velX*du;
-        this.updatePosition(newPosX, this.cy);
-    }
-    if(up || down){
-        var dir = down ? 1 : -1;
-        var newPosY = this.cy + dir*this.velY*du;
-        this.updatePosition(this.cx, newPosY);
-    }
-    this.maybeDropBomb();
 
-    // Handle firing
+    if (this.computer) {
+        if (this.aiMovement > 3) {
+            this.aiMovement = 0;
+        }
 
+        switch(this.aiMovement) {
+            case 0:
+                var newPosX = this.cx + this.velX*du;
+                this.updatePosition(newPosX, this.cy);
+                break;
+            case 1:
+                var newPosX = this.cx - this.velX*du;
+                this.updatePosition(newPosX, this.cy);
+                break;
+            case 2:
+                var newPosY = this.cy + this.velY*du;
+                this.updatePosition(this.cx, newPosY);
+                break;
+            case 3:
+                var newPosY = this.cy - this.velY*du;
+                this.updatePosition(this.cx, newPosY);
+                break;
+        }        
+        
+
+        console.log(this.aiMovement);
+
+    } else {
+        const right = keys[this.keyRight];
+        const left = keys[this.keyLeft];
+        const up = keys[this.keyUp];
+        const down = keys[this.keyDown];
+        if(right || left){
+            var dir = right ? 1 : -1;
+            var newPosX = this.cx + dir*this.velX*du;
+            this.updatePosition(newPosX, this.cy);
+        }
+        if(up || down){
+            var dir = down ? 1 : -1;
+            var newPosY = this.cy + dir*this.velY*du;
+            this.updatePosition(this.cx, newPosY);
+        }
+        this.maybeDropBomb();
+    
+        // Handle firing
+    }
 
     spatialManager.register(this);
 };
@@ -183,7 +224,7 @@ Character.prototype.setPos = function (x, y) {
 };
 
 Character.prototype.maybeDropBomb = function () {
-    if (eatKey(this.keyFire) && this.ammo > 0) {
+    if ((eatKey(this.keyFire) || this.computer ) && this.ammo > 0) {
         // Gets correct position from board
         const pos = entityManager.getValidBombCenter(this.cx, this.cy);
         // Tries to spawn a bomb
