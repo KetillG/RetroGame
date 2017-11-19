@@ -52,13 +52,13 @@ btnNewGame.onclick = function() {
 btnNewGameAI.onclick = function() {
     console.log('I am computah gamerino');
     menuMain.style.display = "none";
-    
+
     entityManager.initSoloPlayer();
 
     menuScoreboard.style.display = "flex";
     Page.resizeCanvas();
     // reset everything
-  
+
     // Init scoreboard
     scoreboard.init();
     scoreboard.start(entityManager.getPlayers());
@@ -134,6 +134,7 @@ function requestPreloads() {
       catBlack : './sprite/Cat_Black_Frame.png',
       catBlack2 : './sprite/Cat_Black_Frame.png',
       catWhite : './sprite/Cat_White_Frame.png',
+      catWhite2 : './sprite/Cat_White_Frame.png',
       explosion: './sprite/Explosion.png',
       brick0: './sprite/Brick_0.png',
       brick1: './sprite/Brick_1_test.png',
@@ -182,7 +183,7 @@ function preloadDone() {
     // Fire
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
-    
+
     scoreboard.init();
 
     entityManager.init();

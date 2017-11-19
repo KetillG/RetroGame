@@ -3,6 +3,7 @@
 var scoreboard = {
     _players: [],
     _playersDOM: [],
+    _sprite: [],
 
 
     start: function (players) {
@@ -16,11 +17,11 @@ var scoreboard = {
         for (let index = 0; index < MAX_PLAYERS; index++) {
             if(this._players[index]) {
                 //
-                if(index === 0) {
-                    const canvasP = this._playersDOM[index].querySelector('.playerCTX');
-                    const ctxP = canvasP.getContext("2d");
-                    this.drawPlayer(this._players[index], canvasP, ctxP);
-                }
+
+                const canvasP = this._playersDOM[index].querySelector('.playerCTX');
+                const ctxP = canvasP.getContext("2d");
+                this.drawPlayer(this._players[index], canvasP, ctxP,index);
+
                 const stats = Object.values(this._players[index].getStats());
                 const statBoxes = this._playersDOM[index].querySelector('.player-score').children;
                 const STAT_COUNT = 4;
@@ -31,9 +32,9 @@ var scoreboard = {
             }
         }
     },
-    drawPlayer(player,canvasP ,ctxP) {
+    drawPlayer(player,canvasP ,ctxP,index) {
         ctxP.clearRect(0, 0, canvasP.width, canvasP.height);
-        var test =  new Sprite(g_images.catBlack2)
+        var test =  new Sprite(this._sprite[index])
         test.drawFrameCenteredAtExtra(
             ctxP,
             0,
@@ -49,6 +50,7 @@ var scoreboard = {
         const scoreboard = document.getElementById('scoreboard-container');
         const playerDivs = scoreboard.querySelector('.players-list')
         this._playersDOM.push(...playerDivs.children);
+        this._sprite = [g_images.catBlack2,g_images.catWhite2];
     }
 
 }
