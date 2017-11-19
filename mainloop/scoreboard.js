@@ -26,6 +26,7 @@ var scoreboard = {
                 const STAT_COUNT = 4;
                 for (let i = 0; i < STAT_COUNT; i++) {
                     statBoxes[i].children[1].innerHTML = stats[i];
+                    statBoxes[i].children[1].style.fontSize = consts.SCOREBOARD_FONT_SIZE;
                 }
             }
         }
@@ -34,14 +35,14 @@ var scoreboard = {
         ctxP.clearRect(0, 0, canvasP.width, canvasP.height);
         var test =  new Sprite(g_images.catBlack2)
         test.drawFrameCenteredAtExtra(
-            ctxP, 
-            0, 
+            ctxP,
+            0,
             0,
             0,
             Math.floor(0.8 * player.timeAlive / 6) % 6 ,
             0,
         );
-        
+
     },
 
     init: function () {
