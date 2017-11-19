@@ -114,32 +114,51 @@ ul {
   /*flex-direction: column;*/
   color: rgba(255,255,255,1);
   padding: 1em;
-  border: 0.125em outset black; 
+  border: 0.125em outset black;
 }
+
 .players-list {
   display: flex;
   flex-direction: column;
   height: 80%;
 }
+
 .player-container {
   display: flex;
   height: 25%;
   margin: 2px;
 }
+
 .player-image {
   flex-grow: 1;
   flex-basis: 33%;
 }
+
 .player-score {
   flex-grow: 2;
   flex-basis: 67%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /*flex-wrap: wrap;*/
 }
+
 .player-score > div {
-  background-color: rgb(102, 62, 247);
-  width: 50%;
-  height: 50%;
+  /*background-color: rgb(102, 62, 247);*/
+  height: 25%;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: row;
+}
+.player-info > div{
+    width: 20px;
+    padding-right: 0.5em;
+}
+
+.info-img {
+    height:100%;
+    width: 100%;
 }
 #player1C {
   width: 100%;

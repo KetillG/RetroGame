@@ -25,7 +25,7 @@ var scoreboard = {
                 const statBoxes = this._playersDOM[index].querySelector('.player-score').children;
                 const STAT_COUNT = 4;
                 for (let i = 0; i < STAT_COUNT; i++) {
-                    statBoxes[i].innerHTML = stats[i];
+                    statBoxes[i].children[1].innerHTML = stats[i];
                 }
             }
         }
