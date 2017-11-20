@@ -344,10 +344,5 @@ function initSprites(sprite, ratio, brickSize, xFrames = 1, yFrames = 1) {
     sprite.height = sprite.height / yFrames;
 }
 
-function initSpriteFrames() {
-
-}
-
-
 // Kick it off
 requestPreloads();
