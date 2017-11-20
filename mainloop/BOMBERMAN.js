@@ -44,6 +44,7 @@ btnAbout.onclick = function() {
 
 // Play function takes in num human and num computers
 function play (human, computer) {
+
     const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
     const playerCode = [
         [38,40,37,39,'O'.charCodeAt(0)],
@@ -82,6 +83,11 @@ function play (human, computer) {
             index
         );
     }
+
+    
+    scoreboard.init();
+    console.log()
+    scoreboard.start(entityManager.getPlayers());
 }
 btnNewGame.onclick = function() {
   console.log('I am newGame')
@@ -90,52 +96,42 @@ btnNewGame.onclick = function() {
   menuScoreboard.style.display = "flex";
   
   // Init
-  //entityManager.initPlayer();
-  play(0,4);
-  scoreboard.init();
-  scoreboard.start(entityManager.getPlayers());
-  /*spatialManager.restart();
-  entityManager.init();
-  entityManager.deferredSetup();*/
-  //entityManager.initPlayer();
   menuPlayers.style.display = "flex";
-
-  // Init scoreboard
-  //scoreboard.init();
-  //scoreboard.start(entityManager.getPlayers());
 }
-
+let numPlayers = 0;
 btn1Player.onclick = function() {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
+    numPlayers = 1;
 }
 
 btn2Player.onclick = function() {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
-    var asd = document.getElementById("btn-3opponent");
-    asd.style.display = "none";
+    var moreOpponent = document.getElementById("btn-3opponent");
+    moreOpponent.style.display = "none";
+    numPlayers = 2;
 }
 
 btn1Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
-    // vantar
+    play(numPlayers,1)
 }
 
 btn2Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
-    // vantar
+    play(numPlayers,2)
 }
 
 btn3Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
-    // vantar
+    play(numPlayers,3)
 }
 
 
