@@ -13,14 +13,14 @@ var btnNewGame = document.getElementById("btn-newgame");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
-var btnsBack = document.querySelectorAll("btn-back");
+var btnsBack = document.querySelectorAll(".btn-back");
 var btn1Player = document.getElementById("btn-1player");
 var btn2Player = document.getElementById("btn-2player");
 var btn1Opponent = document.getElementById("btn-1opponent");
 var btn2Opponent = document.getElementById("btn-2opponent");
 var btn3Opponent = document.getElementById("btn-3opponent");
 
-var menuContainers = document.querySelectorAll("menu-container");
+var menuContainers = document.querySelectorAll(".menu-container");
 var menuMain = document.getElementById("main-container");
 var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
@@ -57,12 +57,12 @@ btnNewGame.onclick = function() {
   /*spatialManager.restart();
   entityManager.init();
   entityManager.deferredSetup();*/
-  entityManager.initPlayer();
+  //entityManager.initPlayer();
   menuPlayers.style.display = "flex";
 
   // Init scoreboard
-  scoreboard.init();
-  scoreboard.start(entityManager.getPlayers());
+  //scoreboard.init();
+  //scoreboard.start(entityManager.getPlayers());
 }
 
 btn1Player.onclick = function() {
