@@ -11,13 +11,16 @@ var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
 var btnsBack = document.querySelectorAll(".btn-back");
+
 var btn1Player = document.getElementById("btn-1player");
 var btn2Player = document.getElementById("btn-2player");
+
 var btn0Opponent = document.getElementById("btn-0opponent");
 var btn1Opponent = document.getElementById("btn-1opponent");
 var btn2Opponent = document.getElementById("btn-2opponent");
 var btn3Opponent = document.getElementById("btn-3opponent");
 var btnBackOpponent = document.getElementById("btn-back-opponent");
+
 var btnsScoreboard = document.querySelectorAll(".btn-scoreboard");
 var btnPause = document.getElementById("btn-pause");
 var btnMute = document.getElementById("btn-mute");
@@ -33,17 +36,14 @@ var menuPlayers = document.getElementById("player-container");
 var menuOpponents = document.getElementById("opponent-container");
 
 btnInstructions.onclick = function() {
-  console.log('instruction')
   menuMain.style.display = "none";
   menuInstructions.style.display = "flex";
 }
 
 btnAbout.onclick = function() {
-  console.log('about')
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
-// consts, should refactor
 
 // Play function takes in num human and num computers
 function play (human, computer) {
@@ -95,74 +95,60 @@ function play (human, computer) {
 }
 
 btnNewGame.onclick = function() {
-  console.log('I am newGame')
-  // show menu
   menuMain.style.display = "none";
-  //menuScoreboard.style.display = "flex";
-
-  // Init
   menuPlayers.style.display = "flex";
 }
 
 let numPlayers = 0;
 btn1Player.onclick = function() {
-    menuPlayers.style.display = "none";
-    menuOpponents.style.display = "flex";
-    var noOpponent = document.getElementById("btn-0opponent");
-    noOpponent.style.display = "none";
-    var moreOpponent = document.getElementById("btn-3opponent");
-    moreOpponent.style.display = "inline";
-    numPlayers = 1;
+    playersChosen(1);
 }
 
 btn2Player.onclick = function() {
+    playersChosen(2);
+}
+
+function playersChosen(nrOfPlayers) {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
     var noOpponent = document.getElementById("btn-0opponent");
-    noOpponent.style.display = "inline";
     var moreOpponent = document.getElementById("btn-3opponent");
-    moreOpponent.style.display = "none";
-    numPlayers = 2;
+
+    if(nrOfPlayers === 1) {
+        noOpponent.style.display = "none";
+        moreOpponent.style.display = "inline";
+    } else if(nrOfPlayers === 2) {
+        noOpponent.style.display = "inline";
+        moreOpponent.style.display = "none";
+    }
+
+    numPlayers = nrOfPlayers;
 }
 
 btn0Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
     showScoreboardButtons();
-
-
     play(numPlayers,0)
 }
 
 btn1Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
     showScoreboardButtons();
-
     play(numPlayers,1)
 }
 
 btn2Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
     showScoreboardButtons();
-
     play(numPlayers,2)
 }
 
 btn3Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
     showScoreboardButtons();
-
     play(numPlayers,3)
 }
 
 function showScoreboardButtons() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
     for(var i = 0; i < btnsScoreboard.length; i++) {
         btnsScoreboard[i].style.display = "inline";
     }
@@ -180,7 +166,6 @@ btnBackOpponent.onclick = function() {
 }
 
 btnRestart.onclick = function() {
-    console.log('I am restart')
     for (var j = 0; j < menuContainers.length; j++) {
         menuContainers[j].style.display = "none";
       }
@@ -199,17 +184,12 @@ btnPause.onclick = function() {
 }
 
 btnMute.onclick = function() {
-    // mute
     muteSound();
 }
 
 btnQuit.onclick = function() {
-    // quit
-    console.log('quit')
     hideScoreboardButtons();
     quitGame();
-    //menuNewGame.style.display = "flex";
-    //menuScoreboard.style.display = "none";
     g_isGameStarted = true;
 }
 
