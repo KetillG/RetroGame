@@ -41,20 +41,21 @@ btnAbout.onclick = function() {
   menuAbout.style.display = "flex";
 }
 // consts, should refactor
-const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
-const playerCode = [
-    [38,40,37,39,'O'.charCodeAt(0)],
-    [
-        'W'.charCodeAt(0),
-        'S'.charCodeAt(0),
-        'A'.charCodeAt(0),
-        'D'.charCodeAt(0),
-        220
-    ]];
-let images = []
 
 // Play function takes in num human and num computers
 function play (human, computer) {
+    const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
+    const playerCode = [
+        [38,40,37,39,'O'.charCodeAt(0)],
+        [
+            'W'.charCodeAt(0),
+            'S'.charCodeAt(0),
+            'A'.charCodeAt(0),
+            'D'.charCodeAt(0),
+            220
+        ]];
+    const images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
+    
     for (let index = 0; index < human; index++) {
         console.log('human')
         const pos = playerPos.shift();
@@ -86,15 +87,13 @@ btnNewGame.onclick = function() {
   console.log('I am newGame')
   // show menu
   menuMain.style.display = "none";
-<<<<<<< HEAD
   menuScoreboard.style.display = "flex";
   
   // Init
   //entityManager.initPlayer();
-  play(1,1);
+  play(0,4);
   scoreboard.init();
   scoreboard.start(entityManager.getPlayers());
-=======
   /*spatialManager.restart();
   entityManager.init();
   entityManager.deferredSetup();*/
@@ -137,7 +136,6 @@ btn3Opponent.onclick = function() {
     menuOpponents.style.display = "none";
 
     // vantar
->>>>>>> d8dd38197b11f0062a7acf04185924b3df0d3c3d
 }
 
 
@@ -280,7 +278,6 @@ function preloadDone() {
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
 
-    images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
 
     scoreboard.init();
 
