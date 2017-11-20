@@ -9,17 +9,27 @@ console.log(g_ctx)
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
-var btnNewGameAI = document.getElementById("btn-newgameai");
+//var btnNewGameAI = document.getElementById("btn-newgameai");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
 var btnsBack = document.querySelectorAll(".btn-back");
+var btn1Player = document.getElementById("btn-1player");
+var btn2Player = document.getElementById("btn-2player");
+var btn0Opponent = document.getElementById("btn-0opponent");
+var btn1Opponent = document.getElementById("btn-1opponent");
+var btn2Opponent = document.getElementById("btn-2opponent");
+var btn3Opponent = document.getElementById("btn-3opponent");
+var btnBackOpponent = document.getElementById("btn-back-opponent");
+
 var menuContainers = document.querySelectorAll(".menu-container");
 var menuMain = document.getElementById("main-container");
 var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
 var menuScoreboard = document.getElementById("scoreboard-container").querySelector(".players-list");
+var menuPlayers = document.getElementById("player-container");
+var menuOpponents = document.getElementById("opponent-container");
 
 btnInstructions.onclick = function() {
   console.log('instruction')
@@ -28,41 +38,136 @@ btnInstructions.onclick = function() {
 }
 
 btnAbout.onclick = function() {
-    console.log('about')
+  console.log('about')
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
+}
+// consts, should refactor
+
+// Play function takes in num human and num computers
+function play (human, computer) {
+
+    const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
+    const playerCode = [
+        [
+            'W'.charCodeAt(0),
+            'S'.charCodeAt(0),
+            'A'.charCodeAt(0),
+            'D'.charCodeAt(0),
+            220
+        ],
+        [38,40,37,39,'O'.charCodeAt(0)]];
+    const images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
+
+    for (let index = 0; index < human; index++) {
+        console.log('human')
+        const pos = playerPos.shift();
+        const keycode = playerCode.shift();
+        const image = images.shift();
+        entityManager.initPlayer(
+            pos[0],
+            pos[1],
+            keycode,
+            "red",
+            new Sprite(image),
+            index
+        );
+    }
+    for (let index = 0; index < computer; index++) {
+        console.log('computer')
+        const pos = playerPos.shift();
+        const image = images.shift();
+        entityManager.initAI(
+            pos[0],
+            pos[1],
+            "red",
+            new Sprite(image),
+            index
+        );
+    }
+
+
+    scoreboard.init();
+    scoreboard.start(entityManager.getPlayers());
+
+    g_isGameStarted = false;
 }
 
 btnNewGame.onclick = function() {
   console.log('I am newGame')
+  // show menu
   menuMain.style.display = "none";
-  /*spatialManager.restart();
-  entityManager.init();
-  entityManager.deferredSetup();*/
-  entityManager.initPlayers();
-  menuScoreboard.style.display = "flex";
-  Page.resizeCanvas();
-  // reset everything
+  //menuScoreboard.style.display = "flex";
 
-  // Init scoreboard
-  scoreboard.init();
-  scoreboard.start(entityManager.getPlayers());
+  // Init
+  menuPlayers.style.display = "flex";
 }
 
-btnNewGameAI.onclick = function() {
-    console.log('I am computah gamerino');
-    menuMain.style.display = "none";
+let numPlayers = 0;
+btn1Player.onclick = function() {
+    menuPlayers.style.display = "none";
+    menuOpponents.style.display = "flex";
+    var noOpponent = document.getElementById("btn-0opponent");
+    noOpponent.style.display = "none";
+    var moreOpponent = document.getElementById("btn-3opponent");
+    moreOpponent.style.display = "inline";
+    numPlayers = 1;
+}
 
-    entityManager.initSoloPlayer();
+btn2Player.onclick = function() {
+    menuPlayers.style.display = "none";
+    menuOpponents.style.display = "flex";
+    var noOpponent = document.getElementById("btn-0opponent");
+    noOpponent.style.display = "inline";
+    var moreOpponent = document.getElementById("btn-3opponent");
+    moreOpponent.style.display = "none";
+    numPlayers = 2;
+}
 
+btn0Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
-    Page.resizeCanvas();
-    // reset everything
+    menuOpponents.style.display = "none";
+
+    play(numPlayers,0)
+}
+
+btn1Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    play(numPlayers,1)
+}
+
+btn2Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    play(numPlayers,2)
+}
+
+btn3Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    play(numPlayers,3)
+}
+
+btnBackOpponent.onclick = function() {
+    menuPlayers.style.display = "flex";
+    menuOpponents.style.display = "none";
+}
+
+/*btnNewGameAI.onclick = function() {
+    console.log('I am computah gamerino');
+    // show menu
+    menuMain.style.display = "none";
+    menuScoreboard.style.display = "flex";
 
     // Init scoreboard
+    entityManager.initAI();
     scoreboard.init();
     scoreboard.start(entityManager.getPlayers());
-}
+}*/
 
 btnRestart.onclick = function() {
     console.log('I am restart')
@@ -93,7 +198,14 @@ function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
     menuScoreboard.style.display = "none";
-    document.getElementById("winner").innerHTML = playerName + ' lost!';
+    const players = entityManager.getPlayers();
+    const winner = players.filter(player => {
+        if(player.lives > 0) return player
+    });
+    const winnerMsg = winner[0] ? winner[0].name + ' won!' : 'Tie!';
+    document.getElementById("winner").innerHTML = winnerMsg;
+
+    g_isGameStarted = true;
 }
 
 // =============
@@ -135,6 +247,10 @@ function requestPreloads() {
       catBlack2 : './sprite/Cat_Black_Frame.png',
       catWhite : './sprite/Cat_White_Frame.png',
       catWhite2 : './sprite/Cat_White_Frame.png',
+      catRed : './sprite/Cat_Red_Frame.png',
+      catRed2 : './sprite/Cat_Red_Frame.png',
+      catBrown : './sprite/Cat_Brown_Frame.png',
+      catBrown2 : './sprite/Cat_Brown_Frame.png',
       explosion: './sprite/Explosion.png',
       brick0: './sprite/Brick_0.png',
       brick1: './sprite/Brick_1_test.png',
@@ -145,6 +261,7 @@ function requestPreloads() {
       powerupSpeed: './sprite/Powerup_Fast.png',
     };
     console.log('preloading');
+    Page.resizeCanvas();
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
@@ -156,9 +273,11 @@ function preloadDone() {
     const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
     // Inits the sprites
     // Characters
-    const CHARACTER_TO_BRICK_RATIO = 0.33;
+    const CHARACTER_TO_BRICK_RATIO = 0.4;
     initSprites(g_images.catWhite, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
     initSprites(g_images.catBlack, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+    initSprites(g_images.catRed, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+    initSprites(g_images.catBrown, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
 
     // Powerup
     const POWERUP_TO_BRICK_RATIO = 0.6;
@@ -184,11 +303,14 @@ function preloadDone() {
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
 
+
     scoreboard.init();
 
     entityManager.init();
 
     main.init();
+
+
 }
 
 function initSprites(sprite, ratio, brickSize, xFrames = 1, yFrames = 1) {

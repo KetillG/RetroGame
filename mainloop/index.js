@@ -17,7 +17,7 @@ let Page = (() => {
         const scoreboard = document.getElementById('scoreboard-container');
 
         wWidth = window.innerWidth - 30 - scoreboard.offsetWidth;
-        wHeight = window.innerHeight;
+        wHeight = window.innerHeight - 20;
 
         wWidth = Math.min(wWidth, wHeight);
         wHeight = wWidth;
@@ -26,7 +26,7 @@ let Page = (() => {
         g_ctx.canvas.height = wHeight;
 
         scoreboard.style.height = wHeight + 'px';
-        scoreboard.style.width = wWidth * 0.3 + 'px';
+        scoreboard.style.width = wWidth * 0.25 + 'px';
 
         scoreboard.querySelector('.scoreHeader').style.fontSize = 0.04 * wWidth + 'px';
 

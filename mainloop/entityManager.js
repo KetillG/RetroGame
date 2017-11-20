@@ -60,62 +60,36 @@ _createBoard(board) {
   this._board = new Board({board});
 },
 
-_addPlayers : function () {
+_addPlayer : function (x,y,keycodes,color,sprite,id) {
   var player1 = new Character({
-    cx: this._board.xStep * 10.5,
-    cy: this._board.xStep * 10.5,
-    keyUp: 38,
-    keyDown: 40,
-    keyLeft: 37,
-    keyRight: 39,
-    keyFire: 'O'.charCodeAt(0),
-    colour: "Red",
-    sprite: new Sprite(g_images.catBlack),
-    name: "Player 1"
-  });
-  var player2 = new Character({
-    cx: this._board.xStep * 1.5,
-    cy: this._board.yStep * 1.5,
-    keyUp: 'W'.charCodeAt(0),
-    keyDown: 'S'.charCodeAt(0),
-    keyLeft: 'A'.charCodeAt(0),
-    keyRight: 'D'.charCodeAt(0),
-    keyFire: 220,
-    colour: "Black",
-    sprite: new Sprite(g_images.catWhite),
-    name: "Player 2"
+    cx: this._board.xStep * x,
+    cy: this._board.xStep * y,
+    keyUp: keycodes[0],
+    keyDown: keycodes[1],
+    keyLeft: keycodes[2],
+    keyRight: keycodes[3],
+    keyFire: keycodes[4],
+    colour: color,
+    sprite: sprite,
+    name: "Player " + ++id
   });
   this._players.push(player1);
-  this._players.push(player2);
 },
 
 getPlayers: function () {
     return this._players;
 },
 
-_addComputerPlayer : function () {
+_addComputerPlayer : function (x,y,color,sprite,id) {
     var player1 = new Character({
-        cx: this._board.xStep * 10.5,
-        cy: this._board.xStep * 10.5,
-        colour: "Red",
-        sprite: new Sprite(g_images.catBlack),
-        name: "Computer 1",
+        cx: this._board.xStep * x,
+        cy: this._board.xStep * y,
+        colour: color,
+        sprite: sprite,
+        name: "Computer " + ++id,
         computer: true,
       });
-      var player2 = new Character({
-        cx: this._board.xStep * 1.5,
-        cy: this._board.yStep * 1.5,
-        keyUp: 'W'.charCodeAt(0),
-        keyDown: 'S'.charCodeAt(0),
-        keyLeft: 'A'.charCodeAt(0),
-        keyRight: 'D'.charCodeAt(0),
-        keyFire: 220,
-        colour: "Black",
-        sprite: new Sprite(g_images.catWhite),
-        name: "Player 2"
-      });
       this._players.push(player1);
-      this._players.push(player2);
 },
 
 // PUBLIC METHODS
@@ -141,12 +115,16 @@ init: function() {
     //this._createBoard(board);
 },
 
-initPlayers() {
-    this._addPlayers();
+initPlayer(x,y,keycode,color,image,id) {
+    //this._addPlayer(1.5,1.5,p2,"yellow",new Sprite(g_images.catWhite),2);
+    console.log(x,y,keycode,color,image,id)
+    this._addPlayer(x,y,keycode,color,image,id);
+
 },
 
-initSoloPlayer() {
-    this._addComputerPlayer();
+initAI(x,y,color,image,id) {
+    //this._addComputerPlayer(10.5,10.5,"red",new Sprite(g_images.catBlack),1);
+    this._addComputerPlayer(x,y,color,image,id);
 },
 
 spawnPowerup(descr) {
@@ -212,7 +190,12 @@ update: function(du) {
           // remove the dead guy, and shuffle the others down to
           // prevent a confusing gap from appearing in the array
           if(aCategory[i].constructorType === 'Character') {
-              gameOver(aCategory[i].name);
+              const players = entityManager.getPlayers();
+              const alive = players.filter(player => {
+                if(player.lives > 0) return player
+              });
+
+              if(alive.length < 2) gameOver(aCategory[i].name);
           }
           aCategory.splice(i,1);
       }
