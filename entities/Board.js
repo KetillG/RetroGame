@@ -30,7 +30,8 @@ function Board(descr) {
       // Randomly creates board
       let blockID = tileBoard[i][j];
       if( tileBoard[i][j] === 0 ) {
-        blockID = Math.random() < 0.75 ? 2 : 0;
+        const BLOCK_SPAWN_CHANCE = 0.75
+        blockID = Math.random() < BLOCK_SPAWN_CHANCE ? 2 : 0;
       }
       // Creates brick from id
       tileBoard[i][j] = new Brick({
