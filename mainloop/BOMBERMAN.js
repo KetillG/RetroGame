@@ -39,7 +39,7 @@ btnNewGame.onclick = function() {
   /*spatialManager.restart();
   entityManager.init();
   entityManager.deferredSetup();*/
-  entityManager.initPlayers();
+  entityManager.initPlayer();
   menuScoreboard.style.display = "flex";
   Page.resizeCanvas();
   // reset everything
@@ -53,7 +53,7 @@ btnNewGameAI.onclick = function() {
     console.log('I am computah gamerino');
     menuMain.style.display = "none";
 
-    entityManager.initSoloPlayer();
+    entityManager.initAI();
 
     menuScoreboard.style.display = "flex";
     Page.resizeCanvas();
@@ -145,6 +145,7 @@ function requestPreloads() {
       powerupSpeed: './sprite/Powerup_Fast.png',
     };
     console.log('preloading');
+    Page.resizeCanvas();
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
