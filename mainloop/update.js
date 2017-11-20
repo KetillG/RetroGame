@@ -59,6 +59,12 @@ var g_isGameStarted = false;
 function shouldSkipUpdate() {
     if (eatKey(KEY_PAUSE)) {
         g_isUpdatePaused = !g_isUpdatePaused;
+
+        if(g_isUpdatePaused) {
+            menuPause.style.display = "inline";
+        } else {
+            menuPause.style.display = "none";
+        }
     }
     return g_isGameStarted || g_isUpdatePaused && !eatKey(KEY_STEP);
 }

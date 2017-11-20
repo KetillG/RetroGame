@@ -34,6 +34,7 @@ var menuGameOver = document.getElementById("gameover-container");
 var menuScoreboard = document.getElementById("scoreboard-container").querySelector(".players-list");
 var menuPlayers = document.getElementById("player-container");
 var menuOpponents = document.getElementById("opponent-container");
+var menuPause = document.getElementById("pause-container");
 
 btnInstructions.onclick = function() {
   menuMain.style.display = "none";
@@ -180,7 +181,7 @@ btnRestart.onclick = function() {
 }
 
 btnPause.onclick = function() {
-    keys['P'.charCodeAt(0)] = true;
+    keys[keyCode('P')] = true;
 }
 
 btnMute.onclick = function() {

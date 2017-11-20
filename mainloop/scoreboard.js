@@ -36,6 +36,7 @@ var scoreboard = {
                     //statBoxes[i].children[1].style.fontSize = consts.SCOREBOARD_FONT_SIZE;
                 }
             }
+
             for (let i = 0; i < STAT_COUNT; i++) {
                 statBoxes[i].children[1].style.fontSize = consts.SCOREBOARD_FONT_SIZE;
             }
@@ -56,7 +57,6 @@ var scoreboard = {
             Math.floor(0.8 * player.timeAlive / 6) % 6 ,
             0,
         );
-
     },
 
     init: function () {
