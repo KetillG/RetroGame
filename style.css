@@ -12,6 +12,7 @@ html, body {
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  border: 0.125em outset black;
 }
 
 .menu-container {
@@ -22,7 +23,6 @@ html, body {
   flex-direction: column;
   color: rgba(255,255,255,1);
   padding: 1.875em;
-  border: 0.125em outset black;
   max-width: 53em;
   min-width: 1em;
 }
