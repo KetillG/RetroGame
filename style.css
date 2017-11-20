@@ -121,13 +121,14 @@ ul {
 .players-list {
   display: flex;
   flex-direction: column;
-  height: 60%;
+  height: 90%;
 }
 
 .player-container {
   display: flex;
   height: 25%;
   margin: 2px;
+  margin-bottom: 2em;
 }
 
 .player-image {
