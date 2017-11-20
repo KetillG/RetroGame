@@ -120,7 +120,7 @@ ul {
 .players-list {
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height: 85%;
 }
 
 .player-container {
