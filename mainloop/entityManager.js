@@ -190,7 +190,12 @@ update: function(du) {
           // remove the dead guy, and shuffle the others down to
           // prevent a confusing gap from appearing in the array
           if(aCategory[i].constructorType === 'Character') {
-              gameOver(aCategory[i].name);
+              const players = entityManager.getPlayers();
+              const alive = players.filter(player => {
+                if(player.lives > 0) return player
+              });
+              
+              if(alive.length < 2) gameOver(aCategory[i].name);
           }
           aCategory.splice(i,1);
       }
