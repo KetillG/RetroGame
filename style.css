@@ -110,7 +110,7 @@ ul {
 }
 
 .scoreboard {
-  background-color: rgba(0,93,177,1);
+  background-color: rgba(0,0,143,0.8);
   /*flex-direction: column;*/
   color: rgba(255,255,255,1);
   /*padding: 1em;*/
