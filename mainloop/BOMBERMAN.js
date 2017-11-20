@@ -19,7 +19,7 @@ var menuMain = document.getElementById("main-container");
 var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
-var menuScoreboard = document.getElementById("scoreboard-container");
+var menuScoreboard = document.getElementById("scoreboard-container").querySelector(".players-list");
 
 btnInstructions.onclick = function() {
   console.log('instruction')

@@ -32,15 +32,15 @@ Character.prototype.immuneTime = -1;
 
 Character.prototype.velX = 4,
 Character.prototype.velY = 4,
-Character.prototype.maxVelX = 10,
-Character.prototype.maxVelY = 10,
+Character.prototype.maxVelX = 8,
+Character.prototype.maxVelY = 8,
 Character.prototype.radius = 30;
 
 Character.prototype.dirObj = {};
 Character.prototype.recentlyHit = false;
 
 Character.prototype.timeAlive = 0;
-Character.prototype.aiMovement = 0;
+Character.prototype.aiMovement = 1;
 
 Character.prototype.getStats = function () {
     return {
@@ -61,7 +61,7 @@ Character.prototype.decrementLife = function () {
 }
 
 
-Character.prototype.hitSomething = function(hitEntities){
+Character.prototype.hitSomething = function(hitEntities, posX, posY){
     hitEntities.map(hitEntity => {
         // If you have not left the bomb area you can walk on it
         if (hitEntity === this.freshBomb) {
@@ -114,7 +114,7 @@ Character.prototype.updatePosition = function(posX, posY){
     const hitEntities = this.findHitEntity();
     // If a entity its an 'wall'
     if (hitEntities.length) {
-        this.hitSomething(hitEntities);
+        this.hitSomething(hitEntities, posX, posY);
     }
     else {
 
