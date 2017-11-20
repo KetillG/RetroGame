@@ -5,9 +5,10 @@
 "use strict";
 
 function Board(descr) {
-
+  // Adds board to spatial manager
   this._spatialID = spatialManager.getNewSpatialID();
   spatialManager.register(this);
+  // Adds a type that can be queried be other entites to know its type
   this['constructorType'] = 'Board'
 
   // vars used to determine scaling
@@ -25,6 +26,7 @@ function Board(descr) {
   this['yStep'] = yStep;
   this['boardsize'] = boardSize;
 
+  // Creates the actual board
   for(var i = 0; i < tileBoard.length; i++) {
     for(var j = 0; j < tileBoard[i].length; j++) {
       // Randomly creates board
@@ -77,24 +79,7 @@ function Board(descr) {
   }
 }
 
-/**
-  * @param {double} x old x position
-  * @param {double} y old y position
-  * @param {double} newX updated x position
-  * @param {double} newY updated y position
-  * @return An array with the updated positions for the character
- */
-
-Board.prototype.getBrickAt = function (x, y) {
-  const i = Math.floor(y / ( this.yStep * consts.RENDER_SCALE_WIDTH));
-  const j = Math.floor(x / ( this.xStep * consts.RENDER_SCALE_HEIGHT));
-  try {
-    return this.board[i][j];
-  } catch (e) {
-    return null;
-  }
-}
-
+// Send in a position and get the brick at that position
 Board.prototype.getBrickAtWithoutScaling = function (x, y) {
   const i = Math.floor(y / ( this.yStep));
   const j = Math.floor(x / ( this.xStep));
@@ -104,7 +89,7 @@ Board.prototype.getBrickAtWithoutScaling = function (x, y) {
     return null;
   }
 }
-
+// Returns the center of a brick at a certain position
 Board.prototype.getBrickCenterAt = function (x, y) {
   const i = Math.floor(x / ( this.xStep));
   const j = Math.floor(y / ( this.yStep));
@@ -117,11 +102,12 @@ Board.prototype.getBrickCenterAt = function (x, y) {
     return null;
   }
 }
-
+// Checks if a non walkable brick is at position
 Board.prototype.positionOccupied = function (x, y) {
   return !this.getBrickAtWithoutScaling(x,y).isWalkable();
 }
 
+// Tries to explode brick at position
 Board.prototype.tryExplodeBrick = function (x, y) {
   const i = Math.floor(y / ( this.yStep));
   const j = Math.floor(x / ( this.xStep));
@@ -133,6 +119,7 @@ Board.prototype.tryExplodeBrick = function (x, y) {
   return false;
 }
 
+// Drops powerup on board
 Board.prototype.dropPowerup = function (i, j) {
   if(Math.random() < 0.7) {
       const powerupType = Math.floor(Math.random() * 3);
@@ -142,6 +129,7 @@ Board.prototype.dropPowerup = function (i, j) {
   }
 };
 
+// Updates board
 Board.prototype.update = function (du) {
   for(var i = 0; i < this.board.length; i++) {
     for(var j = 0; j < this.board[i].length; j++) {
@@ -150,6 +138,7 @@ Board.prototype.update = function (du) {
   }
 }
 
+// Renders board
 Board.prototype.render = function (ctx) {
   for(var i = 0; i < this.board.length; i++) {
     for(var j = 0; j < this.board[i].length; j++) {

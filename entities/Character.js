@@ -20,8 +20,8 @@ function Character(descr) {
 }
 
 Character.prototype = new Entity();
-// Character.prototype.board = new Board();
 
+// Various properties of a character
 Character.prototype.ammo = 1;
 Character.prototype.power = 1;
 Character.prototype.kickPower = false;
@@ -42,6 +42,7 @@ Character.prototype.recentlyHit = false;
 Character.prototype.timeAlive = 0;
 Character.prototype.aiMovement = 1;
 
+// Returns stats of value
 Character.prototype.getStats = function () {
     return {
         life: this.lives,
@@ -51,16 +52,19 @@ Character.prototype.getStats = function () {
     }
 }
 
+// Decreases the player life and kills him if none are left
 Character.prototype.decrementLife = function () {
     if(this.immuneTime >= 0) return;
     this.lives--;
     if(this.lives < 1) {
         this.kill();
     }
+
+    // Gives the character an immune period after taking damage
     this.immuneTime = 1000 / NOMINAL_UPDATE_INTERVAL;
 }
 
-
+// If the player hit something react accordingly
 Character.prototype.hitSomething = function(hitEntities, posX, posY){
     hitEntities.map(hitEntity => {
         // If you have not left the bomb area you can walk on it
@@ -88,6 +92,7 @@ Character.prototype.hitSomething = function(hitEntities, posX, posY){
     });
 }
 
+// The "AI"
 Character.prototype.dumbAiChangeDir = function () {
     if (this.computer) {
         this.aiMovement = Math.floor(Math.random() * 4);        
@@ -100,6 +105,7 @@ Character.prototype.bombCollide = false;
 Character.prototype.stillOnFreshBomb = false;
 Character.prototype.playerCollision = false;
 
+// Updates the position
 Character.prototype.updatePosition = function(posX, posY){
     this.newPosX = posX;
     this.newPosY = posY;
@@ -130,6 +136,7 @@ Character.prototype.updatePosition = function(posX, posY){
     }
 }
 
+// Handles character updating
 Character.prototype.update = function (du) {
     spatialManager.unregister(this);
 
@@ -188,6 +195,7 @@ Character.prototype.update = function (du) {
     spatialManager.register(this);
 };
 
+// Renders the character
 Character.prototype.render = function (ctx) {
     var a = new Sprite(g_images.explosion)
 
@@ -219,12 +227,15 @@ Character.prototype.render = function (ctx) {
     ctx.globalAlpha = 1;
 };
 
+// Sets character position
 Character.prototype.setPos = function (x, y) {
     this.cx = x;
     this.cy = y;
 };
 
+// Tries to drop a bomb
 Character.prototype.maybeDropBomb = function () {
+    // If drop bomb key is pressed and player has ammo then drop bomb
     if ((eatKey(this.keyFire) || this.computer ) && this.ammo > 0) {
         // Gets correct position from board
         const pos = entityManager.getValidBombCenter(this.cx, this.cy);
@@ -244,6 +255,7 @@ Character.prototype.maybeDropBomb = function () {
     }
 };
 
+// Returns if self is at the position sent in
 Character.prototype.positionOccupied = function (x, y, radius = 0) {
     const yHit = this.cy - this.height < y && this.cy + this.height> y;
     const xHit = this.cx - this.width < x && this.cx + this.width > x;

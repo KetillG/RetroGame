@@ -199,10 +199,6 @@ update: function(du) {
   }
 },
 
-getBrick: function(x,y) {
-  return this._board.getBrickAt(x,y);
-},
-
 render: function(ctx) {
 
     this._board.render(ctx);

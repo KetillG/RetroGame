@@ -23,6 +23,7 @@ function Fire(descr) {
 Fire.prototype.lifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 Fire.prototype.totalLifeSpan = 1000 / NOMINAL_UPDATE_INTERVAL;
 
+// Calculates the path of the fire
 Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
     // New fire path added to fire
     const path = {
@@ -41,6 +42,7 @@ Fire.prototype.explodingBomb = function (bomb, xStep, yStep) {
     this.paths.push(path);
 }
 
+// Check if current position hit something with the spatial manager
 Fire.prototype.computeHitPath = function (x, y) {
     const tempHitEntitiesStep = [];
 
@@ -66,6 +68,7 @@ Fire.prototype.computeHitPath = function (x, y) {
     return tempHitEntitiesStep;
 }
 
+// Function to unique join arrays together
 Fire.prototype.addUniqueToArray = function(main, add) {
     add.forEach(element => {
         if(main.indexOf(element) === -1) {
@@ -74,6 +77,7 @@ Fire.prototype.addUniqueToArray = function(main, add) {
     });
 }
 
+// Calculates a single direction of the fire
 Fire.prototype.addPath = function (power, pos, xStep, yStep) {
     while(power > 0) {
         power--;
@@ -131,6 +135,7 @@ Fire.prototype.addPath = function (power, pos, xStep, yStep) {
     return pos;
 }
 
+// Updates the fire
 Fire.prototype.update = function (du) {
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
@@ -138,6 +143,7 @@ Fire.prototype.update = function (du) {
     }
 }
 
+// Renders the fire
 Fire.prototype.render = function (ctx) {
     this.paths.map(path => {
         path.directions.map(dir => {
@@ -157,7 +163,7 @@ Fire.prototype.render = function (ctx) {
                 const xDir = stepX === 0 ? 0  : stepX / Math.abs(stepX);
                 const yDir = stepY === 0 ? 0  : stepY / Math.abs(stepY);
 
-                // Hmm
+                // For each cell in the fire path
                 for(let i = 0; i <= Math.abs(stepX + stepY); i++) {
                     this.sprite.drawFrameCenteredAt(
                         ctx, 

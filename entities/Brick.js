@@ -9,18 +9,21 @@ function Brick(descr) {
   for (var property in descr) {
       this[property] = descr[property];
   }
+  // Adds the brick properties to the brick
   for (var property in brick) {
       this[property] = brick[property];
   }
 
 }
-
+// Updates the brick
 Brick.prototype.update = function (du) {
+  // If brick was broken then break it
   if(this.broken) {
     this.updateBroken();
   }
 }
 
+// Renders the brick
 Brick.prototype.render = function (ctx) {
   if (this.sprite) {
     this.sprite.drawFrameCenteredAt(
@@ -36,26 +39,32 @@ Brick.prototype.render = function (ctx) {
   }
 }
 
+// Return wether brick is walkable
 Brick.prototype.isWalkable = function () {
   return this.walkable;
 }
 
+// Makes a brick walkable
 Brick.prototype.makeWalkable = function () {
   this.walkable = true;
 }
 
+// Returns wether brick is breakable
 Brick.prototype.isBreakable = function () {
   return this.breakable;
 }
 
+// Breaks the brick
 Brick.prototype.break = function () {
   this.broken = true;
 }
 
+// Return wether the brick is broken
 Brick.prototype.isBroken = function () {
   return this.broken;
 }
 
+// Breaks a brick that was broken
 Brick.prototype.updateBroken = function () {
   var brick = this.getBricktype(0)
   

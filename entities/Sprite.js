@@ -30,6 +30,7 @@ Sprite.prototype.drawAt = function (ctx, x, y) {
                   x, y);
 };
 
+// Draws a spritesheet at a frame x and y
 Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, frameY) {
     if (rotation === undefined) rotation = 0;
 
@@ -60,35 +61,7 @@ Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, 
     ctx.restore();
 };
 
-Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, frameY) {
-    if (rotation === undefined) rotation = 0;
-
-    var w = this.width / this.scale;
-    var h = this.height / this.scale;
-
-    ctx.save();
-    ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
-    ctx.rotate(rotation);
-    ctx.scale(
-        this.scale * consts.RENDER_SCALE_WIDTH,
-        this.scale * consts.RENDER_SCALE_HEIGHT
-    );
-    // drawImage expects "top-left" coords, so we offset our destination
-    // coords accordingly, to draw our sprite centred at the origin
-    ctx.drawImage(
-        this.image,
-        w * frameX,
-        h * frameY,
-        w,
-        h,
-        0.5 * -w,
-        0.5 * -h,
-        w,
-        h
-    );
-
-    ctx.restore();
-};
+// Draws cats to side, special function since not same scaling
 Sprite.prototype.drawFrameCenteredAtExtra = function (ctx, cx, cy, rotation, frameX, frameY) {
     if (rotation === undefined) rotation = 0;
     const image = this.image;

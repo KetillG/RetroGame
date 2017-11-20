@@ -24,12 +24,14 @@ function Powerup(descr) {
 Powerup.prototype = new Entity();
 Powerup.prototype.radius = 33;
 
+// Returns if self is at the position sent in
 Powerup.prototype.positionOccupied = function (x, y) {
   const yHit = this.cy - this.radius < y && this.cy + this.radius > y
   const xHit = this.cx - this.radius < x && this.cx + this.radius > x
   return xHit && yHit;
 }
 
+// Updates the powerup
 Powerup.prototype.update = function (du) {
 
     spatialManager.unregister(this);
@@ -39,6 +41,7 @@ Powerup.prototype.update = function (du) {
     spatialManager.register(this);
 };
 
+// Renders the powerup
 Powerup.prototype.render = function (ctx) {
   if (this.sprite) {
     this.sprite.drawFrameCenteredAt(
@@ -69,22 +72,27 @@ Powerup.prototype.render = function (ctx) {
 
 };
 
+// Gives player more firepower
 Powerup.prototype.addFire = function (player) {
   player.power++;
 }
 
+// Adds speed to the player
 Powerup.prototype.addSpeed =  function (player) {
   if(player.velX < player.maxVelX) player.velX += 1;
   if(player.velY < player.maxVelY) player.velY += 1;
 }
 
+// Adds ammo to the player
 Powerup.prototype.addAmmo =  function (player) {
   player.ammo++;
 }
 
+// Adds kick ability to the player, not used
 Powerup.prototype.addKick =  function (player) {
   player.kickPower = true;
 }
+
 // Maps number to a brick type
 Powerup.prototype.getBricktype =  function (number) {
     switch (number) {

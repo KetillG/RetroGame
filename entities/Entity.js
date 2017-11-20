@@ -27,6 +27,7 @@ function Entity() {
 
 };
 
+// Set widths of a entity
 Entity.prototype.setWidths = function(){
     if(this.sprite){
         this.width = this.sprite.width / 2;
@@ -38,7 +39,7 @@ Entity.prototype.setWidths = function(){
     }
 }
 
-
+// Base setup of an entity
 Entity.prototype.setup = function (descr) {
 
     // Apply all setup properies from the (optional) descriptor
@@ -57,32 +58,38 @@ Entity.prototype.setup = function (descr) {
     this.newPosY = this.cy;
 };
 
+// Sets pos
 Entity.prototype.setPos = function (cx, cy) {
     this.cx = cx;
     this.cy = cy;
 };
 
+// Returns pos
 Entity.prototype.getPos = function(){
     return {posX:this.cx, posY:this.cy};
 };
 
+// Returns future pos if it has been calculated
 Entity.prototype.getFuturePos = function () {
     return {posX : this.newPosX, posY : this.newPosY};
 };
 
+// Default value if none assigned
 Entity.prototype.getRadius = function () {
     return 0;
 };
 
-
+// Kills the entity
 Entity.prototype.kill = function () {
     this._isDeadNow = true;
 };
 
+// Tells if entity is dead
 Entity.prototype.isDead = function () {
     return this._isDeadNow;
 };
 
+// Checks if entity hit something with the spatialManager
 Entity.prototype.findHitEntity = function () {
     const tempHitEntitiesStep = [];
 
@@ -121,9 +128,9 @@ Entity.prototype.findHitEntity = function () {
     this.addUniqueToArray(tempHitEntitiesStep,west);
     this.addUniqueToArray(tempHitEntitiesStep,east);
     return tempHitEntitiesStep;
-    //return right.concat(left).concat(up).concat(down).concat(north).concat(south).concat(east).concat(west);
 };
 
+// Function to unique join arrays together
 Entity.prototype.addUniqueToArray = function(main, add) {
     add.forEach(element => {
         if(main.indexOf(element) === -1) {
