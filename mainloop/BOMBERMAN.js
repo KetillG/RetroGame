@@ -135,7 +135,6 @@ function play (human, computer) {
 
     // For each human
     for (let index = 0; index < human; index++) {
-        console.log('human')
         const pos = playerPos.shift();
         const keycode = playerCode.shift();
         const image = images.shift();
@@ -150,7 +149,6 @@ function play (human, computer) {
     }
     // For each computer
     for (let index = 0; index < computer; index++) {
-        console.log('computer')
         const pos = playerPos.shift();
         const image = images.shift();
         entityManager.initAI(
@@ -203,7 +201,6 @@ function hideScoreboardButtons() {
 // Adds event listener to each back button
 for (var i = 0; i < btnsBack.length; i++) {
     btnsBack[i].onclick = function() {
-        console.log('I am back')
      for (var j = 0; j < menuContainers.length; j++) {
        menuContainers[j].style.display = "none";
      }
@@ -213,7 +210,6 @@ for (var i = 0; i < btnsBack.length; i++) {
 
 // Game over function
 function gameOver(playerName) {
-    console.log('gameover')
     menuGameOver.style.display = "flex";
     menuScoreboard.style.display = "none";
     hideScoreboardButtons();
