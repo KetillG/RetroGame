@@ -17,7 +17,7 @@ let Page = (() => {
         const scoreboard = document.getElementById('scoreboard-container');
 
         wWidth = window.innerWidth - 30 - scoreboard.offsetWidth;
-        wHeight = window.innerHeight;
+        wHeight = window.innerHeight - 20;
 
         wWidth = Math.min(wWidth, wHeight);
         wHeight = wWidth;

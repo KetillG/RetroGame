@@ -41,7 +41,7 @@ btnNewGame.onclick = function() {
   entityManager.deferredSetup();*/
   entityManager.initPlayer();
   menuScoreboard.style.display = "flex";
-  Page.resizeCanvas();
+  //Page.resizeCanvas();
   // reset everything
 
   // Init scoreboard
