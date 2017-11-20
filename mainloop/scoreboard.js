@@ -22,6 +22,7 @@ var scoreboard = {
         for (let index = 0; index < MAX_PLAYERS; index++) {
             const STAT_COUNT = 4;
             const statBoxes = this._playersDOM[index].querySelector('.player-score').children;
+            statBoxes[0].children[1].innerHTML = 0;
 
             if(this._players[index]) {
                 const canvasP = this._playersDOM[index].querySelector('.playerCTX');
