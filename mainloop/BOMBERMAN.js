@@ -32,34 +32,36 @@ btnAbout.onclick = function() {
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
-
+const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
+const playerCode = [
+    [38,40,37,39,'O'.charCodeAt(0)],
+    [
+        'W'.charCodeAt(0),
+        'S'.charCodeAt(0),
+        'A'.charCodeAt(0),
+        'D'.charCodeAt(0),
+        220
+    ]];
 btnNewGame.onclick = function() {
   console.log('I am newGame')
+  // show menu
   menuMain.style.display = "none";
-  /*spatialManager.restart();
-  entityManager.init();
-  entityManager.deferredSetup();*/
-  entityManager.initPlayer();
   menuScoreboard.style.display = "flex";
-  //Page.resizeCanvas();
-  // reset everything
-
-  // Init scoreboard
+  
+  // Init
+  entityManager.initPlayer();
   scoreboard.init();
   scoreboard.start(entityManager.getPlayers());
 }
 
 btnNewGameAI.onclick = function() {
     console.log('I am computah gamerino');
+    // show menu
     menuMain.style.display = "none";
-
-    entityManager.initAI();
-
     menuScoreboard.style.display = "flex";
-    Page.resizeCanvas();
-    // reset everything
-
+    
     // Init scoreboard
+    entityManager.initAI();
     scoreboard.init();
     scoreboard.start(entityManager.getPlayers());
 }

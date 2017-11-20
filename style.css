@@ -115,13 +115,13 @@ ul {
   color: rgba(255,255,255,1);
   /*padding: 1em;*/
   border: 0.125em outset black;
-  padding-left: 2em;
+  padding-left: 1em;
 }
 
 .players-list {
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height: 60%;
 }
 
 .player-container {
@@ -157,8 +157,8 @@ ul {
 }
 
 .info-img {
-    max-width:100%;
-max-height:100%;
+  max-width:100%;
+  max-height:100%;
 }
 #player1C {
   width: 100%;
