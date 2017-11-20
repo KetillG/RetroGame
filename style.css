@@ -111,7 +111,6 @@ ul {
 
 .scoreboard {
   background-color: rgba(0,0,143,0.8);
-  /*flex-direction: column;*/
   color: rgba(255,255,255,1);
   border: 0.125em outset black;
   padding-left: 1em;
@@ -140,11 +139,9 @@ ul {
   flex-basis: 50%;
   display: flex;
   flex-direction: column;
-  /*flex-wrap: wrap;*/
 }
 
 .player-score > div {
-  /*background-color: rgb(102, 62, 247);*/
   height: 25%;
 }
 
@@ -164,4 +161,11 @@ ul {
 .playerCTX {
   width: 100%;
   height: 100%;
+}
+
+.btn-scoreboard {
+    display: none;
+    border: 1px outset black;
+    width: 90%;
+    padding: 0,
 }

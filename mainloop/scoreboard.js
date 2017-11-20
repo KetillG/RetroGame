@@ -39,6 +39,10 @@ var scoreboard = {
             for (let i = 0; i < STAT_COUNT; i++) {
                 statBoxes[i].children[1].style.fontSize = consts.SCOREBOARD_FONT_SIZE;
             }
+
+            for(let i=0; i < btnsScoreboard.length; i++) {
+                btnsScoreboard[i].style.fontSize = consts.BUTTON_FONT_SIZE;
+            }
         }
     },
     drawPlayer(player,canvasP ,ctxP,index) {

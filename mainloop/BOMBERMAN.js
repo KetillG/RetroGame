@@ -4,23 +4,27 @@
 
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
-console.log('ket')
-console.log(g_ctx)
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
-//var btnNewGameAI = document.getElementById("btn-newgameai");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
 var btnsBack = document.querySelectorAll(".btn-back");
+
 var btn1Player = document.getElementById("btn-1player");
 var btn2Player = document.getElementById("btn-2player");
+
 var btn0Opponent = document.getElementById("btn-0opponent");
 var btn1Opponent = document.getElementById("btn-1opponent");
 var btn2Opponent = document.getElementById("btn-2opponent");
 var btn3Opponent = document.getElementById("btn-3opponent");
 var btnBackOpponent = document.getElementById("btn-back-opponent");
+
+var btnsScoreboard = document.querySelectorAll(".btn-scoreboard");
+var btnPause = document.getElementById("btn-pause");
+var btnMute = document.getElementById("btn-mute");
+var btnQuit = document.getElementById("btn-quit");
 
 var menuContainers = document.querySelectorAll(".menu-container");
 var menuMain = document.getElementById("main-container");
@@ -32,17 +36,14 @@ var menuPlayers = document.getElementById("player-container");
 var menuOpponents = document.getElementById("opponent-container");
 
 btnInstructions.onclick = function() {
-  console.log('instruction')
   menuMain.style.display = "none";
   menuInstructions.style.display = "flex";
 }
 
 btnAbout.onclick = function() {
-  console.log('about')
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
-// consts, should refactor
 
 // Play function takes in num human and num computers
 function play (human, computer) {
@@ -94,62 +95,69 @@ function play (human, computer) {
 }
 
 btnNewGame.onclick = function() {
-  console.log('I am newGame')
-  // show menu
   menuMain.style.display = "none";
-  //menuScoreboard.style.display = "flex";
-
-  // Init
   menuPlayers.style.display = "flex";
 }
 
 let numPlayers = 0;
 btn1Player.onclick = function() {
-    menuPlayers.style.display = "none";
-    menuOpponents.style.display = "flex";
-    var noOpponent = document.getElementById("btn-0opponent");
-    noOpponent.style.display = "none";
-    var moreOpponent = document.getElementById("btn-3opponent");
-    moreOpponent.style.display = "inline";
-    numPlayers = 1;
+    playersChosen(1);
 }
 
 btn2Player.onclick = function() {
+    playersChosen(2);
+}
+
+function playersChosen(nrOfPlayers) {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
     var noOpponent = document.getElementById("btn-0opponent");
-    noOpponent.style.display = "inline";
     var moreOpponent = document.getElementById("btn-3opponent");
-    moreOpponent.style.display = "none";
-    numPlayers = 2;
+
+    if(nrOfPlayers === 1) {
+        noOpponent.style.display = "none";
+        moreOpponent.style.display = "inline";
+    } else if(nrOfPlayers === 2) {
+        noOpponent.style.display = "inline";
+        moreOpponent.style.display = "none";
+    }
+
+    numPlayers = nrOfPlayers;
 }
 
 btn0Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
+    showScoreboardButtons();
     play(numPlayers,0)
 }
 
 btn1Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
+    showScoreboardButtons();
     play(numPlayers,1)
 }
 
 btn2Opponent.onclick = function() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
+    showScoreboardButtons();
     play(numPlayers,2)
 }
 
 btn3Opponent.onclick = function() {
+    showScoreboardButtons();
+    play(numPlayers,3)
+}
+
+function showScoreboardButtons() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
-    play(numPlayers,3)
+    for(var i = 0; i < btnsScoreboard.length; i++) {
+        btnsScoreboard[i].style.display = "inline";
+    }
+}
+
+function hideScoreboardButtons() {
+    for(var i = 0; i < btnsScoreboard.length; i++) {
+        btnsScoreboard[i].style.display = "none";
+    }
 }
 
 btnBackOpponent.onclick = function() {
@@ -157,20 +165,7 @@ btnBackOpponent.onclick = function() {
     menuOpponents.style.display = "none";
 }
 
-/*btnNewGameAI.onclick = function() {
-    console.log('I am computah gamerino');
-    // show menu
-    menuMain.style.display = "none";
-    menuScoreboard.style.display = "flex";
-
-    // Init scoreboard
-    entityManager.initAI();
-    scoreboard.init();
-    scoreboard.start(entityManager.getPlayers());
-}*/
-
 btnRestart.onclick = function() {
-    console.log('I am restart')
     for (var j = 0; j < menuContainers.length; j++) {
         menuContainers[j].style.display = "none";
       }
@@ -182,6 +177,20 @@ btnRestart.onclick = function() {
     entityManager.restartEntityManager();
     // New board
     entityManager.init();
+}
+
+btnPause.onclick = function() {
+    keys['P'.charCodeAt(0)] = true;
+}
+
+btnMute.onclick = function() {
+    muteSound();
+}
+
+btnQuit.onclick = function() {
+    hideScoreboardButtons();
+    quitGame();
+    g_isGameStarted = true;
 }
 
 for (var i = 0; i < btnsBack.length; i++) {
@@ -198,6 +207,7 @@ function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
     menuScoreboard.style.display = "none";
+    hideScoreboardButtons();
     const players = entityManager.getPlayers();
     const winner = players.filter(player => {
         if(player.lives > 0) return player
@@ -205,6 +215,13 @@ function gameOver(playerName) {
     const winnerMsg = winner[0] ? winner[0].name + ' won!' : 'Tie!';
     document.getElementById("winner").innerHTML = winnerMsg;
 
+    g_isGameStarted = true;
+}
+
+function quitGame() {
+    menuGameOver.style.display = "flex";
+    menuScoreboard.style.display = "none";
+    document.getElementById("winner").innerHTML = 'Game quit :(';
     g_isGameStarted = true;
 }
 
