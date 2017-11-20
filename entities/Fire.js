@@ -139,7 +139,6 @@ Fire.prototype.update = function (du) {
 }
 
 Fire.prototype.render = function (ctx) {
-    //ctx.globalAlpha = this.lifeSpan / (1000 / NOMINAL_UPDATE_INTERVAL);
     this.paths.map(path => {
         path.directions.map(dir => {
             if(this.sprite) {

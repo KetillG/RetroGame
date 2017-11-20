@@ -96,15 +96,9 @@ Sprite.prototype.drawFrameCenteredAtExtra = function (ctx, cx, cy, rotation, fra
     var test = 1
     var w = image.width / 6;
     var h = image.height / test;
-    //console.log(this)
-    //console.log(w,h)
-    //console.log(this.scale)
     ctx.save();
-    //ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
     ctx.rotate(rotation);
-    /*ctx.scale(
-        5,5
-    );*/
+
     // drawImage expects "top-left" coords, so we offset our destination
     // coords accordingly, to draw our sprite centred at the origin
     ctx.drawImage(

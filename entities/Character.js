@@ -76,8 +76,6 @@ Character.prototype.hitSomething = function(hitEntities, posX, posY){
             }
             this.dumbAiChangeDir();
             this.bombCollide = true;
-            //this.revertPosition();
-            //return;
         }
         else if(hitEntity.constructorType === "Character"){
             this.dumbAiChangeDir();
@@ -128,9 +126,7 @@ Character.prototype.updatePosition = function(posX, posY){
         return;
     }
     if(this.wallCollide && this.bombCollide && !this.stillOnFreshBomb) {
-        //this.revertPosition();
         this.setPos(this.cx, this.cy);
-        //return;
     }
 }
 
@@ -187,7 +183,6 @@ Character.prototype.update = function (du) {
         }
         this.maybeDropBomb();
     
-        // Handle firing
     }
 
     spatialManager.register(this);

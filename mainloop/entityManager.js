@@ -20,7 +20,6 @@ with suitable 'data' and 'methods'.
 // my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
-/*jslint nomen: true, white: true, plusplus: true*/
 
 
 
@@ -112,18 +111,14 @@ restartEntityManager: function () {
 },
 init: function() {
     this._createBoard(board);
-    //this._createBoard(board);
 },
 
 initPlayer(x,y,keycode,color,image,id) {
-    //this._addPlayer(1.5,1.5,p2,"yellow",new Sprite(g_images.catWhite),2);
-    console.log(x,y,keycode,color,image,id)
     this._addPlayer(x,y,keycode,color,image,id);
 
 },
 
 initAI(x,y,color,image,id) {
-    //this._addComputerPlayer(10.5,10.5,"red",new Sprite(g_images.catBlack),1);
     this._addComputerPlayer(x,y,color,image,id);
 },
 
@@ -146,8 +141,6 @@ bombExplode(bomb) {
         yStep: this._board.yStep,
     });
 
-
-    //sprite: new Sprite(g_images.catWhite),
 
     fire.explodingBomb(bomb, this._board.xStep, this._board.yStep);
     this._fires.push(fire);

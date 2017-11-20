@@ -14,8 +14,6 @@ function Brick(descr) {
   }
 
 }
-//Brick.prototype.width = consts.LOGICAL_WIDTH / 7;
-//Brick.prototype.height = consts.LOGICAL_HEIGHT / 7;
 
 Brick.prototype.update = function (du) {
   if(this.broken) {
@@ -24,7 +22,6 @@ Brick.prototype.update = function (du) {
 }
 
 Brick.prototype.render = function (ctx) {
-  //console.log(this.sprite)
   if (this.sprite) {
     this.sprite.drawFrameCenteredAt(
       ctx, 
