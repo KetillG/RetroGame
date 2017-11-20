@@ -85,7 +85,7 @@ function play (human, computer) {
     }
 
     
-    scoreboard.init();
+    //scoreboard.init();
     console.log()
     scoreboard.start(entityManager.getPlayers());
 }

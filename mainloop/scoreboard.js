@@ -8,8 +8,16 @@ var scoreboard = {
 
     start: function (players) {
         this._players = players;
+        console.log(players)  
+        console.log(this._playersDOM)          
+        for (let index = 0; index < 4; index++) {
+            const domItem = this._playersDOM[index]
+            domItem.style.display = 'flex';
+            if(!players[index]) {
+                domItem.style.display = 'none';
+            }            
+        }
         console.log('I am in start scoreboard')
-        console.log(players)
     },
 
     update: function (du) {
