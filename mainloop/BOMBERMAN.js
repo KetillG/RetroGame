@@ -229,7 +229,7 @@ function requestPreloads() {
       explosion: './sprite/Explosion.png',
       brick0: './sprite/Brick_0.png',
       brick1: './sprite/Brick_1_test.png',
-      brick2: './sprite/Brick_2.png',
+      brick2: './sprite/Brick_2_test.png',
       bombNew: './sprite/Bomb2.png',
       powerupBomb: './sprite/Powerup_Bomb.png',
       powerupFire: './sprite/Powerup_Fire.png',
