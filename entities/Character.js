@@ -27,7 +27,7 @@ Character.prototype.power = 1;
 Character.prototype.kickPower = false;
 Character.prototype.freshBomb;
 
-Character.prototype.lives = 1;
+Character.prototype.lives = 3;
 Character.prototype.immuneTime = -1;
 
 Character.prototype.velX = 4,

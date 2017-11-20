@@ -178,7 +178,6 @@ function gameOver(playerName) {
     menuScoreboard.style.display = "none";
     const players = entityManager.getPlayers();
     const winner = players.filter(player => {
-        console.log(player)
         if(player.lives > 0) return player
     });
     document.getElementById("winner").innerHTML = winner[0].name + ' won!';
