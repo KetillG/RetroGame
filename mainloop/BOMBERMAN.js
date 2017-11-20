@@ -273,7 +273,7 @@ function preloadDone() {
     const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
     // Inits the sprites
     // Characters
-    const CHARACTER_TO_BRICK_RATIO = 0.33;
+    const CHARACTER_TO_BRICK_RATIO = 0.4;
     initSprites(g_images.catWhite, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
     initSprites(g_images.catBlack, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
     initSprites(g_images.catRed, CHARACTER_TO_BRICK_RATIO, brickSize, 6);

@@ -131,13 +131,13 @@ ul {
 }
 
 .player-image {
-  flex-grow: 1;
-  flex-basis: 33%;
+  flex-grow: 3;
+  flex-basis: 50%;
 }
 
 .player-score {
-  flex-grow: 2;
-  flex-basis: 67%;
+  flex-grow: 3;
+  flex-basis: 50%;
   display: flex;
   flex-direction: column;
   /*flex-wrap: wrap;*/

@@ -26,7 +26,7 @@ let Page = (() => {
         g_ctx.canvas.height = wHeight;
 
         scoreboard.style.height = wHeight + 'px';
-        scoreboard.style.width = wWidth * 0.3 + 'px';
+        scoreboard.style.width = wWidth * 0.25 + 'px';
 
         scoreboard.querySelector('.scoreHeader').style.fontSize = 0.04 * wWidth + 'px';
 
