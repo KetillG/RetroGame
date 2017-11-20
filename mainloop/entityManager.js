@@ -24,16 +24,16 @@ with suitable 'data' and 'methods'.
 
 
 
-var board = [[4,4,0,0,0,0,0,0,0,0],
-             [4,1,0,1,0,0,1,0,1,0],
+var board = [[4,4,0,0,0,0,0,0,4,4],
+             [4,1,0,1,0,0,1,0,1,4],
              [0,0,0,0,0,0,0,0,0,0],
              [0,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,2,2,0,0,0,0],
              [0,0,0,0,2,2,0,0,0,0],
              [0,1,0,1,0,0,1,0,1,0],
              [0,0,0,0,0,0,0,0,0,0],
-             [0,1,0,1,0,0,1,0,1,4],
-             [0,0,0,0,0,0,0,0,4,4]]
+             [4,1,0,1,0,0,1,0,1,4],
+             [4,4,0,0,0,0,0,0,4,4]]
 function scalePlayers(player){
     var maxWidth = 0.8*canvas.width/board[0].length;
     var maxHeight = 0.8*canvas.height/board.length;
@@ -92,7 +92,7 @@ _addPlayers : function () {
 getPlayers: function () {
     return this._players;
 },
-  
+
 _addComputerPlayer : function () {
     var player1 = new Character({
         cx: this._board.xStep * 10.5,

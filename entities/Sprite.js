@@ -20,7 +20,7 @@ function Sprite(image) {
     this.scale = image.scale;
     this.width = this.scale * image.width;
     this.height = this.scale * image.height;
-    
+
     this.scaleX = 1;
     this.scaleY = 1;
 }
@@ -35,12 +35,12 @@ Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, 
 
     var w = this.width / this.scale;
     var h = this.height / this.scale;
-    
+
     ctx.save();
     ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
     ctx.rotate(rotation);
     ctx.scale(
-        this.scale * consts.RENDER_SCALE_WIDTH, 
+        this.scale * consts.RENDER_SCALE_WIDTH,
         this.scale * consts.RENDER_SCALE_HEIGHT
     );
     // drawImage expects "top-left" coords, so we offset our destination
@@ -65,12 +65,12 @@ Sprite.prototype.drawFrameCenteredAt = function (ctx, cx, cy, rotation, frameX, 
 
     var w = this.width / this.scale;
     var h = this.height / this.scale;
-    
+
     ctx.save();
     ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
     ctx.rotate(rotation);
     ctx.scale(
-        this.scale * consts.RENDER_SCALE_WIDTH, 
+        this.scale * consts.RENDER_SCALE_WIDTH,
         this.scale * consts.RENDER_SCALE_HEIGHT
     );
     // drawImage expects "top-left" coords, so we offset our destination
@@ -115,7 +115,7 @@ Sprite.prototype.drawFrameCenteredAtExtra = function (ctx, cx, cy, rotation, fra
         h,
         0,
         0,
-        w*6,
+        w*10,
         h*3
     );
 
@@ -127,12 +127,12 @@ Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
 
     var w = this.width / this.scale;
     var h = this.height / this.scale;
-    
+
     ctx.save();
     ctx.translate(cx*consts.RENDER_SCALE_WIDTH, cy*consts.RENDER_SCALE_HEIGHT);
     ctx.rotate(rotation);
     ctx.scale(
-        this.scale * consts.RENDER_SCALE_WIDTH, 
+        this.scale * consts.RENDER_SCALE_WIDTH,
         this.scale * consts.RENDER_SCALE_HEIGHT
     );
     // drawImage expects "top-left" coords, so we offset our destination
