@@ -201,7 +201,8 @@ function gameOver(playerName) {
     const winner = players.filter(player => {
         if(player.lives > 0) return player
     });
-    document.getElementById("winner").innerHTML = winner[0].name + ' won!';
+    const winnerMsg = winner[0] ? winner[0].name + ' won!' : 'Tie!';
+    document.getElementById("winner").innerHTML = winnerMsg;
 }
 
 // =============
