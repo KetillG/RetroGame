@@ -54,9 +54,11 @@ var KEY_STEP  = 'O'.charCodeAt(0);
 
 var g_isUpdatePaused = false;
 
+var g_isGameStarted = false;
+
 function shouldSkipUpdate() {
     if (eatKey(KEY_PAUSE)) {
         g_isUpdatePaused = !g_isUpdatePaused;
     }
-    return g_isUpdatePaused && !eatKey(KEY_STEP);
+    return g_isGameStarted || g_isUpdatePaused && !eatKey(KEY_STEP);
 }

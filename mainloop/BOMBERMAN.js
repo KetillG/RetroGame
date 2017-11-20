@@ -88,8 +88,9 @@ function play (human, computer) {
 
 
     scoreboard.init();
-    console.log()
     scoreboard.start(entityManager.getPlayers());
+
+    g_isGameStarted = false;
 }
 
 btnNewGame.onclick = function() {
@@ -203,6 +204,8 @@ function gameOver(playerName) {
     });
     const winnerMsg = winner[0] ? winner[0].name + ' won!' : 'Tie!';
     document.getElementById("winner").innerHTML = winnerMsg;
+
+    g_isGameStarted = true;
 }
 
 // =============
