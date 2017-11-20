@@ -71,7 +71,7 @@ _addPlayer : function (x,y,keycodes,color,sprite,id) {
     keyFire: keycodes[4],
     colour: color,
     sprite: sprite,
-    name: "Player " + id
+    name: "Player " + ++id
   });
   this._players.push(player1);
 },
@@ -86,7 +86,7 @@ _addComputerPlayer : function (x,y,color,sprite,id) {
         cy: this._board.xStep * y,
         colour: color,
         sprite: sprite,
-        name: "Computer " + id,
+        name: "Computer " + ++id,
         computer: true,
       });
       this._players.push(player1);
@@ -119,7 +119,7 @@ initPlayer(x,y,keycode,color,image,id) {
     //this._addPlayer(1.5,1.5,p2,"yellow",new Sprite(g_images.catWhite),2);
     console.log(x,y,keycode,color,image,id)
     this._addPlayer(x,y,keycode,color,image,id);
-    
+
 },
 
 initAI(x,y,color,image,id) {
@@ -194,7 +194,7 @@ update: function(du) {
               const alive = players.filter(player => {
                 if(player.lives > 0) return player
               });
-              
+
               if(alive.length < 2) gameOver(aCategory[i].name);
           }
           aCategory.splice(i,1);
