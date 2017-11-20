@@ -16,6 +16,7 @@ var btnRestart = document.getElementById("btn-gameover");
 var btnsBack = document.querySelectorAll(".btn-back");
 var btn1Player = document.getElementById("btn-1player");
 var btn2Player = document.getElementById("btn-2player");
+var btn0Opponent = document.getElementById("btn-0opponent");
 var btn1Opponent = document.getElementById("btn-1opponent");
 var btn2Opponent = document.getElementById("btn-2opponent");
 var btn3Opponent = document.getElementById("btn-3opponent");
@@ -84,7 +85,7 @@ function play (human, computer) {
         );
     }
 
-    
+
     scoreboard.init();
     console.log()
     scoreboard.start(entityManager.getPlayers());
@@ -102,6 +103,8 @@ let numPlayers = 0;
 btn1Player.onclick = function() {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
+    var noOpponent = document.getElementById("btn-0opponent");
+    noOpponent.style.display = "none";
     numPlayers = 1;
 }
 
@@ -111,6 +114,13 @@ btn2Player.onclick = function() {
     var moreOpponent = document.getElementById("btn-3opponent");
     moreOpponent.style.display = "none";
     numPlayers = 2;
+}
+
+btn0Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    play(numPlayers,0)
 }
 
 btn1Opponent.onclick = function() {
