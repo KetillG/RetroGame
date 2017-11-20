@@ -227,6 +227,7 @@ function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
     menuScoreboard.style.display = "none";
+    hideScoreboardButtons();
     const players = entityManager.getPlayers();
     const winner = players.filter(player => {
         if(player.lives > 0) return player

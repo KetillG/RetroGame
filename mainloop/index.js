@@ -32,7 +32,8 @@ let Page = (() => {
 
         consts.RENDER_SCALE_WIDTH = ctx.canvas.width / consts.LOGICAL_WIDTH;
         consts.RENDER_SCALE_HEIGHT = ctx.canvas.height / consts.LOGICAL_HEIGHT;
-        consts.SCOREBOARD_FONT_SIZE = wWidth * 0.04 + 'px';
+        consts.SCOREBOARD_FONT_SIZE = wWidth * 0.03 + 'px';
+        consts.BUTTON_FONT_SIZE = wWidth * 0.03 + 'px';
     };
 
     window.addEventListener('resize', () => {

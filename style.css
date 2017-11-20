@@ -120,7 +120,7 @@ ul {
 .players-list {
   display: flex;
   flex-direction: column;
-  height: 70%;
+  height: 85%;
 }
 
 .player-container {
@@ -170,4 +170,5 @@ ul {
     display: none;
     border: 1px outset black;
     width: 90%;
+    padding: 0,
 }
