@@ -32,6 +32,7 @@ btnAbout.onclick = function() {
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
+// consts, should refactor
 const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
 const playerCode = [
     [38,40,37,39,'O'.charCodeAt(0)],
@@ -42,6 +43,37 @@ const playerCode = [
         'D'.charCodeAt(0),
         220
     ]];
+let images = []
+
+// Play function takes in num human and num computers
+function play (human, computer) {
+    for (let index = 0; index < human; index++) {
+        console.log('human')
+        const pos = playerPos.shift();
+        const keycode = playerCode.shift();
+        const image = images.shift();
+        entityManager.initPlayer(
+            pos[0],
+            pos[1],
+            keycode,
+            "red",
+            new Sprite(image),
+            index
+        );
+    }
+    for (let index = 0; index < computer; index++) {
+        console.log('computer')
+        const pos = playerPos.shift();
+        const image = images.shift();
+        entityManager.initAI(
+            pos[0],
+            pos[1],
+            "red",
+            new Sprite(image),
+            index
+        );
+    }
+}
 btnNewGame.onclick = function() {
   console.log('I am newGame')
   // show menu
@@ -49,7 +81,8 @@ btnNewGame.onclick = function() {
   menuScoreboard.style.display = "flex";
   
   // Init
-  entityManager.initPlayer();
+  //entityManager.initPlayer();
+  play(1,1);
   scoreboard.init();
   scoreboard.start(entityManager.getPlayers());
 }
@@ -137,6 +170,10 @@ function requestPreloads() {
       catBlack2 : './sprite/Cat_Black_Frame.png',
       catWhite : './sprite/Cat_White_Frame.png',
       catWhite2 : './sprite/Cat_White_Frame.png',
+      catRed : './sprite/Cat_Red_Frame.png',
+      catRed2 : './sprite/Cat_Red_Frame.png',
+      catBrown : './sprite/Cat_Brown_Frame.png',
+      catBrown2 : './sprite/Cat_Brown_Frame.png',
       explosion: './sprite/Explosion.png',
       brick0: './sprite/Brick_0.png',
       brick1: './sprite/Brick_1_test.png',
@@ -162,6 +199,8 @@ function preloadDone() {
     const CHARACTER_TO_BRICK_RATIO = 0.33;
     initSprites(g_images.catWhite, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
     initSprites(g_images.catBlack, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+    initSprites(g_images.catRed, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
+    initSprites(g_images.catBrown, CHARACTER_TO_BRICK_RATIO, brickSize, 6);
 
     // Powerup
     const POWERUP_TO_BRICK_RATIO = 0.6;
@@ -187,11 +226,15 @@ function preloadDone() {
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
 
+    images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
+
     scoreboard.init();
 
     entityManager.init();
 
     main.init();
+
+    
 }
 
 function initSprites(sprite, ratio, brickSize, xFrames = 1, yFrames = 1) {

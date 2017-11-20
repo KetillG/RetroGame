@@ -170,8 +170,6 @@ Character.prototype.update = function (du) {
         }        
         
 
-        console.log(this.aiMovement);
-
     } else {
         const right = keys[this.keyRight];
         const left = keys[this.keyLeft];

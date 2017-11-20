@@ -115,30 +115,16 @@ init: function() {
     //this._createBoard(board);
 },
 
-initPlayer() {
-    const p1 = [38,40,37,39,'O'.charCodeAt(0)];
-    this._addPlayer(10.5,10.5,p1,"red",new Sprite(g_images.catBlack),1);
-
-    const p2 = [
-        'W'.charCodeAt(0),
-        'S'.charCodeAt(0),
-        'A'.charCodeAt(0),
-        'D'.charCodeAt(0),
-        220];
-    this._addPlayer(1.5,1.5,p2,"yellow",new Sprite(g_images.catWhite),2);
-
+initPlayer(x,y,keycode,color,image,id) {
+    //this._addPlayer(1.5,1.5,p2,"yellow",new Sprite(g_images.catWhite),2);
+    console.log(x,y,keycode,color,image,id)
+    this._addPlayer(x,y,keycode,color,image,id);
+    
 },
 
-initAI() {
-    const p2 = [
-        'W'.charCodeAt(0),
-        'S'.charCodeAt(0),
-        'A'.charCodeAt(0),
-        'D'.charCodeAt(0),
-        220];
-    this._addPlayer(1.5,1.5,p2,"yellow",new Sprite(g_images.catWhite),2);
-
-    this._addComputerPlayer(10.5,10.5,"red",new Sprite(g_images.catBlack),1);
+initAI(x,y,color,image,id) {
+    //this._addComputerPlayer(10.5,10.5,"red",new Sprite(g_images.catBlack),1);
+    this._addComputerPlayer(x,y,color,image,id);
 },
 
 spawnPowerup(descr) {

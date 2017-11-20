@@ -50,7 +50,7 @@ var scoreboard = {
         const scoreboard = document.getElementById('scoreboard-container');
         const playerDivs = scoreboard.querySelector('.players-list')
         this._playersDOM.push(...playerDivs.children);
-        this._sprite = [g_images.catBlack2,g_images.catWhite2];
+        this._sprite = [g_images.catBlack2,g_images.catWhite2,g_images.catRed2,g_images.catBrown2];
     }
 
 }
