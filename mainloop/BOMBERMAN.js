@@ -56,7 +56,7 @@ function play (human, computer) {
             220
         ]];
     const images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
-    
+
     for (let index = 0; index < human; index++) {
         console.log('human')
         const pos = playerPos.shift();
@@ -84,7 +84,7 @@ function play (human, computer) {
         );
     }
 
-    
+
     scoreboard.init();
     console.log()
     scoreboard.start(entityManager.getPlayers());
@@ -93,8 +93,8 @@ btnNewGame.onclick = function() {
   console.log('I am newGame')
   // show menu
   menuMain.style.display = "none";
-  menuScoreboard.style.display = "flex";
-  
+  //menuScoreboard.style.display = "flex";
+
   // Init
   menuPlayers.style.display = "flex";
 }
@@ -281,7 +281,7 @@ function preloadDone() {
 
     main.init();
 
-    
+
 }
 
 function initSprites(sprite, ratio, brickSize, xFrames = 1, yFrames = 1) {
