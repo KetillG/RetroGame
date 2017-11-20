@@ -21,7 +21,7 @@ var btnBackOpponent = document.getElementById("btn-back-opponent");
 var btnsScoreboard = document.querySelectorAll(".btn-scoreboard");
 var btnPause = document.getElementById("btn-pause");
 var btnMute = document.getElementById("btn-mute");
-var btnQuit = document.getElementById("bnt-quit");
+var btnQuit = document.getElementById("btn-quit");
 
 var menuContainers = document.querySelectorAll(".menu-container");
 var menuMain = document.getElementById("main-container");
@@ -168,6 +168,12 @@ function showScoreboardButtons() {
     }
 }
 
+function hideScoreboardButtons() {
+    for(var i = 0; i < btnsScoreboard.length; i++) {
+        btnsScoreboard[i].style.display = "none";
+    }
+}
+
 btnBackOpponent.onclick = function() {
     menuPlayers.style.display = "flex";
     menuOpponents.style.display = "none";
@@ -192,6 +198,21 @@ btnPause.onclick = function() {
     keys['P'.charCodeAt(0)] = true;
 }
 
+btnMute.onclick = function() {
+    // mute
+    muteSound();
+}
+
+btnQuit.onclick = function() {
+    // quit
+    console.log('quit')
+    hideScoreboardButtons();
+    quitGame();
+    //menuNewGame.style.display = "flex";
+    //menuScoreboard.style.display = "none";
+    g_isGameStarted = true;
+}
+
 for (var i = 0; i < btnsBack.length; i++) {
     btnsBack[i].onclick = function() {
         console.log('I am back')
@@ -213,6 +234,13 @@ function gameOver(playerName) {
     const winnerMsg = winner[0] ? winner[0].name + ' won!' : 'Tie!';
     document.getElementById("winner").innerHTML = winnerMsg;
 
+    g_isGameStarted = true;
+}
+
+function quitGame() {
+    menuGameOver.style.display = "flex";
+    menuScoreboard.style.display = "none";
+    document.getElementById("winner").innerHTML = 'Game quit :(';
     g_isGameStarted = true;
 }
 
