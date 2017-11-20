@@ -9,17 +9,25 @@ console.log(g_ctx)
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
-var btnNewGameAI = document.getElementById("btn-newgameai");
+//var btnNewGameAI = document.getElementById("btn-newgameai");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
-var btnsBack = document.querySelectorAll(".btn-back");
-var menuContainers = document.querySelectorAll(".menu-container");
+var btnsBack = document.querySelectorAll("btn-back");
+var btn1Player = document.getElementById("btn-1player");
+var btn2Player = document.getElementById("btn-2player");
+var btn1Opponent = document.getElementById("btn-1opponent");
+var btn2Opponent = document.getElementById("btn-2opponent");
+var btn3Opponent = document.getElementById("btn-3opponent");
+
+var menuContainers = document.querySelectorAll("menu-container");
 var menuMain = document.getElementById("main-container");
 var menuInstructions = document.getElementById("instructions-container");
 var menuAbout = document.getElementById("about-container");
 var menuGameOver = document.getElementById("gameover-container");
 var menuScoreboard = document.getElementById("scoreboard-container").querySelector(".players-list");
+var menuPlayers = document.getElementById("player-container");
+var menuOpponents = document.getElementById("opponent-container");
 
 btnInstructions.onclick = function() {
   console.log('instruction')
@@ -28,7 +36,7 @@ btnInstructions.onclick = function() {
 }
 
 btnAbout.onclick = function() {
-    console.log('about')
+  console.log('about')
   menuMain.style.display = "none";
   menuAbout.style.display = "flex";
 }
@@ -40,16 +48,48 @@ btnNewGame.onclick = function() {
   entityManager.init();
   entityManager.deferredSetup();*/
   entityManager.initPlayer();
-  menuScoreboard.style.display = "flex";
-  //Page.resizeCanvas();
-  // reset everything
+  menuPlayers.style.display = "flex";
 
   // Init scoreboard
   scoreboard.init();
   scoreboard.start(entityManager.getPlayers());
 }
 
-btnNewGameAI.onclick = function() {
+btn1Player.onclick = function() {
+    menuPlayers.style.display = "none";
+    menuOpponents.style.display = "flex";
+}
+
+btn2Player.onclick = function() {
+    menuPlayers.style.display = "none";
+    menuOpponents.style.display = "flex";
+    var asd = document.getElementById("btn-3opponent");
+    asd.style.display = "none";
+}
+
+btn1Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    // vantar
+}
+
+btn2Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    // vantar
+}
+
+btn3Opponent.onclick = function() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    // vantar
+}
+
+
+/*btnNewGameAI.onclick = function() {
     console.log('I am computah gamerino');
     menuMain.style.display = "none";
 
@@ -62,7 +102,7 @@ btnNewGameAI.onclick = function() {
     // Init scoreboard
     scoreboard.init();
     scoreboard.start(entityManager.getPlayers());
-}
+}*/
 
 btnRestart.onclick = function() {
     console.log('I am restart')
