@@ -7,9 +7,7 @@ var scoreboard = {
 
 
     start: function (players) {
-        this._players = players;
-        console.log(players)  
-        console.log(this._playersDOM)          
+        this._players = players;      
         for (let index = 0; index < 4; index++) {
             const domItem = this._playersDOM[index]
             domItem.style.display = 'flex';
@@ -17,7 +15,6 @@ var scoreboard = {
                 domItem.style.display = 'none';
             }            
         }
-        console.log('I am in start scoreboard')
     },
 
     update: function (du) {
