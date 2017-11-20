@@ -20,6 +20,7 @@ var btn0Opponent = document.getElementById("btn-0opponent");
 var btn1Opponent = document.getElementById("btn-1opponent");
 var btn2Opponent = document.getElementById("btn-2opponent");
 var btn3Opponent = document.getElementById("btn-3opponent");
+var btnBackOpponent = document.getElementById("btn-back-opponent");
 
 var menuContainers = document.querySelectorAll(".menu-container");
 var menuMain = document.getElementById("main-container");
@@ -90,6 +91,7 @@ function play (human, computer) {
     console.log()
     scoreboard.start(entityManager.getPlayers());
 }
+
 btnNewGame.onclick = function() {
   console.log('I am newGame')
   // show menu
@@ -99,18 +101,23 @@ btnNewGame.onclick = function() {
   // Init
   menuPlayers.style.display = "flex";
 }
+
 let numPlayers = 0;
 btn1Player.onclick = function() {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
     var noOpponent = document.getElementById("btn-0opponent");
     noOpponent.style.display = "none";
+    var moreOpponent = document.getElementById("btn-3opponent");
+    moreOpponent.style.display = "inline";
     numPlayers = 1;
 }
 
 btn2Player.onclick = function() {
     menuPlayers.style.display = "none";
     menuOpponents.style.display = "flex";
+    var noOpponent = document.getElementById("btn-0opponent");
+    noOpponent.style.display = "inline";
     var moreOpponent = document.getElementById("btn-3opponent");
     moreOpponent.style.display = "none";
     numPlayers = 2;
@@ -144,6 +151,10 @@ btn3Opponent.onclick = function() {
     play(numPlayers,3)
 }
 
+btnBackOpponent.onclick = function() {
+    menuPlayers.style.display = "flex";
+    menuOpponents.style.display = "none";
+}
 
 /*btnNewGameAI.onclick = function() {
     console.log('I am computah gamerino');

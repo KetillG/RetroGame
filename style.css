@@ -113,7 +113,6 @@ ul {
   background-color: rgba(0,0,143,0.8);
   /*flex-direction: column;*/
   color: rgba(255,255,255,1);
-  /*padding: 1em;*/
   border: 0.125em outset black;
   padding-left: 1em;
 }
@@ -121,14 +120,14 @@ ul {
 .players-list {
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 80%;
 }
 
 .player-container {
   display: flex;
   height: 25%;
   margin: 2px;
-  margin-bottom: 2em;
+  margin-bottom: 15px;
 }
 
 .player-image {
