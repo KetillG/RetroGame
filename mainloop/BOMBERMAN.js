@@ -50,7 +50,6 @@ btnAbout.onclick = function() {
   menuAbout.style.display = "flex";
 }
 
-
 btnNewGame.onclick = function() {
     menuMain.style.display = "none";
     menuPlayers.style.display = "flex";
@@ -83,7 +82,6 @@ btn3Opponent.onclick = function() {
     showScoreboardButtons();
     play(numPlayers,3)
 }
-
 
 btnBackOpponent.onclick = function() {
     menuPlayers.style.display = "flex";
@@ -183,6 +181,7 @@ function playersChosen(nrOfPlayers) {
 
     numPlayers = nrOfPlayers;
 }
+
 // Shows the scoreboard
 function showScoreboardButtons() {
     menuScoreboard.style.display = "flex";
@@ -192,12 +191,14 @@ function showScoreboardButtons() {
         btnsScoreboard[i].style.display = "inline";
     }
 }
+
 // Hides the scoreboard
 function hideScoreboardButtons() {
     for(var i = 0; i < btnsScoreboard.length; i++) {
         btnsScoreboard[i].style.display = "none";
     }
 }
+
 // Adds event listener to each back button
 for (var i = 0; i < btnsBack.length; i++) {
     btnsBack[i].onclick = function() {
@@ -246,7 +247,6 @@ function updateSimulation(du) {
 
     scoreboard.update(du);
     entityManager.update(du);
-
 }
 
 // GAME-SPECIFIC RENDERING
@@ -254,7 +254,6 @@ function updateSimulation(du) {
 function renderSimulation(ctx) {
 
     entityManager.render(ctx);
-
 }
 
 // =============
@@ -291,7 +290,6 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
-
     // Size of a single brick
     const brickSize = consts.LOGICAL_WIDTH / (board.length + 2);
     // Inits the sprites
@@ -307,7 +305,6 @@ function preloadDone() {
     initSprites(g_images.powerupBomb, POWERUP_TO_BRICK_RATIO, brickSize);
     initSprites(g_images.powerupFire, POWERUP_TO_BRICK_RATIO, brickSize);
     initSprites(g_images.powerupSpeed, POWERUP_TO_BRICK_RATIO, brickSize);
-
 
     // Brick 0
     initSprites(g_images.brick0, 1, brickSize);
@@ -326,14 +323,11 @@ function preloadDone() {
     const FIRE_TO_BRICK_RATIO = 0.9;
     initSprites(g_images.explosion, FIRE_TO_BRICK_RATIO, brickSize, consts.BOMB_FRAMES_X, consts.BOMB_FRAMES_Y);
 
-
     scoreboard.init();
 
     entityManager.init();
 
     main.init();
-
-
 }
 
 // Scales the sprite correctly
