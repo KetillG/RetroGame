@@ -4,12 +4,9 @@
 
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
-console.log('ket')
-console.log(g_ctx)
 
 // HTML elements
 var btnNewGame = document.getElementById("btn-newgame");
-//var btnNewGameAI = document.getElementById("btn-newgameai");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
 var btnRestart = document.getElementById("btn-gameover");
@@ -21,6 +18,10 @@ var btn1Opponent = document.getElementById("btn-1opponent");
 var btn2Opponent = document.getElementById("btn-2opponent");
 var btn3Opponent = document.getElementById("btn-3opponent");
 var btnBackOpponent = document.getElementById("btn-back-opponent");
+var btnsScoreboard = document.querySelectorAll(".btn-scoreboard");
+var btnPause = document.getElementById("btn-pause");
+var btnMute = document.getElementById("btn-mute");
+var btnQuit = document.getElementById("bnt-quit");
 
 var menuContainers = document.querySelectorAll(".menu-container");
 var menuMain = document.getElementById("main-container");
@@ -128,12 +129,17 @@ btn0Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
+    showScoreboardButtons();
+
+
     play(numPlayers,0)
 }
 
 btn1Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
+
+    showScoreboardButtons();
 
     play(numPlayers,1)
 }
@@ -142,6 +148,8 @@ btn2Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
+    showScoreboardButtons();
+
     play(numPlayers,2)
 }
 
@@ -149,25 +157,21 @@ btn3Opponent.onclick = function() {
     menuScoreboard.style.display = "flex";
     menuOpponents.style.display = "none";
 
+    showScoreboardButtons();
+
     play(numPlayers,3)
+}
+
+function showScoreboardButtons() {
+    for(var i = 0; i < btnsScoreboard.length; i++) {
+        btnsScoreboard[i].style.display = "inline";
+    }
 }
 
 btnBackOpponent.onclick = function() {
     menuPlayers.style.display = "flex";
     menuOpponents.style.display = "none";
 }
-
-/*btnNewGameAI.onclick = function() {
-    console.log('I am computah gamerino');
-    // show menu
-    menuMain.style.display = "none";
-    menuScoreboard.style.display = "flex";
-
-    // Init scoreboard
-    entityManager.initAI();
-    scoreboard.init();
-    scoreboard.start(entityManager.getPlayers());
-}*/
 
 btnRestart.onclick = function() {
     console.log('I am restart')
@@ -182,6 +186,10 @@ btnRestart.onclick = function() {
     entityManager.restartEntityManager();
     // New board
     entityManager.init();
+}
+
+btnPause.onclick = function() {
+    keys['P'.charCodeAt(0)] = true;
 }
 
 for (var i = 0; i < btnsBack.length; i++) {
