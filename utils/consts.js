@@ -4,7 +4,7 @@
 
 "use strict";
 
-
+// Consts that can be used in the project
 var consts = {
 
     FULL_CIRCLE: Math.PI * 2,

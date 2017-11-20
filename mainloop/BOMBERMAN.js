@@ -5,7 +5,7 @@
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
-// HTML elements
+// HTML elements selected
 var btnNewGame = document.getElementById("btn-newgame");
 var btnInstructions =document.getElementById("btn-instructions");
 var btnAbout = document.getElementById("btn-about");
@@ -36,6 +36,10 @@ var menuPlayers = document.getElementById("player-container");
 var menuOpponents = document.getElementById("opponent-container");
 var menuPause = document.getElementById("pause-container");
 
+
+// On click handlers
+let numPlayers = 0;
+
 btnInstructions.onclick = function() {
   menuMain.style.display = "none";
   menuInstructions.style.display = "flex";
@@ -46,84 +50,18 @@ btnAbout.onclick = function() {
   menuAbout.style.display = "flex";
 }
 
-// Play function takes in num human and num computers
-function play (human, computer) {
-
-    const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
-    const playerCode = [
-        [
-            'W'.charCodeAt(0),
-            'S'.charCodeAt(0),
-            'A'.charCodeAt(0),
-            'D'.charCodeAt(0),
-            220
-        ],
-        [38,40,37,39,'O'.charCodeAt(0)]];
-    const images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
-
-    for (let index = 0; index < human; index++) {
-        console.log('human')
-        const pos = playerPos.shift();
-        const keycode = playerCode.shift();
-        const image = images.shift();
-        entityManager.initPlayer(
-            pos[0],
-            pos[1],
-            keycode,
-            "red",
-            new Sprite(image),
-            index
-        );
-    }
-    for (let index = 0; index < computer; index++) {
-        console.log('computer')
-        const pos = playerPos.shift();
-        const image = images.shift();
-        entityManager.initAI(
-            pos[0],
-            pos[1],
-            "red",
-            new Sprite(image),
-            index
-        );
-    }
-
-
-    scoreboard.init();
-    scoreboard.start(entityManager.getPlayers());
-
-    g_isGameStarted = false;
-}
 
 btnNewGame.onclick = function() {
-  menuMain.style.display = "none";
-  menuPlayers.style.display = "flex";
+    menuMain.style.display = "none";
+    menuPlayers.style.display = "flex";
 }
 
-let numPlayers = 0;
 btn1Player.onclick = function() {
     playersChosen(1);
 }
 
 btn2Player.onclick = function() {
     playersChosen(2);
-}
-
-function playersChosen(nrOfPlayers) {
-    menuPlayers.style.display = "none";
-    menuOpponents.style.display = "flex";
-    var noOpponent = document.getElementById("btn-0opponent");
-    var moreOpponent = document.getElementById("btn-3opponent");
-
-    if(nrOfPlayers === 1) {
-        noOpponent.style.display = "none";
-        moreOpponent.style.display = "inline";
-    } else if(nrOfPlayers === 2) {
-        noOpponent.style.display = "inline";
-        moreOpponent.style.display = "none";
-    }
-
-    numPlayers = nrOfPlayers;
 }
 
 btn0Opponent.onclick = function() {
@@ -146,20 +84,6 @@ btn3Opponent.onclick = function() {
     play(numPlayers,3)
 }
 
-function showScoreboardButtons() {
-    menuScoreboard.style.display = "flex";
-    menuOpponents.style.display = "none";
-
-    for(var i = 0; i < btnsScoreboard.length; i++) {
-        btnsScoreboard[i].style.display = "inline";
-    }
-}
-
-function hideScoreboardButtons() {
-    for(var i = 0; i < btnsScoreboard.length; i++) {
-        btnsScoreboard[i].style.display = "none";
-    }
-}
 
 btnBackOpponent.onclick = function() {
     menuPlayers.style.display = "flex";
@@ -169,7 +93,7 @@ btnBackOpponent.onclick = function() {
 btnRestart.onclick = function() {
     for (var j = 0; j < menuContainers.length; j++) {
         menuContainers[j].style.display = "none";
-      }
+    }
     menuMain.style.display = "flex";
     // "new" spatial manage
     spatialManager.restart();
@@ -194,6 +118,89 @@ btnQuit.onclick = function() {
     g_isGameStarted = true;
 }
 
+// Play function takes in num human and num computers
+function play (human, computer) {
+    // hardcoded values, should be refactored
+    const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
+    const playerCode = [
+        [
+            'W'.charCodeAt(0),
+            'S'.charCodeAt(0),
+            'A'.charCodeAt(0),
+            'D'.charCodeAt(0),
+            220
+        ],
+        [38,40,37,39,'O'.charCodeAt(0)]];
+    const images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
+
+    // For each human
+    for (let index = 0; index < human; index++) {
+        console.log('human')
+        const pos = playerPos.shift();
+        const keycode = playerCode.shift();
+        const image = images.shift();
+        entityManager.initPlayer(
+            pos[0],
+            pos[1],
+            keycode,
+            "red",
+            new Sprite(image),
+            index
+        );
+    }
+    // For each computer
+    for (let index = 0; index < computer; index++) {
+        console.log('computer')
+        const pos = playerPos.shift();
+        const image = images.shift();
+        entityManager.initAI(
+            pos[0],
+            pos[1],
+            "red",
+            new Sprite(image),
+            index
+        );
+    }
+
+
+    scoreboard.init();
+    scoreboard.start(entityManager.getPlayers());
+
+    g_isGameStarted = false;
+}
+// Sets how many human players
+function playersChosen(nrOfPlayers) {
+    menuPlayers.style.display = "none";
+    menuOpponents.style.display = "flex";
+    var noOpponent = document.getElementById("btn-0opponent");
+    var moreOpponent = document.getElementById("btn-3opponent");
+
+    if(nrOfPlayers === 1) {
+        noOpponent.style.display = "none";
+        moreOpponent.style.display = "inline";
+    } else if(nrOfPlayers === 2) {
+        noOpponent.style.display = "inline";
+        moreOpponent.style.display = "none";
+    }
+
+    numPlayers = nrOfPlayers;
+}
+// Shows the scoreboard
+function showScoreboardButtons() {
+    menuScoreboard.style.display = "flex";
+    menuOpponents.style.display = "none";
+
+    for(var i = 0; i < btnsScoreboard.length; i++) {
+        btnsScoreboard[i].style.display = "inline";
+    }
+}
+// Hides the scoreboard
+function hideScoreboardButtons() {
+    for(var i = 0; i < btnsScoreboard.length; i++) {
+        btnsScoreboard[i].style.display = "none";
+    }
+}
+// Adds event listener to each back button
 for (var i = 0; i < btnsBack.length; i++) {
     btnsBack[i].onclick = function() {
         console.log('I am back')
@@ -204,6 +211,7 @@ for (var i = 0; i < btnsBack.length; i++) {
    }
 }
 
+// Game over function
 function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
@@ -219,6 +227,7 @@ function gameOver(playerName) {
     g_isGameStarted = true;
 }
 
+// Quits the game
 function quitGame() {
     menuGameOver.style.display = "flex";
     menuScoreboard.style.display = "none";
@@ -331,6 +340,7 @@ function preloadDone() {
 
 }
 
+// Scales the sprite correctly
 function initSprites(sprite, ratio, brickSize, xFrames = 1, yFrames = 1) {
     const bombScale = ratio * brickSize / ( sprite.width / xFrames );
     sprite.scale = bombScale;

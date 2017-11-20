@@ -31,20 +31,24 @@ _entities : [],
 restart: function() {
   this._entities = [];
 },
+// Creates a new spatial ID
 getNewSpatialID : function() {
     return this._nextSpatialID++;
 },
 
+// Adds item to self
 register: function(entity) {
     this._entities.push(entity);
 },
 
+// Remove item from self
 unregister: function(entity) {
     var index = this._entities.indexOf(entity);
     if(index === -1) return;
     this._entities.splice(index, 1);
 },
 
+// Returns all entities hit at an position
 findEntityInRange: function(posX, posY) {
   const hitEntities = [];
 

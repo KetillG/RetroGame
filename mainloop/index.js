@@ -1,9 +1,10 @@
+// Inits the page method on domcontent load
 document.addEventListener('DOMContentLoaded', () => {
     Page.init();
   });
 
 let Page = (() => {
-
+    // Rezizes canvas correctly
     let init = () => {
         resizeCanvas();
     }

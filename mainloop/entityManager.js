@@ -20,9 +20,7 @@ with suitable 'data' and 'methods'.
 // my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
-
-
-
+// Our board, maybe not the best location, can be done better
 var board = [[4,4,0,0,0,0,0,0,4,4],
              [4,1,0,1,0,0,1,0,1,4],
              [0,0,0,0,0,0,0,0,0,0],
@@ -33,32 +31,20 @@ var board = [[4,4,0,0,0,0,0,0,4,4],
              [0,0,0,0,0,0,0,0,0,0],
              [4,1,0,1,0,0,1,0,1,4],
              [4,4,0,0,0,0,0,0,4,4]]
-function scalePlayers(player){
-    var maxWidth = 0.8*canvas.width/board[0].length;
-    var maxHeight = 0.8*canvas.height/board.length;
-
-    var width = player.width;
-    var height = player.height;
-
-    var ratioWidth = maxWidth/width;
-    var ratioHeight = maxHeight/height;
-
-    $(player).css("width", maxWidth*ratioWidth);
-    $(player).css("height", maxHeight*ratioHeight);
-}
 
 var entityManager = {
-
+// Private vars
 _board: null,
 _players : [],
 _powerups : [],
 _bombs : [],
 _fires : [],
-
+// Creates a new board
 _createBoard(board) {
   this._board = new Board({board});
 },
 
+// Adds a human player
 _addPlayer : function (x,y,keycodes,color,sprite,id) {
   var player1 = new Character({
     cx: this._board.xStep * x,
@@ -75,10 +61,7 @@ _addPlayer : function (x,y,keycodes,color,sprite,id) {
   this._players.push(player1);
 },
 
-getPlayers: function () {
-    return this._players;
-},
-
+// Adds a computer player
 _addComputerPlayer : function (x,y,color,sprite,id) {
     var player1 = new Character({
         cx: this._board.xStep * x,
@@ -87,10 +70,14 @@ _addComputerPlayer : function (x,y,color,sprite,id) {
         sprite: sprite,
         name: "Computer " + ++id,
         computer: true,
-      });
-      this._players.push(player1);
+    });
+    this._players.push(player1);
 },
 
+// Returns players
+getPlayers: function () {
+    return this._players;
+},
 // PUBLIC METHODS
 
 // A special return value, used by other objects,
@@ -102,6 +89,8 @@ KILL_ME_NOW : -1,
 deferredSetup : function () {
     this._categories = [this._powerups, this._bombs, this._players, this._fires];
 },
+
+// Reinints the entity manager
 restartEntityManager: function () {
     this._players = [];
     this._powerups = [];
@@ -109,23 +98,29 @@ restartEntityManager: function () {
     this._fires = [];
     this._categories = [this._powerups, this._bombs, this._players, this._fires];
 },
+// Inits the entity manager
 init: function() {
     this._createBoard(board);
 },
 
+// Inits a player
 initPlayer(x,y,keycode,color,image,id) {
     this._addPlayer(x,y,keycode,color,image,id);
 
 },
 
+// Inits a computer
 initAI(x,y,color,image,id) {
     this._addComputerPlayer(x,y,color,image,id);
 },
 
+// spawns a powerup
 spawnPowerup(descr) {
     this._powerups.push(new Powerup(descr));
 },
 
+
+// Handles an exploding bomb
 bombExplode(bomb) {
     // Remove bomb from existance
     spatialManager.unregister(bomb);
@@ -146,6 +141,7 @@ bombExplode(bomb) {
     this._fires.push(fire);
 },
 
+// Tries to spawn bomb on the board
 trySpawnBomb(descr) {
     // Check if bomb already in place at location
     for(var i = 0; i < this._bombs.length; i++) {
@@ -163,11 +159,13 @@ trySpawnBomb(descr) {
     return bomb;
 },
 
+// Gets a valid location for the bomb
 getValidBombCenter: function(posX, posY) {
     return this._board.getBrickCenterAt(posX, posY);
     //return false;
-  },
+},
 
+// Updates all in the entity manager
 update: function(du) {
 
   this._board.update(du);
@@ -187,7 +185,7 @@ update: function(du) {
               const alive = players.filter(player => {
                 if(player.lives > 0) return player
               });
-
+              // If less then 2 people are alive end the game
               if(alive.length < 2) gameOver(aCategory[i].name);
           }
           aCategory.splice(i,1);
@@ -199,6 +197,7 @@ update: function(du) {
   }
 },
 
+// Renders all in the entity manager
 render: function(ctx) {
 
     this._board.render(ctx);
