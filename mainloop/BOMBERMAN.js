@@ -47,14 +47,14 @@ function play (human, computer) {
 
     const playerPos = [[1.5,1.5],[10.5,10.5],[10.5,1.5],[1.5,10.5]];
     const playerCode = [
-        [38,40,37,39,'O'.charCodeAt(0)],
         [
             'W'.charCodeAt(0),
             'S'.charCodeAt(0),
             'A'.charCodeAt(0),
             'D'.charCodeAt(0),
             220
-        ]];
+        ],
+        [38,40,37,39,'O'.charCodeAt(0)]];
     const images = [g_images.catBlack,g_images.catWhite,g_images.catRed,g_images.catBrown]
 
     for (let index = 0; index < human; index++) {
@@ -176,7 +176,12 @@ function gameOver(playerName) {
     console.log('gameover')
     menuGameOver.style.display = "flex";
     menuScoreboard.style.display = "none";
-    document.getElementById("winner").innerHTML = playerName + ' lost!';
+    const players = entityManager.getPlayers();
+    const winner = players.filter(player => {
+        console.log(player)
+        if(player.lives > 0) return player
+    });
+    document.getElementById("winner").innerHTML = winner[0].name + ' won!';
 }
 
 // =============
